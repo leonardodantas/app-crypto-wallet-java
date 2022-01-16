@@ -1,6 +1,6 @@
 # APP-CRYPTO-WALLET-JAVA
 
-Aplicação SpringBoot Java para compra e armazenamento de cryptomoedas, seguindo os principios de boas praticas do livro Clean Architecture do uncle Bob. 
+Aplicação SpringBoot Java para compra e armazenamento de criptomoedas, seguindo os princípios de boas praticas do livro Clean Architecture. 
 
 
 <div style="display: inline_block">
@@ -12,7 +12,7 @@ Aplicação SpringBoot Java para compra e armazenamento de cryptomoedas, seguind
 
 ## Documentação da API
 
-### Retorna a tendencia de venda e compra da criptomoeda
+### Retorna a tendência de venda e compra da criptomoeda
 
 ```
   GET /get-cryptocurrency-trend/{cryptocurrency}
@@ -28,7 +28,7 @@ Aplicação SpringBoot Java para compra e armazenamento de cryptomoedas, seguind
   POST /add-crypto-currency-wallet
 ```
 
-A requisição precisa de um body com os seguintes parametros:
+A requisição precisa de um body com os seguintes parâmetros:
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
 | `name` | `string` | **Obrigatório**. Nome da criptomoeda |
@@ -49,7 +49,7 @@ A requisição precisa de um body com os seguintes parametros:
 | :---------- | :--------- | :---------------------------------- |
 | `cryptocurrency` | `string` | **Obrigatório**. Nome da criptomoeda |
 
-### Resumo de operação de todas as criptomoedas disponiveis na aplicação
+### Resumo de operação de todas as criptomoedas disponíveis na aplicação
 
 ```
   GET /get-last-day-all-cryptocurrency-summary
@@ -57,4 +57,4 @@ A requisição precisa de um body com os seguintes parametros:
 
 ## Apêndice
 
-Para calcular a tendencia da moeda foi utilizada uma função de regressão linear. Em uma aplicação complexa varios outros fatores deveriam ser considerados para esse calculo, porem utilizei uma lib simples e que considera apenas dois fatores em seu calculo(tempo e valor) para fins de estudo.
+Para calcular a tendência da moeda foi utilizada uma função de regressão linear. Em uma aplicação complexa vários outros fatores deveriam ser considerados para esse cálculo, porém utilizei uma lib simples e que considera apenas dois fatores em seu cálculo (tempo e valor) para fins de estudo.
