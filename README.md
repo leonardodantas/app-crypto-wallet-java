@@ -8,7 +8,7 @@ Aplicação SpringBoot Java para compra e armazenamento de cryptomoedas, seguind
   <img align="center" alt="java" src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
   <img align="center" alt="spring" src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
 
-</div><br/>
+</div>
 
 ## Documentação da API
 
@@ -54,7 +54,6 @@ A requisição precisa de um body com os seguintes parametros:
 ```
   GET /get-last-day-all-cryptocurrency-summary
 ```
-
 
 ## Apêndice
 
