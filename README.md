@@ -46,3 +46,9 @@ A requisição precisa de um body com os seguintes parametros:
 ```
   GET /get-last-day-all-cryptocurrency-summary
 ```
+
+
+## Apêndice
+
+Para calcular a tendencia da moeda foi utilizada uma função de regressão linear. Em uma aplicação complexa varios outros fatores deveriam ser considerados para esse calculo, porem utilizei uma lib simples e que considera apenas dois fatores em seu calculo(tempo e valor) para fins de estudo.
+
