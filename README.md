@@ -25,3 +25,24 @@ A requisição precisa de um body com os seguintes parametros:
 | :---------- | :--------- | :---------------------------------- |
 | `name` | `string` | **Obrigatório**. Nome da criptomoeda |
 | `quantity` | `double` | **Obrigatório**. Quantidade a ser comprada |
+
+### Retorna todas criptomoedas em sua carteira
+
+```
+  GET /find-crypto-currency-wallet
+```
+### Retorna a criptomoeda caso ela exista em sua carteira
+
+```
+  GET /find-crypto-currency-wallet/{cryptocurrency}
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `cryptocurrency` | `string` | **Obrigatório**. Nome da criptomoeda |
+
+### Resumo de operação de todas as criptomoedas disponiveis na aplicação
+
+```
+  GET /get-last-day-all-cryptocurrency-summary
+```
