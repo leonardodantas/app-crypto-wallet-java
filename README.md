@@ -6,7 +6,9 @@ Aplicação SpringBoot Java para compra e armazenamento de cryptomoedas, seguind
 
 #### Retorna a tendencia de venda e compra da criptomoeda
 
+```http
   GET /get-cryptocurrency-trend/{cryptocurrency}
+```
 
 | Parâmetro   | Tipo       | Descrição                           |
 | :---------- | :--------- | :---------------------------------- |
