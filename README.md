@@ -15,7 +15,7 @@ Aplicação SpringBoot Java para compra e armazenamento de criptomoedas, seguind
 ### Retorna a tendência de venda e compra da criptomoeda
 
 ```
-  GET /get-cryptocurrency-trend/{cryptocurrency}
+  GET /cryptocurrency/{cryptocurrency}/trend
 ```
 
 | Parâmetro   | Tipo       | Descrição                           |
@@ -25,7 +25,7 @@ Aplicação SpringBoot Java para compra e armazenamento de criptomoedas, seguind
 ### Adiciona a criptomoeda em sua carteira
 
 ```
-  POST /add-crypto-currency-wallet
+  POST /crypto
 ```
 
 A requisição precisa de um body com os seguintes parâmetros:
@@ -37,12 +37,12 @@ A requisição precisa de um body com os seguintes parâmetros:
 ### Retorna todas criptomoedas em sua carteira
 
 ```
-  GET /find-crypto-currency-wallet
+  GET /cryptocurrency/wallet
 ```
 ### Retorna a criptomoeda caso ela exista em sua carteira
 
 ```
-  GET /find-crypto-currency-wallet/{cryptocurrency}
+  GET /cryptocurrency/{cryptocurrency}/wallet
 ```
 
 | Parâmetro   | Tipo       | Descrição                           |
@@ -52,7 +52,7 @@ A requisição precisa de um body com os seguintes parâmetros:
 ### Resumo de operação de todas as criptomoedas disponíveis na aplicação
 
 ```
-  GET /get-last-day-all-cryptocurrency-summary
+  GET /lastday/cryptocurrency/summary
 ```
 
 ## Apêndice

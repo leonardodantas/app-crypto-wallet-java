@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @Api(tags = "Find Cryptocurrency Wallet")
-@RequestMapping("/find-crypto-currency-wallet")
+@RequestMapping("/cryptocurrency")
 public class FindCryptocurrencyWalletController {
 
     private final IFindCryptocurrencyWallet findCryptocurrencyWallet;
@@ -29,7 +29,7 @@ public class FindCryptocurrencyWalletController {
         this.findCryptocurrencyWallet = findCryptocurrencyWallet;
     }
 
-    @GetMapping("/{cryptocurrency}")
+    @GetMapping("/{cryptocurrency}/wallet")
     @ApiOperation(tags = "Find Cryptocurrency Wallet", value = "Return cryptocurrency if it exists in wallet")
     @ApiResponses(value = {
             @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "Success", response = CryptocurrencyWalletResponse.class, responseContainer = "List"),

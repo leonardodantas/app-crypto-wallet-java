@@ -17,7 +17,7 @@ import java.net.HttpURLConnection;
 
 @RestController
 @Api(tags = "Cryptocurrency Wallet")
-@RequestMapping("/add-crypto-currency-wallet")
+@RequestMapping("/crypto")
 public class AddCryptocurrencyWalletController {
 
     private final IAddCryptocurrencyWallet addCryptocurrencyWallet;

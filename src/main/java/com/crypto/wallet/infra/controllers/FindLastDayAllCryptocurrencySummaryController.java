@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @Api(tags = "Summary Cryptocurrency")
-@RequestMapping("/get-last-day-all-cryptocurrency-summary")
+@RequestMapping("/lastday/cryptocurrency/summary")
 public class FindLastDayAllCryptocurrencySummaryController {
 
     private final IFindLastDayCryptocurrencySummary findLastDayCryptocurrencySummary;

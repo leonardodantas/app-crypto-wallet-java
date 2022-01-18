@@ -36,7 +36,6 @@ public class Swagger implements WebMvcConfigurer {
                 .tags(
                         new Tag("Summary Cryptocurrency", ""),
                         new Tag("Cryptocurrency Trend", ""),
-                        new Tag("Get Wallet", ""),
                         new Tag("Find Cryptocurrency Wallet", ""),
                         new Tag("Cryptocurrency Wallet", ""))
                 .apiInfo(metaData());

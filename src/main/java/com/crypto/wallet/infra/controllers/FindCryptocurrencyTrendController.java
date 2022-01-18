@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Api(tags = "Cryptocurrency Trend")
-@RequestMapping("/get-cryptocurrency-trend")
+@RequestMapping("/cryptocurrency")
 public class FindCryptocurrencyTrendController {
 
     private final IFindCryptocurrencyTrend findCryptocurrencyTrend;
@@ -24,7 +24,7 @@ public class FindCryptocurrencyTrendController {
         this.findCryptocurrencyTrend = findCryptocurrencyTrend;
     }
 
-    @GetMapping("/{cryptocurrency}")
+    @GetMapping("/{cryptocurrency}/trend")
     @ApiOperation(tags = "Cryptocurrency Trend", value = "Returns the selling and buying trend of the informed currency")
     @ApiResponses(value = {
             @ApiResponse(code = HttpURLConnection.HTTP_OK, message = "Success", response = CryptocurrencyTrendResponse.class, responseContainer = "List"),
