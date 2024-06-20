@@ -1,7 +1,6 @@
 package com.crypto.wallet.app.usecases.impl;
 
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.models.responses.DigitalCurrencyAcronymResponse;
 import com.crypto.wallet.app.models.responses.TickerResponse;
 import com.crypto.wallet.app.usecases.IFindLastDayCryptocurrencySummary;
 import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;

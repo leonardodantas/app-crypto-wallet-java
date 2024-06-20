@@ -1,6 +1,5 @@
 package com.crypto.wallet.infra.feign.service;
 
-import com.crypto.wallet.app.models.responses.DigitalCurrencyAcronymResponse;
 import com.crypto.wallet.app.models.responses.TickerResponse;
 import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
 import com.crypto.wallet.infra.feign.FindLastDayCryptocurrencySummaryFeign;

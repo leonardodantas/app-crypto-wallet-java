@@ -1,33 +1,26 @@
 package com.crypto.wallet.app.usecases.impl;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
-import com.crypto.wallet.app.models.requests.CryptocurrencyWalletRequest;
-import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.usecases.ISaveWallet;
-import com.crypto.wallet.app.usecases.IAddCryptocurrencyWallet;
+import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AddCryptocurrencyWallet implements IAddCryptocurrencyWallet {
+@RequiredArgsConstructor
+public class AddCryptocurrencyWallet {
 
     private final IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
-    private final ISaveWallet saveWallet;
+    private final SaveWallet saveWallet;
 
-    public AddCryptocurrencyWallet(IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository, ISaveWallet saveWallet) {
-        this.digitalCurrencyAcronymRepository = digitalCurrencyAcronymRepository;
-        this.saveWallet = saveWallet;
-    }
-
-    @Override
-    public CryptocurrencyWalletResponse addCryptocurrency(CryptocurrencyWalletRequest cryptocurrencyWalletRequest) {
+    public CryptocurrencyWallet addCryptocurrency(final String name, final double quantity) {
         DigitalCurrencyAcronym digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
-                .findByName(cryptocurrencyWalletRequest.getName()).orElseThrow(() -> new CryptocurrencyNotFoundException(cryptocurrencyWalletRequest.getName()));
+                .findByName(name).orElseThrow(() -> new CryptocurrencyNotFoundException(name));
 
         Wallet wallet = saveWallet.save(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
 
-        return CryptocurrencyWalletResponse.of(wallet, digitalCurrencyAcronym);
+        return CryptocurrencyWallet.of(wallet, digitalCurrencyAcronym);
     }
 }

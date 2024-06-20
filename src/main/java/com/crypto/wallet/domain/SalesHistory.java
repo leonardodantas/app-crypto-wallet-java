@@ -23,7 +23,7 @@ public class SalesHistory {
     private SalesHistory(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronym digitalCurrencyAcronym, TypeOperation operation) {
         this.id = UUID.randomUUID().toString();
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
-        this.quantity = cryptoWallet.getQuatity();
+        this.quantity = cryptoWallet.getQuantity();
         this.crypto = Crypto.from(operation);
         this.date = LocalDateTime.now();
     }

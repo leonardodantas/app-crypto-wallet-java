@@ -1,9 +1,9 @@
-package com.crypto.wallet.infra.controllers.advice;
+package com.crypto.wallet.infra.http.controllers.advice;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.exceptions.EntitySaveException;
-import com.crypto.wallet.infra.controllers.advice.response.ErrorDTO;
-import com.crypto.wallet.infra.controllers.advice.response.ErrorsDTO;
+import com.crypto.wallet.infra.http.controllers.advice.response.ErrorDTO;
+import com.crypto.wallet.infra.http.controllers.advice.response.ErrorsDTO;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,6 @@
-package com.crypto.wallet.infra.controllers;
+package com.crypto.wallet.infra.http.controllers;
 
 
-import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.app.usecases.IFindCryptocurrencyWallet;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

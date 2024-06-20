@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.controllers.advice.response;
+package com.crypto.wallet.infra.http.controllers.advice.response;
 
 import lombok.Getter;
 import org.springframework.validation.FieldError;
