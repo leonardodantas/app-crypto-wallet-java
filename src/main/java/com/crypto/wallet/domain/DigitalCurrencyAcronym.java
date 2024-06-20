@@ -1,8 +1,7 @@
 package com.crypto.wallet.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
@@ -11,9 +10,10 @@ public class DigitalCurrencyAcronym {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
     @Column(unique = true, length = 60)
     private String name;
+    @Column(length = 120)
     private String description;
 
 }
