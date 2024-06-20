@@ -1,7 +1,7 @@
 package com.crypto.wallet.infra.database.impl;
 
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.infra.database.entities.DigitalCurrencyAcronymEntity;
 import com.crypto.wallet.infra.database.DigitalCurrencyAcronymSpringData;
 import org.springframework.stereotype.Repository;
 
@@ -18,12 +18,12 @@ public class DigitalCurrencyAcronymRepository implements IDigitalCurrencyAcronym
     }
 
     @Override
-    public List<DigitalCurrencyAcronym> findAll() {
+    public List<DigitalCurrencyAcronymEntity> findAll() {
         return springData.findAll();
     }
 
     @Override
-    public Optional<DigitalCurrencyAcronym> findByName(String name) {
+    public Optional<DigitalCurrencyAcronymEntity> findByName(String name) {
         return springData.findByName(name);
     }
 }

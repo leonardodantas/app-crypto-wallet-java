@@ -2,8 +2,8 @@ package com.crypto.wallet.infra.database.impl;
 
 import com.crypto.wallet.app.exceptions.EntitySaveException;
 import com.crypto.wallet.app.repositories.IWalletRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.entities.DigitalCurrencyAcronymEntity;
+import com.crypto.wallet.infra.database.entities.WalletEntity;
 import com.crypto.wallet.infra.database.WalletRepositorySpringData;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +20,7 @@ public class WalletRepository implements IWalletRepository {
     }
 
     @Override
-    public Wallet save(Wallet wallet) {
+    public WalletEntity save(WalletEntity wallet) {
         try {
             return walletRepositorySpringData.save(wallet);
         } catch (Exception e){
@@ -29,17 +29,17 @@ public class WalletRepository implements IWalletRepository {
     }
 
     @Override
-    public Optional<Wallet> findByDigitalCurrencyAcronym(DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return walletRepositorySpringData.findByDigitalCurrencyAcronym(digitalCurrencyAcronym);
+    public Optional<WalletEntity> findByDigitalCurrencyAcronym(DigitalCurrencyAcronymEntity digitalCurrencyAcronymEntity) {
+        return walletRepositorySpringData.findByDigitalCurrencyAcronym(digitalCurrencyAcronymEntity);
     }
 
     @Override
-    public List<Wallet> findAll() {
+    public List<WalletEntity> findAll() {
         return walletRepositorySpringData.findAll();
     }
 
     @Override
-    public Optional<Wallet> findByCryptocurrencyName(String cryptocurrency) {
+    public Optional<WalletEntity> findByCryptocurrencyName(String cryptocurrency) {
         return walletRepositorySpringData.findByDigitalCurrencyAcronymName(cryptocurrency);
     }
 }

@@ -3,7 +3,8 @@ package com.crypto.wallet.app.usecases.impl;
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.app.usecases.IFindCryptocurrencyWallet;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.entities.WalletEntity;
+import com.crypto.wallet.infra.http.responses.CryptocurrencyWalletResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +21,14 @@ public class FindCryptocurrencyWallet implements IFindCryptocurrencyWallet {
 
     @Override
     public CryptocurrencyWalletResponse getByName(String name) {
-        Wallet wallet = walletRepository.findByCryptocurrencyName(name)
+        WalletEntity wallet = walletRepository.findByCryptocurrencyName(name)
                 .orElseThrow(() -> new CryptocurrencyNotFoundException(name));
         return CryptocurrencyWalletResponse.from(wallet);
     }
 
     @Override
     public List<CryptocurrencyWalletResponse> getAll() {
-        List<Wallet> wallet = walletRepository.findAll();
+        List<WalletEntity> wallet = walletRepository.findAll();
         return wallet.stream().map(CryptocurrencyWalletResponse::from).collect(Collectors.toUnmodifiableList());
     }
 }

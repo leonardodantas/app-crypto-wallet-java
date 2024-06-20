@@ -1,5 +1,6 @@
 package com.crypto.wallet.app.models.responses;
 
+import com.crypto.wallet.infra.http.responses.DigitalCurrencyAcronymResponse;
 import lombok.Getter;
 
 import java.math.BigDecimal;

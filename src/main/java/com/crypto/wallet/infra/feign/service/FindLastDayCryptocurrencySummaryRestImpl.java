@@ -4,6 +4,7 @@ import com.crypto.wallet.app.models.responses.TickerResponse;
 import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
 import com.crypto.wallet.infra.feign.FindLastDayCryptocurrencySummaryFeign;
 import com.crypto.wallet.infra.feign.json.TickerRestDTO;
+import com.crypto.wallet.infra.http.responses.DigitalCurrencyAcronymResponse;
 import org.springframework.stereotype.Component;
 
 @Component
