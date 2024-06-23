@@ -8,25 +8,22 @@ import com.crypto.wallet.app.usecases.ISaveWallet;
 import com.crypto.wallet.app.usecases.IAddCryptocurrencyWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AddCryptocurrencyWallet implements IAddCryptocurrencyWallet {
 
     private final IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
     private final ISaveWallet saveWallet;
 
-    public AddCryptocurrencyWallet(IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository, ISaveWallet saveWallet) {
-        this.digitalCurrencyAcronymRepository = digitalCurrencyAcronymRepository;
-        this.saveWallet = saveWallet;
-    }
-
     @Override
-    public CryptocurrencyWalletResponse addCryptocurrency(CryptocurrencyWalletRequest cryptocurrencyWalletRequest) {
-        DigitalCurrencyAcronym digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
+    public CryptocurrencyWalletResponse addCryptocurrency(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest) {
+        final var digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
                 .findByName(cryptocurrencyWalletRequest.getName()).orElseThrow(() -> new CryptocurrencyNotFoundException(cryptocurrencyWalletRequest.getName()));
 
-        Wallet wallet = saveWallet.save(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
+        final var wallet = saveWallet.save(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
 
         return CryptocurrencyWalletResponse.of(wallet, digitalCurrencyAcronym);
     }

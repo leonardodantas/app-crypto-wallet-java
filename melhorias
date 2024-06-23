@@ -1,0 +1,17 @@
+- atualizar java, spring e libs (feito)
+- transformar properties em yaml (feito)
+- criar testes unitarios e integrados ou mutantes
+- utilizar uma base de dados mongodb
+- melhorar retorno de erros da api (não permitir expor estrutura da tabela)
+- ajustar bug onde não é possivel adicionar uma mesma moeda duas vezes
+- permitir apenas duas ou tres casas decimais nos retornos
+- trabalhar com final e var
+- deletar intefaces que não estão sendo usadas
+- deixar dominios limpos e inteligentes
+- melhorar classes feing
+- melhorar estrutura do projeto
+- utilizar recursos mais atuais da linguagem
+- criar schedule para salvar informações das moedas em uma base de dados
+- melhorar logica de calculo
+
+
