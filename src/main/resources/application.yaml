@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-# H2
->>>>>>> main
 spring:
   h2:
     console:
