@@ -1,17 +1,18 @@
 package com.crypto.wallet.app.models.requests;
 
 import com.crypto.wallet.domain.ICryptocurrencyWallet;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 public class CryptocurrencyWalletRequest implements ICryptocurrencyWallet {
 
     @NotBlank
     private String name;
 
-    @NotNull @Positive
+    @NotNull
+    @Positive
     private double quatity;
 
     @Override
