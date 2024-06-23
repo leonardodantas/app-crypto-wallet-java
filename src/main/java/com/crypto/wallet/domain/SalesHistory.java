@@ -1,8 +1,8 @@
 package com.crypto.wallet.domain;
 
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
