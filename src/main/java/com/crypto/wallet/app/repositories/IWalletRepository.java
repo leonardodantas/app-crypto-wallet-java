@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IWalletRepository {
-    Wallet save(Wallet wallet);
-    Optional<Wallet> findByDigitalCurrencyAcronym(DigitalCurrencyAcronym digitalCurrencyAcronym);
+    Wallet save(final Wallet wallet);
+
+    Optional<Wallet> findByDigitalCurrencyAcronym(final DigitalCurrencyAcronym digitalCurrencyAcronym);
+
     List<Wallet> findAll();
-    Optional<Wallet> findByCryptocurrencyName(String cryptocurrency);
+
+    Optional<Wallet> findByCryptocurrencyName(final String cryptocurrency);
 }

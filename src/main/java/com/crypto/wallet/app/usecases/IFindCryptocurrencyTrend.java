@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IFindCryptocurrencyTrend {
 
-    List<CryptocurrencyTrendResponse> getByCryptocurrencyName(String coinName);
+    List<CryptocurrencyTrendResponse> getByCryptocurrencyName(String cryptocurrency);
 }

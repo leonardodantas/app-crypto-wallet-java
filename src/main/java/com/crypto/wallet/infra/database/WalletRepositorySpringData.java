@@ -1,12 +1,12 @@
 package com.crypto.wallet.infra.database;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.entities.DigitalCurrencyAcronymEntity;
+import com.crypto.wallet.infra.database.entities.WalletEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface WalletRepositorySpringData extends JpaRepository<Wallet, String> {
-    Optional<Wallet> findByDigitalCurrencyAcronym(DigitalCurrencyAcronym digitalCurrencyAcronym);
-    Optional<Wallet> findByDigitalCurrencyAcronymName(String coin);
+public interface WalletRepositorySpringData extends JpaRepository<WalletEntity, String> {
+    Optional<WalletEntity> findByDigitalCurrencyAcronym(DigitalCurrencyAcronymEntity digitalCurrencyAcronymEntity);
+    Optional<WalletEntity> findByDigitalCurrencyAcronymName(String coin);
 }

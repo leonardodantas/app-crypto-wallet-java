@@ -1,6 +1,6 @@
 package com.crypto.wallet.app.usecases;
 
-import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
+import com.crypto.wallet.infra.http.responses.CryptocurrencyWalletResponse;
 
 import java.util.List;
 

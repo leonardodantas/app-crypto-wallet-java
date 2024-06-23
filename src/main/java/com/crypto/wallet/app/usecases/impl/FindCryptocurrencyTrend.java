@@ -1,11 +1,13 @@
 package com.crypto.wallet.app.usecases.impl;
 
-import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
+import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.models.responses.CryptocurrencyTrendResponse;
 import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
-import com.crypto.wallet.app.usecases.IFindDerivationHistory;
-import com.crypto.wallet.app.usecases.IFindCryptocurrencyTrend;
+import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
+import com.crypto.wallet.app.rest.IFindDerivationHistoryPerformedRest;
+import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,37 +15,39 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class FindCryptocurrencyTrend implements IFindCryptocurrencyTrend {
+@RequiredArgsConstructor
+public class FindCryptocurrencyTrend {
 
     private static final String BUY = "buy";
     private static final String SELL = "sell";
 
-    private final IFindDerivationHistory getDerivationHistory;
     private final ISimpleRegression simpleRegression;
+    private final IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
+    private final IFindDerivationHistoryPerformedRest findDerivationHistoryPerformedRest;
 
-    public FindCryptocurrencyTrend(IFindDerivationHistory getDerivationHistory, ISimpleRegression simpleRegression) {
-        this.getDerivationHistory = getDerivationHistory;
-        this.simpleRegression = simpleRegression;
+    public List<CryptocurrencyTrendResponse> getByCryptocurrencyName(final String cryptocurrency) {
+        final List<DerivationHistoryPerformedResponse> derivationHistoryPerformed = this.getDerivationsHistoriesPerformed(cryptocurrency);
+
+        final List<DataForCalculation> dataForCalculationsBuy = getDataForCalculations(derivationHistoryPerformed, BUY);
+        final List<DataForCalculation> dataForCalculationsSell = getDataForCalculations(derivationHistoryPerformed, SELL);
+
+        final BigDecimal buy = simpleRegression.calculeSimpleRegression(dataForCalculationsBuy);
+        final BigDecimal sell = simpleRegression.calculeSimpleRegression(dataForCalculationsSell);
+        return List.of(CryptocurrencyTrendResponse.of(buy, BUY, cryptocurrency), CryptocurrencyTrendResponse.of(sell, SELL, cryptocurrency));
     }
 
-    @Override
-    public List<CryptocurrencyTrendResponse> getByCryptocurrencyName(String name) {
-        List<DerivationHistoryPerformedResponse> derivationHistoryPerformed = this.getDerivationHistory.getByCryptocurrencyName(name);
-
-        List<DataForCalculation> dataForCalculationsBuy = getDataForCalculations(derivationHistoryPerformed, BUY);
-        List<DataForCalculation> dataForCalculationsSell = getDataForCalculations(derivationHistoryPerformed, SELL);
-
-        BigDecimal buy = simpleRegression.calculeSimpleRegression(dataForCalculationsBuy);
-        BigDecimal sell = simpleRegression.calculeSimpleRegression(dataForCalculationsSell);
-        return List.of(CryptocurrencyTrendResponse.of(buy, BUY, name), CryptocurrencyTrendResponse.of(sell, SELL, name));
-    }
-
-    private List<DataForCalculation> getDataForCalculations(List<DerivationHistoryPerformedResponse> derivationHistoryPerformed, String type) {
+    private List<DataForCalculation> getDataForCalculations(final List<DerivationHistoryPerformedResponse> derivationHistoryPerformed, final String type) {
         return derivationHistoryPerformed.stream()
                 .filter(derivationHistoryPerformedDTO -> derivationHistoryPerformedDTO.getType().equals(type))
                 .map(DataForCalculation::from)
                 .collect(Collectors.toList());
     }
 
+    private List<DerivationHistoryPerformedResponse> getDerivationsHistoriesPerformed(final String name) {
+        this.digitalCurrencyAcronymRepository
+                .findByName(name).orElseThrow(() -> new CryptocurrencyNotFoundException(name));
+
+        return this.findDerivationHistoryPerformedRest.getDerivationHistoryPerformed(name);
+    }
 
 }
