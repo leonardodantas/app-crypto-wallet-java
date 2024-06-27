@@ -1,6 +1,7 @@
 package com.crypto.wallet.app.models.responses;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -8,13 +9,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Getter
+@NoArgsConstructor
 public class DerivationHistoryPerformedResponse {
 
-    private final BigDecimal amount;
-    private final LocalDateTime date;
-    private final BigDecimal price;
-    private final long tid;
-    private final String type;
+    private BigDecimal amount;
+    private LocalDateTime date;
+    private BigDecimal price;
+    private long tid;
+    private String type;
 
     private DerivationHistoryPerformedResponse(IDerivationHistoryPerformed derivationHistoryPerformed) {
         this.amount = derivationHistoryPerformed.getAmount();

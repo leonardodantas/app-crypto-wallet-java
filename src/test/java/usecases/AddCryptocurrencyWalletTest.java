@@ -7,7 +7,6 @@ import com.crypto.wallet.app.usecases.ISaveWallet;
 import com.crypto.wallet.app.usecases.impl.AddCryptocurrencyWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
