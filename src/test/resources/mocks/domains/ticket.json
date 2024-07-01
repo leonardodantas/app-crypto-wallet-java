@@ -1,0 +1,17 @@
+{
+  "digitalCurrencyAcronym": {
+    "id": 1,
+    "name": "BITCOIN",
+    "description": "The best crypto"
+  },
+  "ticker": {
+    "high":  10,
+    "low":  5,
+    "vol":  1000,
+    "last":  50,
+    "buy":  9.90,
+    "sell":  8.50,
+    "open":  11,
+    "date": "2024-06-26T22:34:37.123333666"
+  }
+}

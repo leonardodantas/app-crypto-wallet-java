@@ -2,12 +2,14 @@ package com.crypto.wallet.app.models.responses;
 
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class DigitalCurrencyAcronymResponse {
 
-    private final String name;
-    private final String description;
+    private String name;
+    private String description;
 
     private DigitalCurrencyAcronymResponse(DigitalCurrencyAcronym digitalCurrencyAcronym) {
         this.name = digitalCurrencyAcronym.getName();

@@ -1,14 +1,16 @@
 package com.crypto.wallet.app.models.responses;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Getter
+@NoArgsConstructor
 public class TickerResponse {
 
-    private final DigitalCurrencyAcronymResponse digitalCurrencyAcronym;
-    private final CryptocurrencySummaryResponse ticker;
+    private DigitalCurrencyAcronymResponse digitalCurrencyAcronym;
+    private CryptocurrencySummaryResponse ticker;
 
     private TickerResponse(ITickerDTO ticker, DigitalCurrencyAcronymResponse digitalCurrencyAcronym) {
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;

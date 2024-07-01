@@ -1,6 +1,7 @@
 package com.crypto.wallet.app.models.responses;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -8,16 +9,17 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Getter
+@NoArgsConstructor
 public class CryptocurrencySummaryResponse {
 
-    private final BigDecimal high;
-    private final BigDecimal low;
-    private final BigDecimal vol;
-    private final BigDecimal last;
-    private final BigDecimal buy;
-    private final BigDecimal sell;
-    private final BigDecimal open;
-    private final LocalDateTime date;
+    private BigDecimal high;
+    private BigDecimal low;
+    private BigDecimal vol;
+    private BigDecimal last;
+    private BigDecimal buy;
+    private BigDecimal sell;
+    private BigDecimal open;
+    private LocalDateTime date;
 
     private CryptocurrencySummaryResponse(ITickerDTO ticker) {
         this.high = ticker.getHigh();
