@@ -1,8 +1,8 @@
 package usecases;
 
 import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
-import com.crypto.wallet.app.usecases.IFindDerivationHistory;
-import com.crypto.wallet.app.usecases.impl.FindCryptocurrencyTrend;
+import com.crypto.wallet.app.usecases.FindCryptocurrencyTrend;
+import com.crypto.wallet.app.usecases.FindDerivationHistory;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ class FindCryptocurrencyTrendTest {
     @InjectMocks
     private FindCryptocurrencyTrend findCryptocurrencyTrend;
     @Mock
-    private IFindDerivationHistory getDerivationHistory;
+    private FindDerivationHistory getDerivationHistory;
     @Mock
     private ISimpleRegression simpleRegression;
 

@@ -3,8 +3,8 @@ package usecases;
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.models.requests.CryptocurrencyWalletRequest;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.usecases.ISaveWallet;
-import com.crypto.wallet.app.usecases.impl.AddCryptocurrencyWallet;
+import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
+import com.crypto.wallet.app.usecases.SaveWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
 import org.junit.jupiter.api.DisplayName;
@@ -30,7 +30,7 @@ class AddCryptocurrencyWalletTest {
     @Mock
     private IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
     @Mock
-    private ISaveWallet saveWallet;
+    private SaveWallet saveWallet;
 
     @Test
     @DisplayName("Deve lançar exceção quando cripto moeda não existir")

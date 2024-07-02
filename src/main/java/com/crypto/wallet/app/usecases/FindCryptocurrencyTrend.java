@@ -1,9 +1,7 @@
-package com.crypto.wallet.app.usecases.impl;
+package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.app.models.responses.CryptocurrencyTrendResponse;
 import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
-import com.crypto.wallet.app.usecases.IFindCryptocurrencyTrend;
-import com.crypto.wallet.app.usecases.IFindDerivationHistory;
 import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
 import lombok.RequiredArgsConstructor;
@@ -14,15 +12,14 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class FindCryptocurrencyTrend implements IFindCryptocurrencyTrend {
+public class FindCryptocurrencyTrend {
 
     private static final String BUY = "buy";
     private static final String SELL = "sell";
 
-    private IFindDerivationHistory getDerivationHistory;
+    private FindDerivationHistory getDerivationHistory;
     private ISimpleRegression simpleRegression;
 
-    @Override
     public List<CryptocurrencyTrendResponse> getByCryptocurrencyName(final String name) {
         final var derivationHistoryPerformed = this.getDerivationHistory.getByCryptocurrencyName(name);
 

@@ -2,7 +2,7 @@ package usecases;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.repositories.IWalletRepository;
-import com.crypto.wallet.app.usecases.impl.FindCryptocurrencyWallet;
+import com.crypto.wallet.app.usecases.FindCryptocurrencyWallet;
 import com.crypto.wallet.domain.Wallet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

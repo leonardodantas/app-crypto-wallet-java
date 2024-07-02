@@ -3,7 +3,7 @@ package usecases;
 import com.crypto.wallet.app.models.requests.CryptocurrencyWalletRequest;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
-import com.crypto.wallet.app.usecases.impl.SaveWallet;
+import com.crypto.wallet.app.usecases.SaveWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
 import org.junit.jupiter.api.DisplayName;
