@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.controllers;
+package com.crypto.wallet.infra.http.controllers;
 
 import com.crypto.wallet.app.models.responses.TickerResponse;
 import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;

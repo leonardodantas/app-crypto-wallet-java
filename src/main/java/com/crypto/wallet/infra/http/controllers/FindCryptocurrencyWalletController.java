@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.controllers;
+package com.crypto.wallet.infra.http.controllers;
 
 
 import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
@@ -20,7 +20,7 @@ public class FindCryptocurrencyWalletController {
     private final FindCryptocurrencyWallet findCryptocurrencyWallet;
 
     @GetMapping("/{cryptocurrency}/wallet")
-    ResponseEntity<?> getCryptocurrencyByName(@PathVariable String cryptocurrency){
+    ResponseEntity<?> getCryptocurrencyByName(@PathVariable final String cryptocurrency){
         CryptocurrencyWalletResponse response = findCryptocurrencyWallet.getByName(cryptocurrency);
         return ResponseEntity.ok(response);
     }

@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.controllers;
+package com.crypto.wallet.infra.http.controllers;
 
 import com.crypto.wallet.app.models.responses.CryptocurrencyTrendResponse;
 import com.crypto.wallet.app.usecases.FindCryptocurrencyTrend;
@@ -19,7 +19,7 @@ public class FindCryptocurrencyTrendController {
     private final FindCryptocurrencyTrend findCryptocurrencyTrend;
 
     @GetMapping("/{cryptocurrency}/trend")
-    ResponseEntity<?> getFindCryptocurrencyTrendByName(@PathVariable String cryptocurrency) {
+    ResponseEntity<?> getFindCryptocurrencyTrendByName(@PathVariable final String cryptocurrency) {
         List<CryptocurrencyTrendResponse> response = this.findCryptocurrencyTrend.getByCryptocurrencyName(cryptocurrency);
         return ResponseEntity.ok(response);
     }
