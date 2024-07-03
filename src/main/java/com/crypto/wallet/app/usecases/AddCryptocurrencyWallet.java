@@ -1,7 +1,6 @@
 package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
-import com.crypto.wallet.app.models.requests.CryptocurrencyWalletRequest;
 import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +13,11 @@ public class AddCryptocurrencyWallet {
     private final IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
     private final SaveWallet saveWallet;
 
-    public CryptocurrencyWalletResponse addCryptocurrency(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest) {
+    public CryptocurrencyWalletResponse addCryptocurrency(final String name, final double quantity) {
         final var digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
-                .findByName(cryptocurrencyWalletRequest.getName()).orElseThrow(() -> new CryptocurrencyNotFoundException(cryptocurrencyWalletRequest.getName()));
+                .findByName(name).orElseThrow(() -> new CryptocurrencyNotFoundException(name));
 
-        final var wallet = saveWallet.save(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
+        final var wallet = saveWallet.save(digitalCurrencyAcronym, quantity);
 
         return CryptocurrencyWalletResponse.of(wallet, digitalCurrencyAcronym);
     }
