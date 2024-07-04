@@ -1,15 +1,19 @@
 package com.crypto.wallet.infra.database.entities;
 
+import com.crypto.wallet.domain.Wallet;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Getter
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "wallet")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class WalletEntity {
 
     @Id
@@ -19,18 +23,7 @@ public class WalletEntity {
     private DigitalCurrencyAcronymEntity digitalCurrencyAcronym;
     private double quantity;
 
-    private WalletEntity(DigitalCurrencyAcronymEntity digitalCurrencyAcronym, ICryptocurrencyWallet cryptoWallet) {
-        this.id = UUID.randomUUID().toString();
-        this.digitalCurrencyAcronym = digitalCurrencyAcronym;
-        this.quantity = cryptoWallet.getQuatity();
-    }
-
-    public static WalletEntity of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymEntity digitalCurrencyAcronym) {
-        return new WalletEntity(digitalCurrencyAcronym, cryptoWallet);
-    }
-
-    public void overrideWallet(WalletEntity wallet) {
-        this.id = wallet.getId();
-        this.quantity += wallet.getQuantity();
+    public static WalletEntity from(final Wallet wallet) {
+        return new WalletEntity(UUID.randomUUID().toString(), DigitalCurrencyAcronymEntity.from(wallet.getDigitalCurrencyAcronym()), wallet.getQuantity());
     }
 }

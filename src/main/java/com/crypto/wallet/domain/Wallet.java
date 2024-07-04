@@ -1,12 +1,16 @@
 package com.crypto.wallet.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Wallet {
 
     private String id;
@@ -14,7 +18,6 @@ public class Wallet {
     private double quantity;
 
     private Wallet(final DigitalCurrencyAcronym digitalCurrencyAcronym, final double quantity) {
-        this.id = UUID.randomUUID().toString();
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
         this.quantity = quantity;
     }

@@ -1,11 +1,14 @@
 package com.crypto.wallet.infra.database.entities;
 
+import com.crypto.wallet.domain.Crypto;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Entity
+@Getter
 @NoArgsConstructor
 @Table(name = "crypto")
 public class CryptoEntity {
@@ -15,12 +18,12 @@ public class CryptoEntity {
     @Enumerated(EnumType.STRING)
     private TypeOperation typeOperation;
 
-    private CryptoEntity(TypeOperation operation) {
+    private CryptoEntity(final Crypto crypto) {
         this.id = UUID.randomUUID().toString();
-        this.typeOperation = operation;
+        this.typeOperation = TypeOperation.valueOf(crypto.getTypeOperation().getType());
     }
 
-    public static CryptoEntity from(TypeOperation operation) {
-        return new CryptoEntity(operation);
+    public static CryptoEntity from(final Crypto crypto) {
+        return new CryptoEntity(crypto);
     }
 }

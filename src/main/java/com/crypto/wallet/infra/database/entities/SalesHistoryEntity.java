@@ -1,14 +1,17 @@
 package com.crypto.wallet.infra.database.entities;
 
+import com.crypto.wallet.domain.SalesHistory;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "sales_history")
+@Getter
 @NoArgsConstructor
+@Table(name = "sales_history")
 public class SalesHistoryEntity {
 
     @Id
@@ -21,15 +24,14 @@ public class SalesHistoryEntity {
     private CryptoEntity crypto;
     private LocalDateTime date;
 
-    private SalesHistoryEntity(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymEntity digitalCurrencyAcronym, TypeOperation operation) {
-        this.id = UUID.randomUUID().toString();
-        this.digitalCurrencyAcronym = digitalCurrencyAcronym;
-        this.quantity = cryptoWallet.getQuatity();
-        this.crypto = CryptoEntity.from(operation);
-        this.date = LocalDateTime.now();
+    private SalesHistoryEntity(final SalesHistory salesHistory) {
+        this.digitalCurrencyAcronym = DigitalCurrencyAcronymEntity.from(salesHistory.getDigitalCurrencyAcronym());
+        this.quantity = salesHistory.getQuantity();
+        this.crypto = CryptoEntity.from(salesHistory.getCrypto());
+        this.date = salesHistory.getDate();
     }
 
-    public static SalesHistoryEntity of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymEntity digitalCurrencyAcronym, TypeOperation operation) {
-        return new SalesHistoryEntity(cryptoWallet, digitalCurrencyAcronym, operation);
+    public static SalesHistoryEntity from(final SalesHistory salesHistory){
+        return new SalesHistoryEntity(salesHistory);
     }
 }

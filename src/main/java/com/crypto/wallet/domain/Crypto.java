@@ -1,10 +1,13 @@
 package com.crypto.wallet.domain;
 
-import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.UUID;
 
-@NoArgsConstructor
+@Getter
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Crypto {
 
     private String id;
@@ -17,5 +20,9 @@ public class Crypto {
 
     public static Crypto from(final TypeOperation operation) {
         return new Crypto(operation);
+    }
+
+    public static Crypto from(final String id, final String type) {
+        return new Crypto(id, TypeOperation.valueOf(type));
     }
 }
