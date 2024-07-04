@@ -3,7 +3,7 @@ package com.crypto.wallet.infra.database.impl;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.infra.database.DigitalCurrencyAcronymSpringData;
-import com.crypto.wallet.infra.database.converters.DigitalCurrencyAcronymEntityToDigitalCurrencyAcronym;
+import com.crypto.wallet.infra.database.converters.DigitalCurrencyAcronymConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class DigitalCurrencyAcronymRepository implements IDigitalCurrencyAcronymRepository {
 
     private final DigitalCurrencyAcronymSpringData springData;
-    private final DigitalCurrencyAcronymEntityToDigitalCurrencyAcronym converter;
+    private final DigitalCurrencyAcronymConverter converter;
 
     @Override
     public List<DigitalCurrencyAcronym> findAll() {

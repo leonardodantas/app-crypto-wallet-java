@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SalesHistoryEntityToSalesHistory implements Converter<SalesHistoryEntity, SalesHistory> {
+public class SalesHistoryConverter implements Converter<SalesHistoryEntity, SalesHistory> {
 
-    private final DigitalCurrencyAcronymEntityToDigitalCurrencyAcronym digitalCurrencyAcronymConverter;
-    private final CryptoEntityToCrypto cryptoEntityToCryptoConverter;
+    private final DigitalCurrencyAcronymConverter digitalCurrencyAcronymConverter;
+    private final CryptoConverter cryptoConverterConverter;
 
     @Override
     public SalesHistory convert(final SalesHistoryEntity entity) {
         return SalesHistory.builder()
                 .digitalCurrencyAcronym(digitalCurrencyAcronymConverter.convert(entity.getDigitalCurrencyAcronym()))
-                .crypto(cryptoEntityToCryptoConverter.convert(entity.getCrypto()))
+                .crypto(cryptoConverterConverter.convert(entity.getCrypto()))
                 .date(entity.getDate())
                 .quantity(entity.getQuantity())
                 .build();

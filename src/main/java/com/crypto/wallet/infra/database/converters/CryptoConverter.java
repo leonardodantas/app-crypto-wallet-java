@@ -6,7 +6,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CryptoEntityToCrypto implements Converter<CryptoEntity, Crypto> {
+public class CryptoConverter implements Converter<CryptoEntity, Crypto> {
 
     @Override
     public Crypto convert(final CryptoEntity entity) {

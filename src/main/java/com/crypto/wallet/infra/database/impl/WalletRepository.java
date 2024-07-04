@@ -5,7 +5,7 @@ import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
 import com.crypto.wallet.infra.database.WalletRepositorySpringData;
-import com.crypto.wallet.infra.database.converters.WalletEntityToWallet;
+import com.crypto.wallet.infra.database.converters.WalletConverter;
 import com.crypto.wallet.infra.database.entities.DigitalCurrencyAcronymEntity;
 import com.crypto.wallet.infra.database.entities.WalletEntity;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +19,13 @@ import java.util.Optional;
 public class WalletRepository implements IWalletRepository {
 
     private final WalletRepositorySpringData walletRepositorySpringData;
-    private final WalletEntityToWallet walletEntityToWalletConverter;
+    private final WalletConverter walletConverterConverter;
 
     @Override
     public Wallet save(final Wallet wallet) {
         try {
             final var walletSave = walletRepositorySpringData.save(WalletEntity.from(wallet));
-            return walletEntityToWalletConverter.convert(walletSave);
+            return walletConverterConverter.convert(walletSave);
         } catch (final Exception e) {
             throw new EntitySaveException("Error save Wallet");
         }
@@ -34,20 +34,20 @@ public class WalletRepository implements IWalletRepository {
     @Override
     public Optional<Wallet> findByDigitalCurrencyAcronym(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
         return walletRepositorySpringData.findByDigitalCurrencyAcronym(DigitalCurrencyAcronymEntity.from(digitalCurrencyAcronym))
-                .map(walletEntityToWalletConverter::convert);
+                .map(walletConverterConverter::convert);
     }
 
     @Override
     public List<Wallet> findAll() {
         return walletRepositorySpringData.findAll()
                 .stream()
-                .map(walletEntityToWalletConverter::convert)
+                .map(walletConverterConverter::convert)
                 .toList();
     }
 
     @Override
     public Optional<Wallet> findByCryptocurrencyName(final String cryptocurrency) {
         return walletRepositorySpringData.findByDigitalCurrencyAcronymName(cryptocurrency)
-                .map(walletEntityToWalletConverter::convert);
+                .map(walletConverterConverter::convert);
     }
 }

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class WalletEntityToWallet implements Converter<WalletEntity, Wallet> {
+public class WalletConverter implements Converter<WalletEntity, Wallet> {
 
-    private final DigitalCurrencyAcronymEntityToDigitalCurrencyAcronym digitalCurrencyAcronymConverter;
+    private final DigitalCurrencyAcronymConverter digitalCurrencyAcronymConverter;
 
     @Override
     public Wallet convert(final WalletEntity entity) {
