@@ -1,7 +1,7 @@
 package com.crypto.wallet.infra.http.controllers;
 
 
-import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
+import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.app.usecases.FindCryptocurrencyWallet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +21,13 @@ public class FindCryptocurrencyWalletController {
 
     @GetMapping("/{cryptocurrency}/wallet")
     ResponseEntity<?> getCryptocurrencyByName(@PathVariable final String cryptocurrency){
-        CryptocurrencyWalletResponse response = findCryptocurrencyWallet.getByName(cryptocurrency);
+        CryptocurrencyWallet response = findCryptocurrencyWallet.getByName(cryptocurrency);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
     ResponseEntity<?> getAllCryptocurrency(){
-        List<CryptocurrencyWalletResponse> response = findCryptocurrencyWallet.getAll();
+        List<CryptocurrencyWallet> response = findCryptocurrencyWallet.getAll();
         if(response.isEmpty()){
             return ResponseEntity.noContent().build();
         }

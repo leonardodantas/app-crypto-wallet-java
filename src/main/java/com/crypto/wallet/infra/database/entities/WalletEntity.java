@@ -24,6 +24,6 @@ public class WalletEntity {
     private double quantity;
 
     public static WalletEntity from(final Wallet wallet) {
-        return new WalletEntity(UUID.randomUUID().toString(), DigitalCurrencyAcronymEntity.from(wallet.getDigitalCurrencyAcronym()), wallet.getQuantity());
+        return new WalletEntity(UUID.randomUUID().toString(), DigitalCurrencyAcronymEntity.from(wallet.getDigitalCurrencyAcronymResponse()), wallet.getQuantity());
     }
 }

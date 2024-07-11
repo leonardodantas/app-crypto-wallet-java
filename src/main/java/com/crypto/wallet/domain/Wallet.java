@@ -1,11 +1,10 @@
 package com.crypto.wallet.domain;
 
+import com.crypto.wallet.infra.http.responses.DigitalCurrencyAcronymResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 @Getter
 @Builder

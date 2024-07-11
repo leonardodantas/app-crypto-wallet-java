@@ -1,6 +1,7 @@
 package com.crypto.wallet.infra.database.entities;
 
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.infra.http.responses.DigitalCurrencyAcronymResponse;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,8 @@ public class DigitalCurrencyAcronymEntity {
     private String description;
 
     private DigitalCurrencyAcronymEntity(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        this.name = digitalCurrencyAcronym.getName();
-        this.description = digitalCurrencyAcronym.getDescription();
+        this.name = digitalCurrencyAcronym.name();
+        this.description = digitalCurrencyAcronym.description();
     }
 
     public static DigitalCurrencyAcronymEntity from(final DigitalCurrencyAcronym digitalCurrencyAcronym) {

@@ -1,6 +1,5 @@
 package com.crypto.wallet.app.models.responses;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,12 +10,12 @@ public class DigitalCurrencyAcronymResponse {
     private String name;
     private String description;
 
-    private DigitalCurrencyAcronymResponse(DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        this.name = digitalCurrencyAcronym.getName();
-        this.description = digitalCurrencyAcronym.getDescription();
+    private DigitalCurrencyAcronymResponse(com.crypto.wallet.infra.http.responses.DigitalCurrencyAcronymResponse digitalCurrencyAcronymResponse) {
+        this.name = digitalCurrencyAcronymResponse.getName();
+        this.description = digitalCurrencyAcronymResponse.getDescription();
     }
 
-    public static DigitalCurrencyAcronymResponse from(DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return new DigitalCurrencyAcronymResponse(digitalCurrencyAcronym);
+    public static DigitalCurrencyAcronymResponse from(com.crypto.wallet.infra.http.responses.DigitalCurrencyAcronymResponse digitalCurrencyAcronymResponse) {
+        return new DigitalCurrencyAcronymResponse(digitalCurrencyAcronymResponse);
     }
 }

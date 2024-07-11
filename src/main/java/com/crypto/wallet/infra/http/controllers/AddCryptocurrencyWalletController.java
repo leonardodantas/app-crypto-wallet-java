@@ -1,12 +1,12 @@
 package com.crypto.wallet.infra.http.controllers;
 
-import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
+import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.infra.http.requests.CryptocurrencyWalletRequest;
+import com.crypto.wallet.infra.http.responses.CryptocurrencyWalletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,8 +18,8 @@ public class AddCryptocurrencyWalletController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> addCryptocurrency(@Valid @RequestBody final CryptocurrencyWalletRequest request) {
-        CryptocurrencyWalletResponse response = addCryptocurrencyWallet.addCryptocurrency(request.name(), request.quantity());
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public CryptocurrencyWalletResponse addCryptocurrency(@Valid @RequestBody final CryptocurrencyWalletRequest request) {
+        final CryptocurrencyWallet response = addCryptocurrencyWallet.addCryptocurrency(request.name(), request.quantity());
+        return CryptocurrencyWalletResponse.from(response);
     }
 }

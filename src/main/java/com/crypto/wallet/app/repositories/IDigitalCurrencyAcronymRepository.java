@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface IDigitalCurrencyAcronymRepository {
 
     List<DigitalCurrencyAcronym> findAll();
-    Optional<DigitalCurrencyAcronym> findByName(String name);
+
+    Optional<DigitalCurrencyAcronym> findByName(final String name);
 }

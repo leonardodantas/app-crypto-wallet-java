@@ -4,7 +4,7 @@ import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
 import com.crypto.wallet.app.usecases.SaveWallet;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.infra.http.responses.DigitalCurrencyAcronymResponse;
 import com.crypto.wallet.domain.Wallet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ class AddCryptocurrencyWalletTest {
         final var name = "BITCOIN";
         final var quantity = 10D;
 
-        final var digitalCurrencyAcronym = GetMockJson.execute("domains/digital-currency-acronym", DigitalCurrencyAcronym.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("domains/digital-currency-acronym", DigitalCurrencyAcronymResponse.class);
         final var wallet = GetMockJson.execute("domains/wallet", Wallet.class);
 
         when(digitalCurrencyAcronymRepository.findByName(anyString()))

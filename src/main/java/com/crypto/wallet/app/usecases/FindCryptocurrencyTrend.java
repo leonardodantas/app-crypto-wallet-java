@@ -1,6 +1,6 @@
 package com.crypto.wallet.app.usecases;
 
-import com.crypto.wallet.app.models.responses.CryptocurrencyTrendResponse;
+import com.crypto.wallet.domain.CryptocurrencyTrend;
 import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
@@ -20,7 +20,7 @@ public class FindCryptocurrencyTrend {
     private FindDerivationHistory getDerivationHistory;
     private ISimpleRegression simpleRegression;
 
-    public List<CryptocurrencyTrendResponse> getByCryptocurrencyName(final String name) {
+    public List<CryptocurrencyTrend> getByCryptocurrencyName(final String name) {
         final var derivationHistoryPerformed = this.getDerivationHistory.getByCryptocurrencyName(name);
 
         final var dataForCalculationsBuy = getDataForCalculations(derivationHistoryPerformed, BUY);
@@ -29,7 +29,7 @@ public class FindCryptocurrencyTrend {
         final var buy = simpleRegression.calculeSimpleRegression(dataForCalculationsBuy);
         final var sell = simpleRegression.calculeSimpleRegression(dataForCalculationsSell);
 
-        return List.of(CryptocurrencyTrendResponse.of(buy, BUY, name), CryptocurrencyTrendResponse.of(sell, SELL, name));
+        return List.of(CryptocurrencyTrend.of(buy, BUY, name), CryptocurrencyTrend.of(sell, SELL, name));
     }
 
     private List<DataForCalculation> getDataForCalculations(final List<DerivationHistoryPerformedResponse> derivationHistoryPerformed, final String type) {

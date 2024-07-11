@@ -1,7 +1,7 @@
 package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
-import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
+import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,15 +14,15 @@ public class FindCryptocurrencyWallet {
 
     private final IWalletRepository walletRepository;
 
-    public CryptocurrencyWalletResponse getByName(final String name) {
+    public CryptocurrencyWallet getByName(final String name) {
         return walletRepository.findByCryptocurrencyName(name)
-                .map(CryptocurrencyWalletResponse::from)
+                .map(CryptocurrencyWallet::from)
                 .orElseThrow(() -> new CryptocurrencyNotFoundException(name));
     }
 
-    public List<CryptocurrencyWalletResponse> getAll() {
+    public List<CryptocurrencyWallet> getAll() {
         return walletRepository.findAll().stream()
-                .map(CryptocurrencyWalletResponse::from)
+                .map(CryptocurrencyWallet::from)
                 .toList();
     }
 }
