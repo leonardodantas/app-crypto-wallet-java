@@ -1,9 +1,9 @@
 package com.crypto.wallet.app.usecases;
 
-import com.crypto.wallet.domain.CryptocurrencyTrend;
-import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
+import com.crypto.wallet.domain.CryptocurrencyTrend;
+import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +32,7 @@ public class FindCryptocurrencyTrend {
         return List.of(CryptocurrencyTrend.of(buy, BUY, name), CryptocurrencyTrend.of(sell, SELL, name));
     }
 
-    private List<DataForCalculation> getDataForCalculations(final List<DerivationHistoryPerformedResponse> derivationHistoryPerformed, final String type) {
+    private List<DataForCalculation> getDataForCalculations(final List<DerivationHistoryPerformed> derivationHistoryPerformed, final String type) {
         return derivationHistoryPerformed.stream()
                 .filter(derivationHistoryPerformedDTO -> derivationHistoryPerformedDTO.getType().equals(type))
                 .map(DataForCalculation::from)

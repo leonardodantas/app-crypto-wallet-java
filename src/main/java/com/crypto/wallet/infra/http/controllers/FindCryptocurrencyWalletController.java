@@ -1,14 +1,11 @@
 package com.crypto.wallet.infra.http.controllers;
 
 
-import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.app.usecases.FindCryptocurrencyWallet;
+import com.crypto.wallet.infra.http.responses.CryptocurrencyWalletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,18 +16,19 @@ public class FindCryptocurrencyWalletController {
 
     private final FindCryptocurrencyWallet findCryptocurrencyWallet;
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{cryptocurrency}/wallet")
-    ResponseEntity<?> getCryptocurrencyByName(@PathVariable final String cryptocurrency){
-        CryptocurrencyWallet response = findCryptocurrencyWallet.getByName(cryptocurrency);
-        return ResponseEntity.ok(response);
+    public CryptocurrencyWalletResponse getCryptocurrencyByName(@PathVariable final String cryptocurrency) {
+        final var response = findCryptocurrencyWallet.getByName(cryptocurrency);
+        return CryptocurrencyWalletResponse.from(response);
     }
 
     @GetMapping
-    ResponseEntity<?> getAllCryptocurrency(){
-        List<CryptocurrencyWallet> response = findCryptocurrencyWallet.getAll();
-        if(response.isEmpty()){
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(response);
+    @ResponseStatus(HttpStatus.OK)
+    public List<CryptocurrencyWalletResponse> getAllCryptocurrency() {
+        return findCryptocurrencyWallet.getAll()
+                .stream()
+                .map(CryptocurrencyWalletResponse::from)
+                .toList();
     }
 }

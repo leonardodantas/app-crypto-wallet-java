@@ -1,6 +1,6 @@
 package usecases;
 
-import com.crypto.wallet.app.models.responses.TickerResponse;
+import com.crypto.wallet.domain.Ticker;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
 import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
@@ -33,7 +33,7 @@ class FindLastDayCryptocurrencySummaryTest {
         final var digitalCurrencyAcronym = GetMockJson.execute("domains/digital-currency-acronym", DigitalCurrencyAcronymResponse.class);
         when(digitalCurrencyAcronymRepository.findAll()).thenReturn(List.of(digitalCurrencyAcronym));
 
-        final var ticket = GetMockJson.execute("domains/ticket", TickerResponse.class);
+        final var ticket = GetMockJson.execute("domains/ticket", Ticker.class);
         when(lastDayCoinSummary.getSummary(any())).thenReturn(ticket);
 
         final var response = findLastDayCryptocurrencySummary.getAllTicker();

@@ -1,28 +1,28 @@
 package com.crypto.wallet.app.utils.simpleregression;
 
-import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
+import com.crypto.wallet.domain.DerivationHistoryPerformed;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class DataForCalculation implements Comparable<DataForCalculation>{
+public class DataForCalculation implements Comparable<DataForCalculation> {
 
     private final LocalDateTime x;
     private final double y;
 
-    private DataForCalculation(DerivationHistoryPerformedResponse derivationHistoryPerformedResponse) {
-        this.x = derivationHistoryPerformedResponse.getDate();
-        this.y = derivationHistoryPerformedResponse.getPrice().doubleValue();
+    private DataForCalculation(final DerivationHistoryPerformed derivationHistoryPerformed) {
+        this.x = derivationHistoryPerformed.getDate();
+        this.y = derivationHistoryPerformed.getPrice().doubleValue();
     }
 
-    public static DataForCalculation from(DerivationHistoryPerformedResponse derivationHistoryPerformedResponse) {
-        return new DataForCalculation(derivationHistoryPerformedResponse);
+    public static DataForCalculation from(final DerivationHistoryPerformed derivationHistoryPerformed) {
+        return new DataForCalculation(derivationHistoryPerformed);
     }
 
     @Override
     public int compareTo(DataForCalculation o) {
-        if(x.isBefore(o.x)) {
+        if (x.isBefore(o.x)) {
             return -1;
         }
         return 1;
