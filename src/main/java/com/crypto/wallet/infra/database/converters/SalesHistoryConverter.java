@@ -16,7 +16,7 @@ public class SalesHistoryConverter implements Converter<SalesHistoryEntity, Sale
     @Override
     public SalesHistory convert(final SalesHistoryEntity entity) {
         return SalesHistory.builder()
-                .digitalCurrencyAcronymResponse(digitalCurrencyAcronymConverter.convert(entity.getDigitalCurrencyAcronym()))
+                .digitalCurrencyAcronym(digitalCurrencyAcronymConverter.convert(entity.getDigitalCurrencyAcronym()))
                 .crypto(cryptoConverterConverter.convert(entity.getCrypto()))
                 .date(entity.getDate())
                 .quantity(entity.getQuantity())

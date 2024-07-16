@@ -16,7 +16,7 @@ public class WalletConverter implements Converter<WalletEntity, Wallet> {
     public Wallet convert(final WalletEntity entity) {
         return Wallet.builder()
                 .id(entity.getId())
-                .digitalCurrencyAcronymResponse(digitalCurrencyAcronymConverter.convert(entity.getDigitalCurrencyAcronym()))
+                .digitalCurrencyAcronym(digitalCurrencyAcronymConverter.convert(entity.getDigitalCurrencyAcronym()))
                 .quantity(entity.getQuantity())
                 .build();
     }

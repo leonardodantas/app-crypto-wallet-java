@@ -24,7 +24,7 @@ public class SalesHistoryEntity {
     private LocalDateTime date;
 
     private SalesHistoryEntity(final SalesHistory salesHistory) {
-        this.digitalCurrencyAcronym = DigitalCurrencyAcronymEntity.from(salesHistory.getDigitalCurrencyAcronymResponse());
+        this.digitalCurrencyAcronym = DigitalCurrencyAcronymEntity.from(salesHistory.getDigitalCurrencyAcronym());
         this.quantity = salesHistory.getQuantity();
         this.crypto = CryptoEntity.from(salesHistory.getCrypto());
         this.date = salesHistory.getDate();

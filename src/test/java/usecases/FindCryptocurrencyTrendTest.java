@@ -1,9 +1,9 @@
 package usecases;
 
-import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.usecases.FindCryptocurrencyTrend;
 import com.crypto.wallet.app.usecases.FindDerivationHistory;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
+import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +33,7 @@ class FindCryptocurrencyTrendTest {
     void shouldGetCryptocurrencyTrend() {
         final var name = "BITCOIN";
 
-        final var derivationHistoriesPerformed = GetMockJson.execute("domains/derivation-history-performed-list", new TypeReference<List<DerivationHistoryPerformedResponse>>() {
+        final var derivationHistoriesPerformed = GetMockJson.execute("domains/derivation-history-performed-list", new TypeReference<List<DerivationHistoryPerformed>>() {
         });
         when(getDerivationHistory.getByCryptocurrencyName(name))
                 .thenReturn(derivationHistoriesPerformed);

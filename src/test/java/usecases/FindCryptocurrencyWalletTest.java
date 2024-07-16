@@ -39,7 +39,7 @@ class FindCryptocurrencyWalletTest {
         final var result = cryptocurrencyWallet.getByName(crypto);
 
         assertNotNull(result);
-        assertNotNull(result.getDigitalCurrencyAcronymResponse());
+        assertNotNull(result.getDigitalCurrencyAcronym());
         assertEquals(10, result.getQuantity());
     }
 

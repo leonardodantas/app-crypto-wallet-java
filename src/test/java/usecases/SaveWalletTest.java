@@ -3,7 +3,7 @@ package usecases;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.app.usecases.SaveWallet;
-import com.crypto.wallet.infra.http.responses.DigitalCurrencyAcronymResponse;
+import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class SaveWalletTest {
     void shouldUpdateCryptoInWallet() {
         final var quantity = 10D;
 
-        final var digitalCurrencyAcronym = GetMockJson.execute("domains/digital-currency-acronym", DigitalCurrencyAcronymResponse.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("domains/digital-currency-acronym", DigitalCurrencyAcronym.class);
         final var walletToSave = GetMockJson.execute("domains/wallet-1", Wallet.class);
         final var walletSave = GetMockJson.execute("domains/wallet", Wallet.class);
 
@@ -67,7 +67,7 @@ class SaveWalletTest {
     void shouldSaveWalletWhenNotFoundCriptoInDataBase() {
         final var quantity = 10D;
 
-        final var digitalCurrencyAcronym = GetMockJson.execute("domains/digital-currency-acronym", DigitalCurrencyAcronymResponse.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("domains/digital-currency-acronym", DigitalCurrencyAcronym.class);
         final var walletToSave = GetMockJson.execute("domains/wallet", Wallet.class);
 
         when(walletRepository
