@@ -19,7 +19,7 @@ public class AddCryptocurrencyWalletController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CryptocurrencyWalletResponse addCryptocurrency(@Valid @RequestBody final CryptocurrencyWalletRequest request) {
-        final CryptocurrencyWallet response = addCryptocurrencyWallet.addCryptocurrency(request.name(), request.quantity());
+        final var response = addCryptocurrencyWallet.addCryptocurrency(request.name(), request.quantity());
         return CryptocurrencyWalletResponse.from(response);
     }
 }

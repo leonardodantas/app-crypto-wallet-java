@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.feign;
+package com.crypto.wallet.infra.feign.converters;
 
 import com.crypto.wallet.domain.CryptocurrencySummary;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;

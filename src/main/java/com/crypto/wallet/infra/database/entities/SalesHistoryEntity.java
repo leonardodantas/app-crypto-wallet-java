@@ -23,6 +23,22 @@ public class SalesHistoryEntity {
     private CryptoEntity crypto;
     private LocalDateTime date;
 
+    public String getCryptoId() {
+        return this.crypto.getId();
+    }
+
+    public String getDigitalCurrencyAcronymName(){
+        return this.digitalCurrencyAcronym.getName();
+    }
+
+    public String getDigitalCurrencyAcronymDescription(){
+        return this.digitalCurrencyAcronym.getDescription();
+    }
+
+    public String getCryptoTypeOperation() {
+        return this.crypto.getTypeOperation().getType();
+    }
+
     private SalesHistoryEntity(final SalesHistory salesHistory) {
         this.digitalCurrencyAcronym = DigitalCurrencyAcronymEntity.from(salesHistory.getDigitalCurrencyAcronym());
         this.quantity = salesHistory.getQuantity();
@@ -30,7 +46,7 @@ public class SalesHistoryEntity {
         this.date = salesHistory.getDate();
     }
 
-    public static SalesHistoryEntity from(final SalesHistory salesHistory){
+    public static SalesHistoryEntity from(final SalesHistory salesHistory) {
         return new SalesHistoryEntity(salesHistory);
     }
 }

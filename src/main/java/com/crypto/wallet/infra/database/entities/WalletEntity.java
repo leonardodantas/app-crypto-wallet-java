@@ -23,6 +23,14 @@ public class WalletEntity {
     private DigitalCurrencyAcronymEntity digitalCurrencyAcronym;
     private double quantity;
 
+    public String getDigitalCurrencyAcronymName() {
+        return this.digitalCurrencyAcronym.getName();
+    }
+
+    public String getDigitalCurrencyAcronymDescription() {
+        return this.digitalCurrencyAcronym.getDescription();
+    }
+
     public static WalletEntity from(final Wallet wallet) {
         return new WalletEntity(UUID.randomUUID().toString(), DigitalCurrencyAcronymEntity.from(wallet.getDigitalCurrencyAcronym()), wallet.getQuantity());
     }

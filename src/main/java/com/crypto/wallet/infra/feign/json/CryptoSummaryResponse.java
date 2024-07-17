@@ -1,19 +1,16 @@
 package com.crypto.wallet.infra.feign.json;
 
-import lombok.Getter;
-
 import java.math.BigDecimal;
 
-@Getter
-public class CryptoSummaryResponse {
-
-    private BigDecimal high;
-    private BigDecimal low;
-    private BigDecimal vol;
-    private BigDecimal last;
-    private BigDecimal buy;
-    private BigDecimal open;
-    private BigDecimal sell;
-    private long date;
+public record CryptoSummaryResponse(
+        BigDecimal high,
+        BigDecimal low,
+        BigDecimal vol,
+        BigDecimal last,
+        BigDecimal buy,
+        BigDecimal open,
+        BigDecimal sell,
+        long date
+) {
 
 }

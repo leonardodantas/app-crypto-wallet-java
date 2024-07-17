@@ -11,5 +11,5 @@ import java.util.List;
 public interface DerivationHistoryPerformedFeign {
 
     @GetMapping("/{name}/trades")
-    List<DerivationHistoryPerformedResponse> getDerivationHistoryPerformed(@PathVariable String name);
+    List<DerivationHistoryPerformedResponse> getDerivationHistoryPerformed(@PathVariable final String name);
 }

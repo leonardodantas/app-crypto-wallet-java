@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.http.controllers.advice.response;
+package com.crypto.wallet.infra.http.responses;
 
 import lombok.Getter;
 import org.springframework.validation.FieldError;
@@ -6,19 +6,19 @@ import org.springframework.validation.FieldError;
 import java.util.UUID;
 
 @Getter
-public class ErrorsDTO {
+public class ErrorsResponse {
 
     private final String id;
     private final String field;
     private final String message;
 
-    private ErrorsDTO(FieldError field, String message) {
+    private ErrorsResponse(FieldError field, String message) {
         this.id = UUID.randomUUID().toString();
         this.field = field.getField();
         this.message = message;
     }
 
-    public static ErrorsDTO of(FieldError field, String message) {
-        return new ErrorsDTO(field, message);
+    public static ErrorsResponse of(FieldError field, String message) {
+        return new ErrorsResponse(field, message);
     }
 }

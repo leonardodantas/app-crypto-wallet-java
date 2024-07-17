@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.feign;
+package com.crypto.wallet.infra.feign.converters;
 
 import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import com.crypto.wallet.infra.feign.json.DerivationHistoryPerformedResponse;

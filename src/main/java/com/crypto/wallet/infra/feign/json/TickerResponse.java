@@ -1,43 +1,40 @@
 package com.crypto.wallet.infra.feign.json;
 
-import lombok.Getter;
-
 import java.math.BigDecimal;
 
-@Getter
-public class TickerResponse {
-
-    private CryptoSummaryResponse ticker;
+public record TickerResponse(
+        CryptoSummaryResponse ticker
+) {
 
     public BigDecimal getHigh() {
-        return ticker.getHigh();
+        return ticker.high();
     }
 
     public BigDecimal getLow() {
-        return ticker.getLow();
+        return ticker.low();
     }
 
     public BigDecimal getVol() {
-        return ticker.getVol();
+        return ticker.vol();
     }
 
     public BigDecimal getLast() {
-        return ticker.getLast();
+        return ticker.last();
     }
 
     public BigDecimal getBuy() {
-        return ticker.getBuy();
+        return ticker.buy();
     }
 
     public BigDecimal getOpen() {
-        return ticker.getOpen();
+        return ticker.open();
     }
 
     public BigDecimal getSell() {
-        return ticker.getSell();
+        return ticker.sell();
     }
 
     public long getDate() {
-        return ticker.getDate();
+        return ticker.date();
     }
 }
