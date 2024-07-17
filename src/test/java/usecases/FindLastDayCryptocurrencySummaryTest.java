@@ -1,7 +1,7 @@
 package usecases;
 
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
+import com.crypto.wallet.app.client.IFindLastDayCryptocurrencySummaryClient;
 import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Ticker;
@@ -24,7 +24,7 @@ class FindLastDayCryptocurrencySummaryTest {
     @InjectMocks
     private FindLastDayCryptocurrencySummary findLastDayCryptocurrencySummary;
     @Mock
-    private IFindLastDayCryptocurrencySummaryRest lastDayCoinSummary;
+    private IFindLastDayCryptocurrencySummaryClient lastDayCoinSummary;
     @Mock
     private IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
 
