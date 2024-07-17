@@ -5,4 +5,7 @@ public record DigitalCurrencyAcronym(
         String description
 ) {
 
+    public static DigitalCurrencyAcronym of(final String name, final String description) {
+        return new DigitalCurrencyAcronym(name, description);
+    }
 }
