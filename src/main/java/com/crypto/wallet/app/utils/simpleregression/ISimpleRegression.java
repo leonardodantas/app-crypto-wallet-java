@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface ISimpleRegression {
 
-    BigDecimal calculeSimpleRegression(List<DataForCalculation> dataForCalculationsBuy);
+    BigDecimal calculeSimpleRegression(final List<DataForCalculation> dataForCalculationsBuy);
 }

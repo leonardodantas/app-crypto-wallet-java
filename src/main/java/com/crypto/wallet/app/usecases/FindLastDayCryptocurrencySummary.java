@@ -3,7 +3,7 @@ package com.crypto.wallet.app.usecases;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Ticker;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
+import com.crypto.wallet.app.client.IFindLastDayCryptocurrencySummaryClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FindLastDayCryptocurrencySummary {
 
-    private final IFindLastDayCryptocurrencySummaryRest lastDayCoinSummary;
+    private final IFindLastDayCryptocurrencySummaryClient lastDayCoinSummary;
     private final IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
 
     public List<Ticker> getAllTicker() {

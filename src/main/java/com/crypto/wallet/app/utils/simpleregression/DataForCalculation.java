@@ -1,6 +1,7 @@
 package com.crypto.wallet.app.utils.simpleregression;
 
 import com.crypto.wallet.domain.DerivationHistoryPerformed;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -9,6 +10,7 @@ import java.time.ZonedDateTime;
 public class DataForCalculation implements Comparable<DataForCalculation> {
 
     private final LocalDateTime x;
+    @Getter
     private final double y;
 
     private DataForCalculation(final DerivationHistoryPerformed derivationHistoryPerformed) {
@@ -21,19 +23,15 @@ public class DataForCalculation implements Comparable<DataForCalculation> {
     }
 
     @Override
-    public int compareTo(DataForCalculation o) {
+    public int compareTo(final DataForCalculation o) {
         if (x.isBefore(o.x)) {
             return -1;
         }
         return 1;
     }
 
-    public double getY() {
-        return y;
-    }
-
     public double getX() {
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(this.x, ZoneId.systemDefault());
+        final var zonedDateTime = ZonedDateTime.of(this.x, ZoneId.systemDefault());
         return zonedDateTime.toInstant().getEpochSecond();
     }
 }

@@ -2,7 +2,7 @@ package com.crypto.wallet.app.exceptions;
 
 public class EntitySaveException extends RuntimeException {
 
-    public EntitySaveException(String message){
+    public EntitySaveException(final String message) {
         super(message);
     }
 }
