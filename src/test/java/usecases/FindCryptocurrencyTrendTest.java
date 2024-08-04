@@ -2,7 +2,7 @@ package usecases;
 
 import com.crypto.wallet.app.usecases.FindCryptocurrencyTrend;
 import com.crypto.wallet.app.usecases.FindDerivationHistory;
-import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
+import com.crypto.wallet.app.usecases.ISimpleRegression;
 import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.junit.jupiter.api.Test;
@@ -38,13 +38,13 @@ class FindCryptocurrencyTrendTest {
         when(getDerivationHistory.getByCryptocurrencyName(name))
                 .thenReturn(derivationHistoriesPerformed);
 
-        when(simpleRegression.calculeSimpleRegression(any()))
+        when(simpleRegression.calculateSimpleRegression(any()))
                 .thenReturn(BigDecimal.valueOf(500)).thenReturn(BigDecimal.valueOf(1500));
 
         final var result = findCryptocurrencyTrend.getByCryptocurrencyName(name);
         assertNotNull(result);
 
-        verify(simpleRegression, times(2)).calculeSimpleRegression(any());
+        verify(simpleRegression, times(2)).calculateSimpleRegression(any());
     }
 
 }

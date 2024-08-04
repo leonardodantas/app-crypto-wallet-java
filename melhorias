@@ -2,12 +2,12 @@
 - transformar properties em yaml (feito)
 - criar testes unitarios e integrados ou mutantes
 - utilizar uma base de dados mongodb
-- melhorar retorno de erros da api (não permitir expor estrutura da tabela)
+- melhorar retorno de erros da api (não permitir expor estrutura da tabela) (feito)
 - ajustar bug onde não é possivel adicionar uma mesma moeda duas vezes
 - permitir apenas duas ou tres casas decimais nos retornos
-- trabalhar com final e var
-- deletar intefaces que não estão sendo usadas
-- deixar dominios limpos e inteligentes
+- trabalhar com final e var (feito)
+- deletar intefaces que não estão sendo usadas (feito)
+- deixar dominios limpos e inteligentes (feito)
 - melhorar classes feing
 - melhorar estrutura do projeto
 - utilizar recursos mais atuais da linguagem

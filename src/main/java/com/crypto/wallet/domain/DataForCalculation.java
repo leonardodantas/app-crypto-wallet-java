@@ -1,6 +1,5 @@
-package com.crypto.wallet.app.utils.simpleregression;
+package com.crypto.wallet.domain;
 
-import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

@@ -15,11 +15,11 @@ public class DerivationHistoryPerformedConverter implements Converter<Derivation
     @Override
     public DerivationHistoryPerformed convert(final DerivationHistoryPerformedResponse response) {
         return DerivationHistoryPerformed.builder()
-                .tid(response.getTid())
-                .price(response.getPrice())
-                .type(response.getType())
-                .date(LocalDateTime.ofInstant(Instant.ofEpochSecond(response.getDate()), ZoneId.of("UTF")))
-                .amount(response.getAmount())
+                .tid(response.tid())
+                .price(response.price())
+                .type(response.type())
+                .date(LocalDateTime.ofInstant(Instant.ofEpochSecond(response.date()), ZoneId.of("UTF")))
+                .amount(response.amount())
                 .build();
     }
 }

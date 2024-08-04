@@ -1,7 +1,6 @@
 package com.crypto.wallet.app.usecases;
 
-import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
-import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
+import com.crypto.wallet.domain.DataForCalculation;
 import com.crypto.wallet.domain.CryptocurrencyTrend;
 import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +25,8 @@ public class FindCryptocurrencyTrend {
         final var dataForCalculationsBuy = getDataForCalculations(derivationHistoryPerformed, BUY);
         final var dataForCalculationsSell = getDataForCalculations(derivationHistoryPerformed, SELL);
 
-        final var buy = simpleRegression.calculeSimpleRegression(dataForCalculationsBuy);
-        final var sell = simpleRegression.calculeSimpleRegression(dataForCalculationsSell);
+        final var buy = simpleRegression.calculateSimpleRegression(dataForCalculationsBuy);
+        final var sell = simpleRegression.calculateSimpleRegression(dataForCalculationsSell);
 
         return List.of(CryptocurrencyTrend.of(buy, BUY, name), CryptocurrencyTrend.of(sell, SELL, name));
     }
