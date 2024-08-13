@@ -1,0 +1,9 @@
+{
+  "id": "1",
+  "digitalCurrencyAcronym": {
+    "id": 1,
+    "name": "BITCOIN",
+    "description": "The best crypto"
+  },
+  "quantity": 10
+}
