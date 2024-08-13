@@ -1,10 +1,12 @@
 package com.crypto.wallet.infra.feign.json;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Getter
+@NoArgsConstructor
 public class CryptoSummaryRestDTO {
 
     private BigDecimal high;

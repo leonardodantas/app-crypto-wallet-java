@@ -2,10 +2,12 @@ package com.crypto.wallet.infra.feign.json;
 
 import com.crypto.wallet.app.models.responses.ITickerDTO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Getter
+@NoArgsConstructor
 public class TickerRestDTO implements ITickerDTO {
 
     private CryptoSummaryRestDTO ticker;
