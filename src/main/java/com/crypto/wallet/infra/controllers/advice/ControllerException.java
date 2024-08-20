@@ -4,6 +4,7 @@ import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.exceptions.EntitySaveException;
 import com.crypto.wallet.infra.controllers.advice.response.ErrorDTO;
 import com.crypto.wallet.infra.controllers.advice.response.ErrorsDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -17,33 +18,30 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
+@RequiredArgsConstructor
 public class ControllerException {
 
     private final MessageSource messageSource;
 
-    public ControllerException(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
-
     @ExceptionHandler(value = CryptocurrencyNotFoundException.class)
-        public ResponseEntity<?> coinNotFoundException(CryptocurrencyNotFoundException error) {
-        ErrorDTO errorDTO = ErrorDTO.from(error.getMessage());
+        public ResponseEntity<?> coinNotFoundException(final CryptocurrencyNotFoundException error) {
+        final ErrorDTO errorDTO = ErrorDTO.from(error.getMessage());
         return new ResponseEntity<>(errorDTO, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = EntitySaveException.class)
-    public ResponseEntity<?> entitySaveException(EntitySaveException error) {
-        ErrorDTO errorDTO = ErrorDTO.from(error.getMessage());
+    public ResponseEntity<?> entitySaveException(final EntitySaveException error) {
+        final ErrorDTO errorDTO = ErrorDTO.from(error.getMessage());
         return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> validationBeanException(MethodArgumentNotValidException error) {
-        List<FieldError> fields = error.getBindingResult().getFieldErrors();
+    public ResponseEntity<Object> validationBeanException(final MethodArgumentNotValidException error) {
+        final List<FieldError> fields = error.getBindingResult().getFieldErrors();
 
-        List<ErrorsDTO> errors = fields.stream()
+        final List<ErrorsDTO> errors = fields.stream()
                 .map(field -> ErrorsDTO.of(field, messageSource.getMessage(field, LocaleContextHolder.getLocale())))
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
