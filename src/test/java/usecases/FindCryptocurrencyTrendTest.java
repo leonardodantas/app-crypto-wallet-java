@@ -4,15 +4,16 @@ import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse
 import com.crypto.wallet.app.usecases.impl.FindCryptocurrencyTrend;
 import com.crypto.wallet.app.usecases.impl.FindDerivationHistory;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
+import com.crypto.wallet.infra.libs.SimpleRegressionMath3;
 import com.fasterxml.jackson.core.type.TypeReference;
+import mocks.GetMockJson;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import utils.GetMockJson;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -26,8 +27,8 @@ class FindCryptocurrencyTrendTest {
     private FindCryptocurrencyTrend findCryptocurrencyTrend;
     @Mock
     private FindDerivationHistory getDerivationHistory;
-    @Mock
-    private ISimpleRegression simpleRegression;
+    @Spy
+    private ISimpleRegression simpleRegression = spy(SimpleRegressionMath3.class);
 
     @Test
     void shouldGetCryptocurrencyTrend() {
@@ -35,11 +36,9 @@ class FindCryptocurrencyTrendTest {
 
         final var derivationHistoriesPerformed = GetMockJson.execute("responses/derivation-history-performed-list", new TypeReference<List<DerivationHistoryPerformedResponse>>() {
         });
+
         when(getDerivationHistory.getByCryptocurrencyName(name))
                 .thenReturn(derivationHistoriesPerformed);
-
-        when(simpleRegression.calculeSimpleRegression(any()))
-                .thenReturn(BigDecimal.valueOf(500)).thenReturn(BigDecimal.valueOf(1500));
 
         final var result = findCryptocurrencyTrend.getByCryptocurrencyName(name);
         assertNotNull(result);

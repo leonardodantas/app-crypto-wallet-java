@@ -4,41 +4,41 @@
     "date": "2024-05-26T22:34:37.123333666",
     "price": 10,
     "tid": 2,
-    "type": "BUY"
+    "type": "buy"
   },
   {
     "amount": 9000,
     "date": "2024-06-27T22:34:37.123333666",
     "price": 100,
     "tid": 1,
-    "type": "BUY"
+    "type": "buy"
   },
   {
     "amount": 52000,
     "date": "2024-06-26T22:34:37.123333666",
     "price": 20,
     "tid": 3,
-    "type": "BUY"
+    "type": "buy"
   },
   {
     "amount": 10000,
     "date": "2024-06-26T22:34:37.123333666",
     "price": 10,
     "tid": 2,
-    "type": "SELL"
+    "type": "sell"
   },
   {
     "amount": 9000,
     "date": "2024-06-29T22:34:37.123333666",
     "price": 100,
     "tid": 1,
-    "type": "SELL"
+    "type": "sell"
   },
   {
     "amount": 52000,
     "date": "2024-06-25T22:34:37.123333666",
     "price": 20,
     "tid": 3,
-    "type": "SELL"
+    "type": "sell"
   }
 ]
