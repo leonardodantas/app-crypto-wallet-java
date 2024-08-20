@@ -2,7 +2,7 @@ package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.models.requests.CryptocurrencyWalletRequest;
 import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
-import com.crypto.wallet.app.usecases.impl.AddCryptocurrencyWallet;
+import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.models.responses.TickerResponse;
-import com.crypto.wallet.app.usecases.impl.FindLastDayCryptocurrencySummary;
+import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -3,7 +3,7 @@ package usecases;
 import com.crypto.wallet.app.models.responses.TickerResponse;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
-import com.crypto.wallet.app.usecases.impl.FindLastDayCryptocurrencySummary;
+import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

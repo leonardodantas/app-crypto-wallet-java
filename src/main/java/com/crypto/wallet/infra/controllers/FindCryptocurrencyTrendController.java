@@ -1,7 +1,7 @@
 package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.models.responses.CryptocurrencyTrendResponse;
-import com.crypto.wallet.app.usecases.impl.FindCryptocurrencyTrend;
+import com.crypto.wallet.app.usecases.FindCryptocurrencyTrend;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,32 +1,27 @@
-package com.crypto.wallet.app.usecases.impl;
+package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.app.models.requests.CryptocurrencyWalletRequest;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
-import com.crypto.wallet.app.usecases.ISaveWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.SalesHistory;
 import com.crypto.wallet.domain.TypeOperation;
 import com.crypto.wallet.domain.Wallet;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SaveWallet implements ISaveWallet {
+@RequiredArgsConstructor
+public class SaveWallet {
 
     private final ISalesHistoryRepository salesHistoryRepository;
     private final IWalletRepository walletRepository;
 
-    public SaveWallet(ISalesHistoryRepository salesHistoryRepository, IWalletRepository walletRepository) {
-        this.salesHistoryRepository = salesHistoryRepository;
-        this.walletRepository = walletRepository;
-    }
-
-    @Override
-    public Wallet save(CryptocurrencyWalletRequest cryptocurrencyWalletRequest, DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        SalesHistory salesHistory = SalesHistory.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym, TypeOperation.BUY);
+    public Wallet save(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest, final DigitalCurrencyAcronym digitalCurrencyAcronym) {
+        final SalesHistory salesHistory = SalesHistory.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym, TypeOperation.BUY);
         salesHistoryRepository.save(salesHistory);
 
-        Wallet wallet = Wallet.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
+        final Wallet wallet = Wallet.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
 
         walletRepository
                 .findByDigitalCurrencyAcronym(digitalCurrencyAcronym)
