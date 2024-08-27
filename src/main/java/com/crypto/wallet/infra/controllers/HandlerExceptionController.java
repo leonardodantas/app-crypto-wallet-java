@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.controllers.advice;
+package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.exceptions.EntitySaveException;
