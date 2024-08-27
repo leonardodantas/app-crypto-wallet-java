@@ -1,6 +1,6 @@
 package usecases;
 
-import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
+import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.usecases.FindCryptocurrencyTrend;
 import com.crypto.wallet.app.usecases.FindDerivationHistory;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;

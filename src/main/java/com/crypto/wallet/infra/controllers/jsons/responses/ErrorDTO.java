@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.controllers.advice.response;
+package com.crypto.wallet.infra.controllers.jsons.responses;
 
 import lombok.Getter;
 

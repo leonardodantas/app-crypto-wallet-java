@@ -1,4 +1,4 @@
-package com.crypto.wallet.app.models.responses;
+package com.crypto.wallet.infra.controllers.jsons.responses;
 
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import lombok.Getter;

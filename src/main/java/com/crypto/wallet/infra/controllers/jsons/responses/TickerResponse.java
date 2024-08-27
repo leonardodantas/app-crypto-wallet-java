@@ -1,4 +1,4 @@
-package com.crypto.wallet.app.models.responses;
+package com.crypto.wallet.infra.controllers.jsons.responses;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

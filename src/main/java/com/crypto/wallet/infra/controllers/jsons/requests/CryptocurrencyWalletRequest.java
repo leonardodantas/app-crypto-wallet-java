@@ -1,4 +1,4 @@
-package com.crypto.wallet.app.models.requests;
+package com.crypto.wallet.infra.controllers.jsons.requests;
 
 import com.crypto.wallet.domain.ICryptocurrencyWallet;
 import jakarta.validation.constraints.NotBlank;

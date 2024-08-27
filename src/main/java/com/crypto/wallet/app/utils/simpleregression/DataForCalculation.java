@@ -1,6 +1,6 @@
 package com.crypto.wallet.app.utils.simpleregression;
 
-import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
+import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

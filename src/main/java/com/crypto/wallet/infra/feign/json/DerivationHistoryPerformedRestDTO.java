@@ -1,6 +1,6 @@
 package com.crypto.wallet.infra.feign.json;
 
-import com.crypto.wallet.app.models.responses.IDerivationHistoryPerformed;
+import com.crypto.wallet.infra.controllers.jsons.responses.IDerivationHistoryPerformed;
 
 import java.math.BigDecimal;
 

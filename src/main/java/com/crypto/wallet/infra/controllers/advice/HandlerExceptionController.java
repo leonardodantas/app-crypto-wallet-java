@@ -2,8 +2,8 @@ package com.crypto.wallet.infra.controllers.advice;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.exceptions.EntitySaveException;
-import com.crypto.wallet.infra.controllers.advice.response.ErrorDTO;
-import com.crypto.wallet.infra.controllers.advice.response.ErrorsDTO;
+import com.crypto.wallet.infra.controllers.jsons.responses.ErrorDTO;
+import com.crypto.wallet.infra.controllers.jsons.responses.ErrorsDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 @RequiredArgsConstructor
-public class ControllerException {
+public class HandlerExceptionController {
 
     private final MessageSource messageSource;
 

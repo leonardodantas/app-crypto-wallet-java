@@ -1,7 +1,7 @@
 package com.crypto.wallet.app.usecases;
 
-import com.crypto.wallet.app.models.responses.CryptocurrencyTrendResponse;
-import com.crypto.wallet.app.models.responses.DerivationHistoryPerformedResponse;
+import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyTrendResponse;
+import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
 import lombok.RequiredArgsConstructor;

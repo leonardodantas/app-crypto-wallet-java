@@ -1,8 +1,8 @@
 package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
-import com.crypto.wallet.app.models.requests.CryptocurrencyWalletRequest;
-import com.crypto.wallet.app.models.responses.CryptocurrencyWalletResponse;
+import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
+import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
