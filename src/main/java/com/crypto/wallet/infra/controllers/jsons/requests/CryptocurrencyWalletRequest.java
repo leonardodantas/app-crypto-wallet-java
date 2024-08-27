@@ -12,7 +12,7 @@ public class CryptocurrencyWalletRequest implements ICryptocurrencyWallet {
 
     @NotNull
     @Positive
-    private double quatity;
+    private double quantity;
 
     @Override
     public String getName() {
@@ -20,7 +20,7 @@ public class CryptocurrencyWalletRequest implements ICryptocurrencyWallet {
     }
 
     @Override
-    public double getQuatity() {
-        return this.quatity;
+    public double getQuantity() {
+        return this.quantity;
     }
 }

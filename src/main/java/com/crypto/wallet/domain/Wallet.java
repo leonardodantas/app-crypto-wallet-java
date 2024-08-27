@@ -24,7 +24,7 @@ public class Wallet {
     private Wallet(DigitalCurrencyAcronym digitalCurrencyAcronym, ICryptocurrencyWallet cryptoWallet) {
         this.id = UUID.randomUUID().toString();
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
-        this.quantity = cryptoWallet.getQuatity();
+        this.quantity = cryptoWallet.getQuantity();
     }
 
     public static Wallet of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronym digitalCurrencyAcronym) {
