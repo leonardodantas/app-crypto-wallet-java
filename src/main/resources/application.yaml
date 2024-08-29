@@ -17,3 +17,10 @@ spring:
         format_sql: true
       logging:
         level.org.hibernate.type: trace
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: cryptowallet
+      username: root
+      password: 123456
