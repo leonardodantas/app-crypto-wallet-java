@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.database;
+package com.crypto.wallet.infra.database.h2;
 
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;

@@ -19,8 +19,5 @@ spring:
         level.org.hibernate.type: trace
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: cryptowallet
-      username: root
-      password: 123456
+      auto-index-creation: true
+      uri: "mongodb://leonardo:123456@localhost:27017/cryptowallet?authSource=admin"

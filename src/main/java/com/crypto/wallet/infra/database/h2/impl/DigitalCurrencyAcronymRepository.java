@@ -1,8 +1,8 @@
-package com.crypto.wallet.infra.database.impl;
+package com.crypto.wallet.infra.database.h2.impl;
 
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
-import com.crypto.wallet.infra.database.DigitalCurrencyAcronymSpringData;
+import com.crypto.wallet.infra.database.h2.DigitalCurrencyAcronymSpringData;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
