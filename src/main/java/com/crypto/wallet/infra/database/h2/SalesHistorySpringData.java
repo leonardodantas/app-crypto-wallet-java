@@ -1,7 +1,7 @@
 package com.crypto.wallet.infra.database.h2;
 
-import com.crypto.wallet.domain.SalesHistory;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.crypto.wallet.domain.SalesHistoryDocument;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface SalesHistorySpringData extends JpaRepository<SalesHistory, String> {
+public interface SalesHistorySpringData extends MongoRepository<SalesHistoryDocument, String> {
 }

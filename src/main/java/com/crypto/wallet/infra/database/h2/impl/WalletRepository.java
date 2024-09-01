@@ -2,7 +2,7 @@ package com.crypto.wallet.infra.database.h2.impl;
 
 import com.crypto.wallet.app.exceptions.EntitySaveException;
 import com.crypto.wallet.app.repositories.IWalletRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.domain.Wallet;
 import com.crypto.wallet.infra.database.h2.WalletRepositorySpringData;
 import org.springframework.stereotype.Repository;
@@ -29,7 +29,7 @@ public class WalletRepository implements IWalletRepository {
     }
 
     @Override
-    public Optional<Wallet> findByDigitalCurrencyAcronym(DigitalCurrencyAcronym digitalCurrencyAcronym) {
+    public Optional<Wallet> findByDigitalCurrencyAcronym(DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
         return walletRepositorySpringData.findByDigitalCurrencyAcronym(digitalCurrencyAcronym);
     }
 

@@ -1,6 +1,6 @@
 package com.crypto.wallet.infra.controllers.jsons.responses;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.domain.Wallet;
 import lombok.Getter;
 
@@ -11,7 +11,7 @@ public class CryptocurrencyWalletResponse {
     private final DigitalCurrencyAcronymResponse digitalCurrencyAcronym;
     private final double quantity;
 
-    private CryptocurrencyWalletResponse(Wallet wallet, DigitalCurrencyAcronym digitalCurrencyAcronym) {
+    private CryptocurrencyWalletResponse(Wallet wallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
         this.id = wallet.getId();
         this.digitalCurrencyAcronym = DigitalCurrencyAcronymResponse.from(digitalCurrencyAcronym);
         this.quantity = wallet.getQuantity();
@@ -23,7 +23,7 @@ public class CryptocurrencyWalletResponse {
         this.quantity = wallet.getQuantity();
     }
 
-    public static CryptocurrencyWalletResponse of(Wallet wallet, DigitalCurrencyAcronym digitalCurrencyAcronym) {
+    public static CryptocurrencyWalletResponse of(Wallet wallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
         return new CryptocurrencyWalletResponse(wallet, digitalCurrencyAcronym);
     }
 

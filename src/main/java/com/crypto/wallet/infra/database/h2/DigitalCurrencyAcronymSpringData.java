@@ -1,10 +1,10 @@
 package com.crypto.wallet.infra.database.h2;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface DigitalCurrencyAcronymSpringData extends JpaRepository<DigitalCurrencyAcronym, String> {
-    Optional<DigitalCurrencyAcronym> findByName(String name);
+public interface DigitalCurrencyAcronymSpringData extends MongoRepository<DigitalCurrencyAcronymDocument, String> {
+    Optional<DigitalCurrencyAcronymDocument> findByName(String name);
 }

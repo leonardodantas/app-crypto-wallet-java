@@ -2,7 +2,7 @@ package com.crypto.wallet.infra.database.h2.impl;
 
 import com.crypto.wallet.app.exceptions.EntitySaveException;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
-import com.crypto.wallet.domain.SalesHistory;
+import com.crypto.wallet.domain.SalesHistoryDocument;
 import com.crypto.wallet.infra.database.h2.SalesHistorySpringData;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,7 @@ public class SalesHistoryRepository implements ISalesHistoryRepository {
     }
 
     @Override
-    public SalesHistory save(SalesHistory salesHistory) {
+    public SalesHistoryDocument save(SalesHistoryDocument salesHistory) {
         try {
             return salesHistorySpringData.save(salesHistory);
         } catch (Exception e){
