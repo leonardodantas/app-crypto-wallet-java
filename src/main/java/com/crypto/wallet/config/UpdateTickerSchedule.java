@@ -1,17 +1,19 @@
 package com.crypto.wallet.config;
 
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
 import com.crypto.wallet.infra.controllers.jsons.responses.DigitalCurrencyAcronymResponse;
 import com.crypto.wallet.infra.database.mongodb.documents.ScheduleLogDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.TickerDocument;
 import com.crypto.wallet.infra.database.mongodb.jpa.IScheduleLogMongoRepository;
 import com.crypto.wallet.infra.database.mongodb.jpa.ITickerDocumentMongoRepository;
+import com.crypto.wallet.infra.feign.FindLastDayCryptocurrencySummaryWebClient;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -21,11 +23,10 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class UpdateTickerSchedule {
 
-    private final IFindLastDayCryptocurrencySummaryRest lastDayCoinSummary;
     private final IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
     private final IScheduleLogMongoRepository scheduleLogMongoRepository;
     private final ITickerDocumentMongoRepository tickerDocumentMongoRepository;
-    private final IFindLastDayCryptocurrencySummaryRest findLastDayCryptocurrencySummary;
+    private final FindLastDayCryptocurrencySummaryWebClient findLastDayCryptocurrencySummaryWebClient;
 
     @PostConstruct
     public void initialize() {
@@ -66,15 +67,22 @@ public class UpdateTickerSchedule {
         log.info("ATUALIZANDO TICKERS");
         tickerDocumentMongoRepository.deleteAll();
 
-        final var tickers = digitalCurrencyAcronymRepository.findAll()
+        final var tickersResponseMono = digitalCurrencyAcronymRepository.findAll()
                 .stream()
                 .map(DigitalCurrencyAcronymResponse::from)
-                .map(findLastDayCryptocurrencySummary::getSummary)
+                .map(findLastDayCryptocurrencySummaryWebClient::getSummary)
+                .toList();
+
+        final var tickerResponseFlux = Flux.merge(tickersResponseMono);
+
+        final var tickerResponses = tickerResponseFlux.collectList().block();
+
+        final var tickerDocuments = CollectionUtils.emptyIfNull(tickerResponses)
+                .stream()
                 .map(TickerDocument::from)
                 .toList();
 
-        tickerDocumentMongoRepository.saveAll(tickers);
-        log.info("TICKER ATUALIZADOS");
+        tickerDocumentMongoRepository.saveAll(tickerDocuments);
     }
 
 }
