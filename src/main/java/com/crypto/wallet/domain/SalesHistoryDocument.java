@@ -1,26 +1,24 @@
 package com.crypto.wallet.domain;
 
-import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
+@Document
 @NoArgsConstructor
 public class SalesHistory {
 
     @Id
     private String id;
-    @OneToOne
-    @JoinColumn(name = "digital_currency_acronym_id", referencedColumnName = "id")
-    private DigitalCurrencyAcronym digitalCurrencyAcronym;
+    private DigitalCurrencyAcronymDocument digitalCurrencyAcronym;
     private double quantity;
-    @OneToOne(cascade = CascadeType.ALL)
     private Crypto crypto;
     private LocalDateTime date;
 
-    private SalesHistory(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronym digitalCurrencyAcronym, TypeOperation operation) {
+    private SalesHistory(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym, TypeOperation operation) {
         this.id = UUID.randomUUID().toString();
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
         this.quantity = cryptoWallet.getQuantity();
@@ -28,7 +26,7 @@ public class SalesHistory {
         this.date = LocalDateTime.now();
     }
 
-    public static SalesHistory of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronym digitalCurrencyAcronym, TypeOperation operation) {
+    public static SalesHistory of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym, TypeOperation operation) {
         return new SalesHistory(cryptoWallet, digitalCurrencyAcronym, operation);
     }
 }
