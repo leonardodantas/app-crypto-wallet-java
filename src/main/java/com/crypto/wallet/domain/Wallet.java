@@ -1,33 +1,29 @@
 package com.crypto.wallet.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-@Entity
+@Document
 public class Wallet {
 
     @Id
     private String id;
-    @OneToOne
-    @JoinColumn(name = "digital_currency_acronym_id", referencedColumnName = "id")
-    private DigitalCurrencyAcronym digitalCurrencyAcronym;
+    private DigitalCurrencyAcronymDocument digitalCurrencyAcronym;
     private double quantity;
 
-    private Wallet(DigitalCurrencyAcronym digitalCurrencyAcronym, ICryptocurrencyWallet cryptoWallet) {
+    private Wallet(DigitalCurrencyAcronymDocument digitalCurrencyAcronym, ICryptocurrencyWallet cryptoWallet) {
         this.id = UUID.randomUUID().toString();
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
         this.quantity = cryptoWallet.getQuantity();
     }
 
-    public static Wallet of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronym digitalCurrencyAcronym) {
+    public static Wallet of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
         return new Wallet(digitalCurrencyAcronym, cryptoWallet);
     }
 

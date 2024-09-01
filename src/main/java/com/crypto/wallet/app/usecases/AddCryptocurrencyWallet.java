@@ -4,7 +4,7 @@ import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
 import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.domain.Wallet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class AddCryptocurrencyWallet {
     private final SaveWallet saveWallet;
 
     public CryptocurrencyWalletResponse addCryptocurrency(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest) {
-        final DigitalCurrencyAcronym digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
+        final DigitalCurrencyAcronymDocument digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
                 .findByName(cryptocurrencyWalletRequest.getName()).orElseThrow(() -> new CryptocurrencyNotFoundException(cryptocurrencyWalletRequest.getName()));
 
         final Wallet wallet = saveWallet.save(cryptocurrencyWalletRequest, digitalCurrencyAcronym);

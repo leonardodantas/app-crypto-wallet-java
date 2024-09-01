@@ -7,9 +7,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Document
+@Document("sales_history")
 @NoArgsConstructor
-public class SalesHistory {
+public class SalesHistoryDocument {
 
     @Id
     private String id;
@@ -18,7 +18,7 @@ public class SalesHistory {
     private Crypto crypto;
     private LocalDateTime date;
 
-    private SalesHistory(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym, TypeOperation operation) {
+    private SalesHistoryDocument(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym, TypeOperation operation) {
         this.id = UUID.randomUUID().toString();
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
         this.quantity = cryptoWallet.getQuantity();
@@ -26,7 +26,7 @@ public class SalesHistory {
         this.date = LocalDateTime.now();
     }
 
-    public static SalesHistory of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym, TypeOperation operation) {
-        return new SalesHistory(cryptoWallet, digitalCurrencyAcronym, operation);
+    public static SalesHistoryDocument of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym, TypeOperation operation) {
+        return new SalesHistoryDocument(cryptoWallet, digitalCurrencyAcronym, operation);
     }
 }

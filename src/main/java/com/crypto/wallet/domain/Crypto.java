@@ -1,14 +1,14 @@
 package com.crypto.wallet.domain;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
-@Entity
+@Document
 @NoArgsConstructor
 public class Crypto {
 

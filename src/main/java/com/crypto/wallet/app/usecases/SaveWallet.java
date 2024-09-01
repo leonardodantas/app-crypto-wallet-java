@@ -3,8 +3,8 @@ package com.crypto.wallet.app.usecases;
 import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
-import com.crypto.wallet.domain.SalesHistory;
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.domain.SalesHistoryDocument;
 import com.crypto.wallet.domain.TypeOperation;
 import com.crypto.wallet.domain.Wallet;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +17,8 @@ public class SaveWallet {
     private final ISalesHistoryRepository salesHistoryRepository;
     private final IWalletRepository walletRepository;
 
-    public Wallet save(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest, final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        final SalesHistory salesHistory = SalesHistory.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym, TypeOperation.BUY);
+    public Wallet save(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest, final DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
+        final SalesHistoryDocument salesHistory = SalesHistoryDocument.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym, TypeOperation.BUY);
         salesHistoryRepository.save(salesHistory);
 
         final Wallet wallet = Wallet.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
