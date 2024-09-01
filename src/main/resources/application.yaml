@@ -21,3 +21,6 @@ spring:
     mongodb:
       auto-index-creation: true
       uri: "mongodb://leonardo:123456@localhost:27017/cryptowallet?authSource=admin"
+  services:
+    url:
+      mercado.bitcoin: "https://www.mercadobitcoin.net/api"
