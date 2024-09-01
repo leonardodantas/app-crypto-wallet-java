@@ -1,7 +1,7 @@
 package com.crypto.wallet.app.repositories;
 
-import com.crypto.wallet.domain.SalesHistory;
+import com.crypto.wallet.domain.SalesHistoryDocument;
 
 public interface ISalesHistoryRepository {
-    SalesHistory save(SalesHistory salesHistory);
+    SalesHistoryDocument save(SalesHistoryDocument salesHistory);
 }
