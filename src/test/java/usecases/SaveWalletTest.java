@@ -5,7 +5,7 @@ import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRe
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.app.usecases.SaveWallet;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.domain.Wallet;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +39,7 @@ class SaveWalletTest {
     @Test
     void shouldUpdateCryptoInWallet() {
         final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", CryptocurrencyWalletRequest.class);
-        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronym.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
         final var walletToSave = GetMockJson.execute("entities/wallet-1", Wallet.class);
         final var walletSave = GetMockJson.execute("entities/wallet", Wallet.class);
 
@@ -64,7 +64,7 @@ class SaveWalletTest {
     @Test
     void shouldSaveWalletWhenNotFoundCriptoInDataBase() {
         final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", CryptocurrencyWalletRequest.class);
-        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronym.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
         final var walletToSave = GetMockJson.execute("entities/wallet", Wallet.class);
 
         when(walletRepository

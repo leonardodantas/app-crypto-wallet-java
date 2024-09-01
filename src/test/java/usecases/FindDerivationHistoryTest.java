@@ -5,7 +5,7 @@ import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerf
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.rest.IFindDerivationHistoryPerformedRest;
 import com.crypto.wallet.app.usecases.FindDerivationHistory;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -45,7 +45,7 @@ class FindDerivationHistoryTest {
     @Test
     void shouldGetDerivationHistoryPerformed() {
         final var name = "BITCOIN";
-        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronym.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
         final var derivationHistoryPerformed = GetMockJson.execute("responses/derivation-history-performed", DerivationHistoryPerformedResponse.class);
 
         when(digitalCurrencyAcronymRepository.findByName(name))

@@ -4,7 +4,7 @@ import com.crypto.wallet.infra.controllers.jsons.responses.TickerResponse;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
 import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -30,7 +30,7 @@ class FindLastDayCryptocurrencySummaryTest {
 
     @Test
     void shouldGetAllTicker() {
-        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronym.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
         when(digitalCurrencyAcronymRepository.findAll()).thenReturn(List.of(digitalCurrencyAcronym));
 
         final var ticket = GetMockJson.execute("responses/ticket", TickerResponse.class);
