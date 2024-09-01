@@ -9,12 +9,14 @@ import com.crypto.wallet.infra.database.mongodb.jpa.IScheduleLogMongoRepository;
 import com.crypto.wallet.infra.database.mongodb.jpa.ITickerDocumentMongoRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class UpdateTickerSchedule {
@@ -27,14 +29,22 @@ public class UpdateTickerSchedule {
 
     @PostConstruct
     public void initialize() {
+        log.info("EXECUÇÃO DE POSTSCONSTRUCT");
+        validateUpdateTickers();
+    }
+
+    @Scheduled(cron = "0 0 0/3 * * ?")
+    public void updateTickerSchedule() {
+        log.info("EXECUÇÃO SCHEDULE TICKERS");
         validateUpdateTickers();
     }
 
     private void validateUpdateTickers() {
         final var SCHEDULE_NAME = "UPDATE_TICKER_SCHEDULE";
         final var THREE_HOURS_TO_MINUTES = 180;
+
         scheduleLogMongoRepository.findByName(SCHEDULE_NAME)
-                .map(scheduleLogDocument -> {
+                .ifPresentOrElse(scheduleLogDocument -> {
                     final var now = LocalDateTime.now();
 
                     final var duration = Duration.between(scheduleLogDocument.getUpdateAt(), now).toMinutes();
@@ -43,19 +53,17 @@ public class UpdateTickerSchedule {
                         final var scheduleLogDocumentUpdate = scheduleLogDocument.of(now);
                         scheduleLogMongoRepository.save(scheduleLogDocumentUpdate);
                         updateTicker();
-                        return Boolean.TRUE;
                     }
-
-                    return Boolean.FALSE;
-                }).orElseGet(() -> {
+                    log.info("TICKERS SEM ATUALIZAÇÃO");
+                }, () -> {
                     final var scheduleLogDocument = ScheduleLogDocument.from(SCHEDULE_NAME);
                     scheduleLogMongoRepository.save(scheduleLogDocument);
                     updateTicker();
-                    return Boolean.TRUE;
                 });
     }
 
     private void updateTicker() {
+        log.info("ATUALIZANDO TICKERS");
         tickerDocumentMongoRepository.deleteAll();
 
         final var tickers = digitalCurrencyAcronymRepository.findAll()
@@ -66,10 +74,7 @@ public class UpdateTickerSchedule {
                 .toList();
 
         tickerDocumentMongoRepository.saveAll(tickers);
+        log.info("TICKER ATUALIZADOS");
     }
 
-    @Scheduled(cron = "0 0 0/3 * * ?")
-    public void updateTickerSchedule() {
-        validateUpdateTickers();
-    }
 }
