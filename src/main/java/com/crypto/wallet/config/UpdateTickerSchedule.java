@@ -27,16 +27,13 @@ public class UpdateTickerSchedule {
 
     @PostConstruct
     public void initialize() {
-        final var initializedTickers = initializedTickers();
-        if (initializedTickers) {
-            updateTicker();
-        }
+        validateUpdateTickers();
     }
 
-    private Boolean initializedTickers() {
+    private void validateUpdateTickers() {
         final var SCHEDULE_NAME = "UPDATE_TICKER_SCHEDULE";
         final var THREE_HOURS_TO_MINUTES = 180;
-        return scheduleLogMongoRepository.findByName(SCHEDULE_NAME)
+        scheduleLogMongoRepository.findByName(SCHEDULE_NAME)
                 .map(scheduleLogDocument -> {
                     final var now = LocalDateTime.now();
 
@@ -45,6 +42,7 @@ public class UpdateTickerSchedule {
                     if (duration > THREE_HOURS_TO_MINUTES) {
                         final var scheduleLogDocumentUpdate = scheduleLogDocument.of(now);
                         scheduleLogMongoRepository.save(scheduleLogDocumentUpdate);
+                        updateTicker();
                         return Boolean.TRUE;
                     }
 
@@ -52,6 +50,7 @@ public class UpdateTickerSchedule {
                 }).orElseGet(() -> {
                     final var scheduleLogDocument = ScheduleLogDocument.from(SCHEDULE_NAME);
                     scheduleLogMongoRepository.save(scheduleLogDocument);
+                    updateTicker();
                     return Boolean.TRUE;
                 });
     }
@@ -71,6 +70,6 @@ public class UpdateTickerSchedule {
 
     @Scheduled(cron = "0 0 0/3 * * ?")
     public void updateTickerSchedule() {
-        updateTicker();
+        validateUpdateTickers();
     }
 }

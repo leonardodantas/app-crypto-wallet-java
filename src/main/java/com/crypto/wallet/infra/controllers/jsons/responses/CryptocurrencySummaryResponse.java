@@ -1,5 +1,6 @@
 package com.crypto.wallet.infra.controllers.jsons.responses;
 
+import com.crypto.wallet.infra.database.mongodb.documents.CryptocurrencySummaryDocument;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,7 +33,22 @@ public class CryptocurrencySummaryResponse {
         this.date = LocalDateTime.ofInstant(Instant.ofEpochSecond(ticker.getDate()), ZoneId.of("America/Sao_Paulo"));
     }
 
+    private CryptocurrencySummaryResponse(final CryptocurrencySummaryDocument cryptocurrencySummaryDocument) {
+        this.high = cryptocurrencySummaryDocument.getHigh();
+        this.low = cryptocurrencySummaryDocument.getLow();
+        this.vol = cryptocurrencySummaryDocument.getVol();
+        this.last = cryptocurrencySummaryDocument.getLast();
+        this.buy = cryptocurrencySummaryDocument.getBuy();
+        this.sell = cryptocurrencySummaryDocument.getSell();
+        this.open = cryptocurrencySummaryDocument.getOpen();
+        this.date = cryptocurrencySummaryDocument.getDate();
+    }
+
     public static CryptocurrencySummaryResponse from(ITickerDTO ticker) {
         return new CryptocurrencySummaryResponse(ticker);
+    }
+
+    public static CryptocurrencySummaryResponse from(final CryptocurrencySummaryDocument cryptocurrencySummaryDocument) {
+        return new CryptocurrencySummaryResponse(cryptocurrencySummaryDocument);
     }
 }
