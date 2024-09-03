@@ -1,8 +1,8 @@
 package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
+import com.crypto.wallet.infra.controllers.jsons.requests.Cryptocurrency;
 import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
-import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.infra.controllers.jsons.responses.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +28,7 @@ public class AddCryptocurrencyWalletController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Criptomoeda adicionada com sucesso",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CryptocurrencyWallet.class))}),
+                            schema = @Schema(implementation = com.crypto.wallet.domain.CryptocurrencyWallet.class))}),
             @ApiResponse(responseCode = "404", description = "Not found",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ErrorResponse.class))}),
@@ -37,8 +37,8 @@ public class AddCryptocurrencyWalletController {
                             schema = @Schema(implementation = ErrorResponse.class))})})
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CryptocurrencyWalletResponse addCryptocurrency(@Valid @RequestBody final CryptocurrencyWalletRequest body) {
-        final var domain = addCryptocurrencyWallet.addCryptocurrency(body);
+    public CryptocurrencyWalletResponse addCryptocurrency(@Valid @RequestBody final CryptocurrencyWalletRequest request) {
+        final var domain = addCryptocurrencyWallet.addCryptocurrency(Cryptocurrency.of(request.name(), request.quantity()));
         return CryptocurrencyWalletResponse.from(domain);
     }
 }

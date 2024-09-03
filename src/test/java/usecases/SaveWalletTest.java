@@ -1,7 +1,7 @@
 
 package usecases;
 
-import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
+import com.crypto.wallet.infra.controllers.jsons.requests.Cryptocurrency;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.app.usecases.SaveWallet;
@@ -38,7 +38,7 @@ class SaveWalletTest {
 
     @Test
     void shouldUpdateCryptoInWallet() {
-        final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", CryptocurrencyWalletRequest.class);
+        final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", Cryptocurrency.class);
         final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
         final var walletToSave = GetMockJson.execute("entities/wallet-1", WalletDocument.class);
         final var walletSave = GetMockJson.execute("entities/wallet", WalletDocument.class);
@@ -63,7 +63,7 @@ class SaveWalletTest {
 
     @Test
     void shouldSaveWalletWhenNotFoundCriptoInDataBase() {
-        final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", CryptocurrencyWalletRequest.class);
+        final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", Cryptocurrency.class);
         final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
         final var walletToSave = GetMockJson.execute("entities/wallet", WalletDocument.class);
 

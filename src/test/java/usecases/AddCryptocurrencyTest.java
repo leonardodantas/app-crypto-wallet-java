@@ -2,7 +2,7 @@ package usecases;
 
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
-import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
+import com.crypto.wallet.infra.controllers.jsons.requests.Cryptocurrency;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
 import com.crypto.wallet.app.usecases.SaveWallet;
@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class AddCryptocurrencyWalletTest {
+class AddCryptocurrencyTest {
 
     @InjectMocks
     private AddCryptocurrencyWallet cryptocurrencyWallet;
@@ -34,7 +34,7 @@ class AddCryptocurrencyWalletTest {
 
     @Test
     void shouldThrownCryptocurrencyNotFoundException() {
-        final var request = GetMockJson.execute("requests/cryptocurrency-wallet-invalid", CryptocurrencyWalletRequest.class);
+        final var request = GetMockJson.execute("requests/cryptocurrency-wallet-invalid", Cryptocurrency.class);
 
         when(digitalCurrencyAcronymRepository.findByName(anyString()))
                 .thenReturn(Optional.empty());
@@ -46,7 +46,7 @@ class AddCryptocurrencyWalletTest {
 
     @Test
     void shouldSaveCryptocurrencyInWallet() {
-        final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", CryptocurrencyWalletRequest.class);
+        final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", Cryptocurrency.class);
 
         final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
         final var wallet = GetMockJson.execute("entities/wallet", WalletDocument.class);

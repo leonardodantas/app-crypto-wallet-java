@@ -1,7 +1,7 @@
 package com.crypto.wallet.infra.database.mongodb.documents;
 
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.domain.ICryptocurrencyWallet;
+import com.crypto.wallet.infra.controllers.jsons.requests.Cryptocurrency;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -19,14 +19,14 @@ public class WalletDocument {
     private DigitalCurrencyAcronymDocument digitalCurrencyAcronym;
     private double quantity;
 
-    private WalletDocument(DigitalCurrencyAcronymDocument digitalCurrencyAcronym, ICryptocurrencyWallet cryptoWallet) {
+    private WalletDocument(DigitalCurrencyAcronymDocument digitalCurrencyAcronym, Cryptocurrency cryptocurrency) {
         this.id = UUID.randomUUID().toString();
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
-        this.quantity = cryptoWallet.getQuantity();
+        this.quantity = cryptocurrency.quantity();
     }
 
-    public static WalletDocument of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
-        return new WalletDocument(digitalCurrencyAcronym, cryptoWallet);
+    public static WalletDocument of(Cryptocurrency cryptocurrency, DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
+        return new WalletDocument(digitalCurrencyAcronym, cryptocurrency);
     }
 
     public void overrideWallet(WalletDocument wallet) {

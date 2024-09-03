@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class FindCryptocurrencyWalletTest {
+class FindCryptocurrencyTest {
 
     @InjectMocks
     private FindCryptocurrencyWallet cryptocurrencyWallet;
