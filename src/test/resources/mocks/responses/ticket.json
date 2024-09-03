@@ -1,11 +1,10 @@
-
 {
   "digitalCurrencyAcronym": {
     "id": 1,
     "name": "BITCOIN",
     "description": "The best crypto"
   },
-  "ticker": {
+  "cryptocurrencySummary": {
     "high":  10,
     "low":  5,
     "vol":  1000,

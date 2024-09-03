@@ -1,21 +1,20 @@
 package usecases;
 
-import com.crypto.wallet.infra.controllers.jsons.responses.TickerResponse;
-import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.rest.IFindLastDayCryptocurrencySummaryRest;
+import com.crypto.wallet.app.repositories.ITickerRepository;
 import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.controllers.jsons.responses.TickerResponse;
+import com.crypto.wallet.infra.database.mongodb.documents.TickerDocument;
+import mocks.GetMockJson;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import mocks.GetMockJson;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,17 +23,14 @@ class FindLastDayCryptocurrencySummaryTest {
     @InjectMocks
     private FindLastDayCryptocurrencySummary findLastDayCryptocurrencySummary;
     @Mock
-    private IFindLastDayCryptocurrencySummaryRest lastDayCoinSummary;
-    @Mock
-    private IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
+    private ITickerRepository tickerRepository;
 
     @Test
     void shouldGetAllTicker() {
-        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
-        when(digitalCurrencyAcronymRepository.findAll()).thenReturn(List.of(digitalCurrencyAcronym));
+        final var ticker = GetMockJson.execute("responses/ticket", TickerDocument.class);
 
-        final var ticket = GetMockJson.execute("responses/ticket", TickerResponse.class);
-        when(lastDayCoinSummary.getSummary(any())).thenReturn(ticket);
+        when(tickerRepository.findAll())
+                .thenReturn(List.of(ticker));
 
         final var response = findLastDayCryptocurrencySummary.getAllTicker();
         assertNotNull(response);
@@ -43,12 +39,11 @@ class FindLastDayCryptocurrencySummaryTest {
 
     @Test
     void shouldGetEmptyList() {
-        when(digitalCurrencyAcronymRepository.findAll()).thenReturn(List.of());
 
         final var response = findLastDayCryptocurrencySummary.getAllTicker();
         assertNotNull(response);
         assertTrue(response.isEmpty());
 
-        verify(lastDayCoinSummary, never()).getSummary(any());
+        verify(tickerRepository, times(1)).findAll();
     }
 }
