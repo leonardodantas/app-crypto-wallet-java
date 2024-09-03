@@ -1,7 +1,7 @@
 package com.crypto.wallet.infra.feign;
 
-import com.crypto.wallet.infra.controllers.jsons.responses.DigitalCurrencyAcronymResponse;
-import com.crypto.wallet.infra.controllers.jsons.responses.TickerResponse;
+import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.Ticker;
 import com.crypto.wallet.infra.feign.json.TickerRestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class FindLastDayCryptocurrencySummaryWebClient {
 
     private final WebClient webClient;
 
-    public Mono<TickerResponse> getSummary(final DigitalCurrencyAcronymResponse digitalCurrencyAcronym) {
+    public Mono<Ticker> getSummary(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
         final var params = new HashMap<String, String>();
         params.put("name", digitalCurrencyAcronym.getName());
 
@@ -24,6 +24,6 @@ public class FindLastDayCryptocurrencySummaryWebClient {
                 .uri("/{name}/ticker", params)
                 .retrieve()
                 .bodyToMono(TickerRestDTO.class)
-                .map(summary -> TickerResponse.of(summary, digitalCurrencyAcronym));
+                .map(summary -> Ticker.of(summary, digitalCurrencyAcronym));
     }
 }

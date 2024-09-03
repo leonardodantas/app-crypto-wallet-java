@@ -1,5 +1,7 @@
-package com.crypto.wallet.domain;
+package com.crypto.wallet.infra.database.mongodb.documents;
 
+import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.domain.ICryptocurrencyWallet;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -9,25 +11,25 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-@Document
-public class Wallet {
+@Document("wallet")
+public class WalletDocument {
 
     @Id
     private String id;
     private DigitalCurrencyAcronymDocument digitalCurrencyAcronym;
     private double quantity;
 
-    private Wallet(DigitalCurrencyAcronymDocument digitalCurrencyAcronym, ICryptocurrencyWallet cryptoWallet) {
+    private WalletDocument(DigitalCurrencyAcronymDocument digitalCurrencyAcronym, ICryptocurrencyWallet cryptoWallet) {
         this.id = UUID.randomUUID().toString();
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
         this.quantity = cryptoWallet.getQuantity();
     }
 
-    public static Wallet of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
-        return new Wallet(digitalCurrencyAcronym, cryptoWallet);
+    public static WalletDocument of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
+        return new WalletDocument(digitalCurrencyAcronym, cryptoWallet);
     }
 
-    public void overrideWallet(Wallet wallet) {
+    public void overrideWallet(WalletDocument wallet) {
         this.id = wallet.getId();
         this.quantity += wallet.getQuantity();
     }

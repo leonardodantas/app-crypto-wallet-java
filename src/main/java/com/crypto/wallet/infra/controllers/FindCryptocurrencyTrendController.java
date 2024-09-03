@@ -1,8 +1,9 @@
 package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.usecases.FindCryptocurrencyTrend;
+import com.crypto.wallet.domain.CryptocurrencyTrend;
 import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyTrendResponse;
-import com.crypto.wallet.infra.controllers.jsons.responses.ErrorDTO;
+import com.crypto.wallet.infra.controllers.jsons.responses.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,16 +29,17 @@ public class FindCryptocurrencyTrendController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tendencias retornadas com sucesso",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = CryptocurrencyTrendResponse.class)))}),
+                            array = @ArraySchema(schema = @Schema(implementation = CryptocurrencyTrend.class)))}),
             @ApiResponse(responseCode = "404", description = "Not found",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))}),
+                            schema = @Schema(implementation = ErrorResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Bad request",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))})})
+                            schema = @Schema(implementation = ErrorResponse.class))})})
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{cryptocurrency}/trend")
     public List<CryptocurrencyTrendResponse> getFindCryptocurrencyTrendByName(@PathVariable final String cryptocurrency) {
-        return this.findCryptocurrencyTrend.getByCryptocurrencyName(cryptocurrency);
+        final var domain = this.findCryptocurrencyTrend.getByCryptocurrencyName(cryptocurrency);
+        return domain.stream().map(CryptocurrencyTrendResponse::from).toList();
     }
 }

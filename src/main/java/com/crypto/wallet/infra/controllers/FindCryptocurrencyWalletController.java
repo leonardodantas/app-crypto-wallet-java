@@ -1,9 +1,10 @@
 package com.crypto.wallet.infra.controllers;
 
 
-import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.app.usecases.FindCryptocurrencyWallet;
-import com.crypto.wallet.infra.controllers.jsons.responses.ErrorDTO;
+import com.crypto.wallet.domain.CryptocurrencyWallet;
+import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyWalletResponse;
+import com.crypto.wallet.infra.controllers.jsons.responses.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,17 +31,18 @@ public class FindCryptocurrencyWalletController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Criptomoeda encontrada com sucesso",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CryptocurrencyWalletResponse.class))}),
+                            schema = @Schema(implementation = CryptocurrencyWallet.class))}),
             @ApiResponse(responseCode = "404", description = "Not found",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))}),
+                            schema = @Schema(implementation = ErrorResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Bad request",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))})})
+                            schema = @Schema(implementation = ErrorResponse.class))})})
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{cryptocurrency}/wallet")
     public CryptocurrencyWalletResponse getCryptocurrencyByName(@PathVariable final String cryptocurrency) {
-        return findCryptocurrencyWallet.getByName(cryptocurrency);
+        final var domain = findCryptocurrencyWallet.getByName(cryptocurrency);
+        return CryptocurrencyWalletResponse.from(domain);
     }
 
 
@@ -48,19 +50,19 @@ public class FindCryptocurrencyWalletController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Criptomoedas retornadas com sucesso",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CryptocurrencyWalletResponse.class))}),
+                            schema = @Schema(implementation = CryptocurrencyWallet.class))}),
             @ApiResponse(responseCode = "404", description = "Not found",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))}),
+                            schema = @Schema(implementation = ErrorResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Bad request",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))})})
+                            schema = @Schema(implementation = ErrorResponse.class))})})
     @GetMapping
     public ResponseEntity<?> getAllCryptocurrency() {
-        final List<CryptocurrencyWalletResponse> response = findCryptocurrencyWallet.getAll();
+        final List<CryptocurrencyWallet> response = findCryptocurrencyWallet.getAll();
         if (response.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response.stream().map(CryptocurrencyWalletResponse::from).toList());
     }
 }

@@ -4,9 +4,9 @@ import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRe
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.domain.SalesHistoryDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.SalesHistoryDocument;
 import com.crypto.wallet.domain.TypeOperation;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +17,11 @@ public class SaveWallet {
     private final ISalesHistoryRepository salesHistoryRepository;
     private final IWalletRepository walletRepository;
 
-    public Wallet save(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest, final DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
+    public WalletDocument save(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest, final DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
         final SalesHistoryDocument salesHistory = SalesHistoryDocument.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym, TypeOperation.BUY);
         salesHistoryRepository.save(salesHistory);
 
-        final Wallet wallet = Wallet.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
+        final WalletDocument wallet = WalletDocument.of(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
 
         walletRepository
                 .findByDigitalCurrencyAcronym(digitalCurrencyAcronym)

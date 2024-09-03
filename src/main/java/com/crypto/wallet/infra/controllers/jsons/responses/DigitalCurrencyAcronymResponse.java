@@ -1,22 +1,13 @@
 package com.crypto.wallet.infra.controllers.jsons.responses;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 
-@Getter
-@NoArgsConstructor
-public class DigitalCurrencyAcronymResponse {
+public record DigitalCurrencyAcronymResponse(
+        String name,
+        String description
+) {
 
-    private String name;
-    private String description;
-
-    private DigitalCurrencyAcronymResponse(DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
-        this.name = digitalCurrencyAcronym.getName();
-        this.description = digitalCurrencyAcronym.getDescription();
-    }
-
-    public static DigitalCurrencyAcronymResponse from(DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
-        return new DigitalCurrencyAcronymResponse(digitalCurrencyAcronym);
+    public static DigitalCurrencyAcronymResponse from(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
+        return new DigitalCurrencyAcronymResponse(digitalCurrencyAcronym.getName(), digitalCurrencyAcronym.getDescription());
     }
 }

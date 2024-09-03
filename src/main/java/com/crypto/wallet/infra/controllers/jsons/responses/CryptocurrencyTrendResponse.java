@@ -1,23 +1,16 @@
 package com.crypto.wallet.infra.controllers.jsons.responses;
 
-import lombok.Getter;
+import com.crypto.wallet.domain.CryptocurrencyTrend;
 
 import java.math.BigDecimal;
 
-@Getter
-public class CryptocurrencyTrendResponse {
+public record CryptocurrencyTrendResponse(
+        String type,
+        String cryptocurrency,
+        BigDecimal trend
+) {
 
-    private final String type;
-    private final String cryptocurrency;
-    private final BigDecimal trend;
-
-    private CryptocurrencyTrendResponse(BigDecimal trend, String type, String cryptocurrency) {
-        this.type = type;
-        this.trend = trend;
-        this.cryptocurrency = cryptocurrency;
-    }
-
-    public static CryptocurrencyTrendResponse of(BigDecimal buy, String type, String crypto) {
-        return new CryptocurrencyTrendResponse(buy, type, crypto);
+    public static CryptocurrencyTrendResponse from(final CryptocurrencyTrend cryptocurrencyTrend) {
+        return new CryptocurrencyTrendResponse(cryptocurrencyTrend.getType(), cryptocurrencyTrend.getCryptocurrency(), cryptocurrencyTrend.getTrend());
     }
 }

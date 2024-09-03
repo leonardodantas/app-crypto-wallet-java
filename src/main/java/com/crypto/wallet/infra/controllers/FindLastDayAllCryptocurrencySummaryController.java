@@ -1,7 +1,8 @@
 package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
-import com.crypto.wallet.infra.controllers.jsons.responses.ErrorDTO;
+import com.crypto.wallet.infra.controllers.jsons.responses.ErrorResponse;
+import com.crypto.wallet.domain.Ticker;
 import com.crypto.wallet.infra.controllers.jsons.responses.TickerResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -31,16 +32,19 @@ public class FindLastDayAllCryptocurrencySummaryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Resumos encontrado com sucesso",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = TickerResponse.class)))}),
+                            array = @ArraySchema(schema = @Schema(implementation = Ticker.class)))}),
             @ApiResponse(responseCode = "404", description = "Not found",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))}),
+                            schema = @Schema(implementation = ErrorResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Bad request",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))})})
+                            schema = @Schema(implementation = ErrorResponse.class))})})
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<TickerResponse> getSummaryCryptocurrency() {
-        return findLastDayCryptocurrencySummary.getAllTicker();
+        return findLastDayCryptocurrencySummary.getAllTicker()
+                .stream()
+                .map(TickerResponse::from)
+                .toList();
     }
 }

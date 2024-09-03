@@ -2,8 +2,6 @@ package usecases;
 
 import com.crypto.wallet.app.repositories.ITickerRepository;
 import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.infra.controllers.jsons.responses.TickerResponse;
 import com.crypto.wallet.infra.database.mongodb.documents.TickerDocument;
 import mocks.GetMockJson;
 import org.junit.jupiter.api.Test;

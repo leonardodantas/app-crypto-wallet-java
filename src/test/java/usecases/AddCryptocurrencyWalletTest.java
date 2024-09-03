@@ -7,7 +7,7 @@ import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
 import com.crypto.wallet.app.usecases.SaveWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -49,7 +49,7 @@ class AddCryptocurrencyWalletTest {
         final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", CryptocurrencyWalletRequest.class);
 
         final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
-        final var wallet = GetMockJson.execute("entities/wallet", Wallet.class);
+        final var wallet = GetMockJson.execute("entities/wallet", WalletDocument.class);
 
         when(digitalCurrencyAcronymRepository.findByName(anyString()))
                 .thenReturn(Optional.of(digitalCurrencyAcronym));

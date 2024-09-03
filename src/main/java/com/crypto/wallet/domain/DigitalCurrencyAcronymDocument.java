@@ -1,6 +1,5 @@
 package com.crypto.wallet.domain;
 
-import com.crypto.wallet.infra.controllers.jsons.responses.DigitalCurrencyAcronymResponse;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -21,7 +20,7 @@ public class DigitalCurrencyAcronymDocument {
         this.description = description;
     }
 
-    public static DigitalCurrencyAcronymDocument from(final DigitalCurrencyAcronymResponse digitalCurrencyAcronym) {
+    public static DigitalCurrencyAcronymDocument from(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
         return new DigitalCurrencyAcronymDocument(digitalCurrencyAcronym.getName(), digitalCurrencyAcronym.getDescription());
     }
 }

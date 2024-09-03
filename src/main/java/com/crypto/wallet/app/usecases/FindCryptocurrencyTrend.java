@@ -1,6 +1,6 @@
 package com.crypto.wallet.app.usecases;
 
-import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyTrendResponse;
+import com.crypto.wallet.domain.CryptocurrencyTrend;
 import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
@@ -21,7 +21,7 @@ public class FindCryptocurrencyTrend {
     private final FindDerivationHistory getDerivationHistory;
     private final ISimpleRegression simpleRegression;
 
-    public List<CryptocurrencyTrendResponse> getByCryptocurrencyName(final String name) {
+    public List<CryptocurrencyTrend> getByCryptocurrencyName(final String name) {
         final List<DerivationHistoryPerformedResponse> derivationHistoryPerformed = this.getDerivationHistory.getByCryptocurrencyName(name);
 
         final List<DataForCalculation> dataForCalculationsBuy = getDataForCalculations(derivationHistoryPerformed, BUY);
@@ -29,7 +29,7 @@ public class FindCryptocurrencyTrend {
 
         final BigDecimal buy = simpleRegression.calculeSimpleRegression(dataForCalculationsBuy);
         final BigDecimal sell = simpleRegression.calculeSimpleRegression(dataForCalculationsSell);
-        return List.of(CryptocurrencyTrendResponse.of(buy, BUY, name), CryptocurrencyTrendResponse.of(sell, SELL, name));
+        return List.of(CryptocurrencyTrend.of(buy, BUY, name), CryptocurrencyTrend.of(sell, SELL, name));
     }
 
     private List<DataForCalculation> getDataForCalculations(final List<DerivationHistoryPerformedResponse> derivationHistoryPerformed, String type) {

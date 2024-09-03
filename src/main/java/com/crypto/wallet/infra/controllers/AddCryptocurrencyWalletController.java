@@ -2,8 +2,9 @@ package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
 import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
+import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyWalletResponse;
-import com.crypto.wallet.infra.controllers.jsons.responses.ErrorDTO;
+import com.crypto.wallet.infra.controllers.jsons.responses.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,16 +28,17 @@ public class AddCryptocurrencyWalletController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Criptomoeda adicionada com sucesso",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CryptocurrencyWalletResponse.class))}),
+                            schema = @Schema(implementation = CryptocurrencyWallet.class))}),
             @ApiResponse(responseCode = "404", description = "Not found",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))}),
+                            schema = @Schema(implementation = ErrorResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Bad request",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ErrorDTO.class))})})
+                            schema = @Schema(implementation = ErrorResponse.class))})})
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CryptocurrencyWalletResponse addCryptocurrency(@Valid @RequestBody final CryptocurrencyWalletRequest body) {
-        return addCryptocurrencyWallet.addCryptocurrency(body);
+        final var domain = addCryptocurrencyWallet.addCryptocurrency(body);
+        return CryptocurrencyWalletResponse.from(domain);
     }
 }

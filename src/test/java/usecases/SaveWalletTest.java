@@ -6,7 +6,7 @@ import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.app.usecases.SaveWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -34,14 +34,14 @@ class SaveWalletTest {
     @Mock
     private IWalletRepository walletRepository;
     @Captor
-    private ArgumentCaptor<Wallet> argumentCaptorWallet;
+    private ArgumentCaptor<WalletDocument> argumentCaptorWallet;
 
     @Test
     void shouldUpdateCryptoInWallet() {
         final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", CryptocurrencyWalletRequest.class);
         final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
-        final var walletToSave = GetMockJson.execute("entities/wallet-1", Wallet.class);
-        final var walletSave = GetMockJson.execute("entities/wallet", Wallet.class);
+        final var walletToSave = GetMockJson.execute("entities/wallet-1", WalletDocument.class);
+        final var walletSave = GetMockJson.execute("entities/wallet", WalletDocument.class);
 
         when(walletRepository
                 .findByDigitalCurrencyAcronym(any())).thenReturn(Optional.of(walletSave));
@@ -65,7 +65,7 @@ class SaveWalletTest {
     void shouldSaveWalletWhenNotFoundCriptoInDataBase() {
         final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", CryptocurrencyWalletRequest.class);
         final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
-        final var walletToSave = GetMockJson.execute("entities/wallet", Wallet.class);
+        final var walletToSave = GetMockJson.execute("entities/wallet", WalletDocument.class);
 
         when(walletRepository
                 .findByDigitalCurrencyAcronym(any())).thenReturn(Optional.empty());

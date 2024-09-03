@@ -1,9 +1,9 @@
 package com.crypto.wallet.app.rest;
 
-import com.crypto.wallet.infra.controllers.jsons.responses.DigitalCurrencyAcronymResponse;
-import com.crypto.wallet.infra.controllers.jsons.responses.TickerResponse;
+import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.Ticker;
 
 public interface IFindLastDayCryptocurrencySummaryRest {
 
-    TickerResponse getSummary(DigitalCurrencyAcronymResponse digitalCurrencyAcronym);
+    Ticker getSummary(DigitalCurrencyAcronym digitalCurrencyAcronym);
 }

@@ -2,10 +2,10 @@ package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
-import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyWalletResponse;
+import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +16,12 @@ public class AddCryptocurrencyWallet {
     private final IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
     private final SaveWallet saveWallet;
 
-    public CryptocurrencyWalletResponse addCryptocurrency(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest) {
+    public CryptocurrencyWallet addCryptocurrency(final CryptocurrencyWalletRequest cryptocurrencyWalletRequest) {
         final DigitalCurrencyAcronymDocument digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
                 .findByName(cryptocurrencyWalletRequest.getName()).orElseThrow(() -> new CryptocurrencyNotFoundException(cryptocurrencyWalletRequest.getName()));
 
-        final Wallet wallet = saveWallet.save(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
+        final WalletDocument wallet = saveWallet.save(cryptocurrencyWalletRequest, digitalCurrencyAcronym);
 
-        return CryptocurrencyWalletResponse.of(wallet, digitalCurrencyAcronym);
+        return CryptocurrencyWallet.of(wallet, digitalCurrencyAcronym);
     }
 }

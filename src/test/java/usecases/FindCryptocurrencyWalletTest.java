@@ -4,7 +4,7 @@ package usecases;
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.app.usecases.FindCryptocurrencyWallet;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +30,7 @@ class FindCryptocurrencyWalletTest {
 
     @Test
     void shouldFindCryptoInWalletByName() {
-        final var wallet = GetMockJson.execute("entities/wallet", Wallet.class);
+        final var wallet = GetMockJson.execute("entities/wallet", WalletDocument.class);
 
         final var crypto = "BITCOIN";
 
@@ -57,7 +57,7 @@ class FindCryptocurrencyWalletTest {
 
     @Test
     void shouldGetAllCryptoInWallet() {
-        final var wallet = GetMockJson.execute("entities/wallet", Wallet.class);
+        final var wallet = GetMockJson.execute("entities/wallet", WalletDocument.class);
 
         when(walletRepository.findAll())
                 .thenReturn(List.of(wallet));

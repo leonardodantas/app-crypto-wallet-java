@@ -1,6 +1,6 @@
 package com.crypto.wallet.infra.database.mongodb.documents;
 
-import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencySummaryResponse;
+import com.crypto.wallet.domain.CryptocurrencySummary;
 import com.crypto.wallet.infra.controllers.jsons.responses.ITickerDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,7 +35,7 @@ public class CryptocurrencySummaryDocument {
         this.date = LocalDateTime.ofInstant(Instant.ofEpochSecond(ticker.getDate()), ZoneId.of("America/Sao_Paulo"));
     }
 
-    public CryptocurrencySummaryDocument(final CryptocurrencySummaryResponse ticker) {
+    public CryptocurrencySummaryDocument(final CryptocurrencySummary ticker) {
         this.high = ticker.getHigh().setScale(2, RoundingMode.HALF_DOWN);
         this.low = ticker.getLow().setScale(2, RoundingMode.HALF_DOWN);
         this.vol = ticker.getVol().setScale(2, RoundingMode.HALF_DOWN);
@@ -50,7 +50,7 @@ public class CryptocurrencySummaryDocument {
         return new CryptocurrencySummaryDocument(ticker);
     }
 
-    public static CryptocurrencySummaryDocument from(final CryptocurrencySummaryResponse ticker) {
+    public static CryptocurrencySummaryDocument from(final CryptocurrencySummary ticker) {
         return new CryptocurrencySummaryDocument(ticker);
     }
 }

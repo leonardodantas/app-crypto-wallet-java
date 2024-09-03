@@ -3,7 +3,7 @@ package com.crypto.wallet.infra.database.h2.impl;
 import com.crypto.wallet.app.exceptions.EntitySaveException;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.domain.Wallet;
+import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import com.crypto.wallet.infra.database.h2.WalletRepositorySpringData;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +20,7 @@ public class WalletRepository implements IWalletRepository {
     }
 
     @Override
-    public Wallet save(Wallet wallet) {
+    public WalletDocument save(WalletDocument wallet) {
         try {
             return walletRepositorySpringData.save(wallet);
         } catch (Exception e){
@@ -29,17 +29,17 @@ public class WalletRepository implements IWalletRepository {
     }
 
     @Override
-    public Optional<Wallet> findByDigitalCurrencyAcronym(DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
+    public Optional<WalletDocument> findByDigitalCurrencyAcronym(DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
         return walletRepositorySpringData.findByDigitalCurrencyAcronym(digitalCurrencyAcronym);
     }
 
     @Override
-    public List<Wallet> findAll() {
+    public List<WalletDocument> findAll() {
         return walletRepositorySpringData.findAll();
     }
 
     @Override
-    public Optional<Wallet> findByCryptocurrencyName(String cryptocurrency) {
+    public Optional<WalletDocument> findByCryptocurrencyName(String cryptocurrency) {
         return walletRepositorySpringData.findByDigitalCurrencyAcronymName(cryptocurrency);
     }
 }
