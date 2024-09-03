@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.controllers.jsons.requests;
+package com.crypto.wallet.domain;
 
 public record Cryptocurrency(
         String name,

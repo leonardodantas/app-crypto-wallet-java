@@ -4,7 +4,7 @@ import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.domain.CryptocurrencyWallet;
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.infra.controllers.jsons.requests.Cryptocurrency;
+import com.crypto.wallet.domain.Cryptocurrency;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.crypto.wallet.infra.controllers;
 
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
-import com.crypto.wallet.infra.controllers.jsons.requests.Cryptocurrency;
+import com.crypto.wallet.domain.Cryptocurrency;
 import com.crypto.wallet.infra.controllers.jsons.requests.CryptocurrencyWalletRequest;
 import com.crypto.wallet.infra.controllers.jsons.responses.CryptocurrencyWalletResponse;
 import com.crypto.wallet.infra.controllers.jsons.responses.ErrorResponse;

@@ -1,6 +1,6 @@
 package com.crypto.wallet.app.usecases;
 
-import com.crypto.wallet.infra.controllers.jsons.requests.Cryptocurrency;
+import com.crypto.wallet.domain.Cryptocurrency;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
