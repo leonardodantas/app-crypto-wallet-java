@@ -3,7 +3,7 @@ package com.crypto.wallet.app.usecases;
 import com.crypto.wallet.domain.Cryptocurrency;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.app.repositories.IWalletRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.SalesHistoryDocument;
 import com.crypto.wallet.domain.TypeOperation;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;

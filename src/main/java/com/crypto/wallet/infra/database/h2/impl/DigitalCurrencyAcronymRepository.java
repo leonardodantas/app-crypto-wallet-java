@@ -1,21 +1,19 @@
 package com.crypto.wallet.infra.database.h2.impl;
 
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.infra.database.h2.DigitalCurrencyAcronymSpringData;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class DigitalCurrencyAcronymRepository implements IDigitalCurrencyAcronymRepository {
 
     private final DigitalCurrencyAcronymSpringData springData;
-
-    public DigitalCurrencyAcronymRepository(DigitalCurrencyAcronymSpringData springData) {
-        this.springData = springData;
-    }
 
     @Override
     public List<DigitalCurrencyAcronymDocument> findAll() {
@@ -23,7 +21,7 @@ public class DigitalCurrencyAcronymRepository implements IDigitalCurrencyAcronym
     }
 
     @Override
-    public Optional<DigitalCurrencyAcronymDocument> findByName(String name) {
+    public Optional<DigitalCurrencyAcronymDocument> findByName(final String name) {
         return springData.findByName(name);
     }
 }

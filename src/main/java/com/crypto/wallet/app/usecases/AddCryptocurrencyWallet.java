@@ -3,7 +3,7 @@ package com.crypto.wallet.app.usecases;
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.domain.CryptocurrencyWallet;
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.domain.Cryptocurrency;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import lombok.RequiredArgsConstructor;

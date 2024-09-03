@@ -5,7 +5,7 @@ import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerf
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.rest.IFindDerivationHistoryPerformedRest;
 import com.crypto.wallet.app.usecases.FindDerivationHistory;
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

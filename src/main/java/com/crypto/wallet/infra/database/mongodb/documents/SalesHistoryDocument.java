@@ -1,6 +1,5 @@
 package com.crypto.wallet.infra.database.mongodb.documents;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.domain.TypeOperation;
 import com.crypto.wallet.domain.Cryptocurrency;
 import lombok.NoArgsConstructor;
@@ -16,7 +15,7 @@ public class SalesHistoryDocument {
 
     @Id
     private String id;
-    private com.crypto.wallet.domain.DigitalCurrencyAcronymDocument digitalCurrencyAcronym;
+    private DigitalCurrencyAcronymDocument digitalCurrencyAcronym;
     private double quantity;
     private CryptoDocument crypto;
     private LocalDateTime date;

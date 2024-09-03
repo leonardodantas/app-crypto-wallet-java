@@ -2,7 +2,7 @@ package com.crypto.wallet.infra.database.h2.impl;
 
 import com.crypto.wallet.app.exceptions.EntitySaveException;
 import com.crypto.wallet.app.repositories.IWalletRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import com.crypto.wallet.infra.database.h2.WalletRepositorySpringData;
 import org.springframework.stereotype.Repository;

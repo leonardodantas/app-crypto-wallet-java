@@ -1,6 +1,5 @@
 package com.crypto.wallet.infra.database.mongodb.documents;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.domain.Cryptocurrency;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

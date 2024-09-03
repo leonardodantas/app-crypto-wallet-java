@@ -1,6 +1,6 @@
 package com.crypto.wallet.app.repositories;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 
 import java.util.List;

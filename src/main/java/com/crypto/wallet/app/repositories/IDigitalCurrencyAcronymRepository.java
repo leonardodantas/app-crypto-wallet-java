@@ -1,6 +1,6 @@
 package com.crypto.wallet.app.repositories;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface IDigitalCurrencyAcronymRepository {
 
     List<DigitalCurrencyAcronymDocument> findAll();
-    Optional<DigitalCurrencyAcronymDocument> findByName(String name);
+    Optional<DigitalCurrencyAcronymDocument> findByName(final String name);
 }

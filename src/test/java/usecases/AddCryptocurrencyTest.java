@@ -6,7 +6,7 @@ import com.crypto.wallet.domain.Cryptocurrency;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
 import com.crypto.wallet.app.usecases.SaveWallet;
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

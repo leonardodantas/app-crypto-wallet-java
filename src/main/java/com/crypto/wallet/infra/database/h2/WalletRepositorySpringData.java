@@ -1,6 +1,6 @@
 package com.crypto.wallet.infra.database.h2;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

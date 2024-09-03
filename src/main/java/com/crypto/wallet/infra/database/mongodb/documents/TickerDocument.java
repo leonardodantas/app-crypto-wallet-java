@@ -1,6 +1,5 @@
 package com.crypto.wallet.infra.database.mongodb.documents;
 
-import com.crypto.wallet.domain.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.domain.Ticker;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
