@@ -1,8 +1,8 @@
-package com.crypto.wallet.infra.database.h2.impl;
+package com.crypto.wallet.infra.database.mongodb.repositories;
 
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.infra.database.h2.DigitalCurrencyAcronymSpringData;
+import com.crypto.wallet.infra.database.mongodb.jpa.DigitalCurrencyAcronymSpringData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

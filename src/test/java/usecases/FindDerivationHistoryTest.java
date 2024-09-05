@@ -3,7 +3,7 @@ package usecases;
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.rest.IFindDerivationHistoryPerformedRest;
+import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedRest;
 import com.crypto.wallet.app.usecases.FindDerivationHistory;
 import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import org.junit.jupiter.api.Test;

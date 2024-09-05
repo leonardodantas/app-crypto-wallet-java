@@ -1,4 +1,4 @@
-package com.crypto.wallet.app.rest;
+package com.crypto.wallet.app.integration;
 
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Ticker;

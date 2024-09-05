@@ -1,9 +1,9 @@
-package com.crypto.wallet.infra.database.h2.impl;
+package com.crypto.wallet.infra.database.mongodb.repositories;
 
 import com.crypto.wallet.app.exceptions.EntitySaveException;
 import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
 import com.crypto.wallet.infra.database.mongodb.documents.SalesHistoryDocument;
-import com.crypto.wallet.infra.database.h2.SalesHistorySpringData;
+import com.crypto.wallet.infra.database.mongodb.jpa.SalesHistorySpringData;
 import org.springframework.stereotype.Repository;
 
 @Repository

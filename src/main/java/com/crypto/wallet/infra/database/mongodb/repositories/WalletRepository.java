@@ -1,10 +1,10 @@
-package com.crypto.wallet.infra.database.h2.impl;
+package com.crypto.wallet.infra.database.mongodb.repositories;
 
 import com.crypto.wallet.app.exceptions.EntitySaveException;
 import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
-import com.crypto.wallet.infra.database.h2.WalletRepositorySpringData;
+import com.crypto.wallet.infra.database.mongodb.jpa.WalletRepositorySpringData;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

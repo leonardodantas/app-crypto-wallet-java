@@ -3,7 +3,7 @@ package com.crypto.wallet.app.usecases;
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.app.rest.IFindDerivationHistoryPerformedRest;
+import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedRest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

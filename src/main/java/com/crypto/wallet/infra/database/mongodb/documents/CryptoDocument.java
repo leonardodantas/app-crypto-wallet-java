@@ -1,8 +1,6 @@
 package com.crypto.wallet.infra.database.mongodb.documents;
 
 import com.crypto.wallet.domain.TypeOperation;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,7 +13,6 @@ public class CryptoDocument {
 
     @Id
     private String id;
-    @Enumerated(EnumType.STRING)
     private TypeOperation typeOperation;
 
     private CryptoDocument(TypeOperation operation) {

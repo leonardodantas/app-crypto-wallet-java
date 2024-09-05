@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.database.h2;
+package com.crypto.wallet.infra.database.mongodb.jpa;
 
 import com.crypto.wallet.infra.database.mongodb.documents.SalesHistoryDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
