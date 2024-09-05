@@ -1,8 +1,8 @@
-package com.crypto.wallet.infra.feign;
+package com.crypto.wallet.infra.integration.webclient;
 
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Ticker;
-import com.crypto.wallet.infra.feign.json.TickerRestDTO;
+import com.crypto.wallet.infra.integration.json.TickerRestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

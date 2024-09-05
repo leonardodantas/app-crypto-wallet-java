@@ -6,7 +6,7 @@ import com.crypto.wallet.infra.database.mongodb.documents.ScheduleLogDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.TickerDocument;
 import com.crypto.wallet.infra.database.mongodb.jpa.IScheduleLogMongoRepository;
 import com.crypto.wallet.infra.database.mongodb.jpa.ITickerDocumentMongoRepository;
-import com.crypto.wallet.infra.feign.FindLastDayCryptocurrencySummaryWebClient;
+import com.crypto.wallet.infra.integration.webclient.FindLastDayCryptocurrencySummaryWebClient;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

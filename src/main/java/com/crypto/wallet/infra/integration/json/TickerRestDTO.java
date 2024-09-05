@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.feign.json;
+package com.crypto.wallet.infra.integration.json;
 
 import com.crypto.wallet.infra.controllers.jsons.responses.ITickerDTO;
 import lombok.Getter;

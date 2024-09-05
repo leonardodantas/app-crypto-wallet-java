@@ -1,6 +1,6 @@
-package com.crypto.wallet.infra.feign;
+package com.crypto.wallet.infra.integration.feign;
 
-import com.crypto.wallet.infra.feign.json.DerivationHistoryPerformedRestDTO;
+import com.crypto.wallet.infra.integration.json.DerivationHistoryPerformedRestDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,10 +1,9 @@
-package com.crypto.wallet.infra.feign.service;
+package com.crypto.wallet.infra.integration.feign;
 
 import com.crypto.wallet.app.integration.IFindLastDayCryptocurrencySummaryRest;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Ticker;
-import com.crypto.wallet.infra.feign.FindLastDayCryptocurrencySummaryFeign;
-import com.crypto.wallet.infra.feign.json.TickerRestDTO;
+import com.crypto.wallet.infra.integration.json.TickerRestDTO;
 import org.springframework.stereotype.Component;
 
 @Component

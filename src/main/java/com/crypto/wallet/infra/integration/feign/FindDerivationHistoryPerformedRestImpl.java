@@ -1,9 +1,8 @@
-package com.crypto.wallet.infra.feign.service;
+package com.crypto.wallet.infra.integration.feign;
 
 import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedRest;
-import com.crypto.wallet.infra.feign.DerivationHistoryPerformedFeign;
-import com.crypto.wallet.infra.feign.json.DerivationHistoryPerformedRestDTO;
+import com.crypto.wallet.infra.integration.json.DerivationHistoryPerformedRestDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

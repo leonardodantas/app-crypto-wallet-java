@@ -1,4 +1,4 @@
-package com.crypto.wallet.infra.feign.json;
+package com.crypto.wallet.infra.integration.json;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
