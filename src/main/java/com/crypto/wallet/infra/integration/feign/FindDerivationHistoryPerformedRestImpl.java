@@ -1,25 +1,32 @@
 package com.crypto.wallet.infra.integration.feign;
 
-import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedRest;
-import com.crypto.wallet.infra.integration.json.DerivationHistoryPerformedRestDTO;
+import com.crypto.wallet.domain.DerivationHistoryPerformed;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class FindDerivationHistoryPerformedRestImpl implements IFindDerivationHistoryPerformedRest {
-    
+
     private final DerivationHistoryPerformedFeign derivationHistoryPerformedFeign;
 
-    public FindDerivationHistoryPerformedRestImpl(DerivationHistoryPerformedFeign derivationHistoryPerformedFeign) {
-        this.derivationHistoryPerformedFeign = derivationHistoryPerformedFeign;
-    }
-
     @Override
-    public List<DerivationHistoryPerformedResponse> getDerivationHistoryPerformed(String coinName) {
-        List<DerivationHistoryPerformedRestDTO> derivationHistoryPerformed = derivationHistoryPerformedFeign.getDerivationHistoryPerformed(coinName);
-        return derivationHistoryPerformed.stream().map(DerivationHistoryPerformedResponse::from).collect(Collectors.toUnmodifiableList());
+    public List<DerivationHistoryPerformed> getDerivationHistoryPerformed(final String coinName) {
+        return derivationHistoryPerformedFeign.getDerivationHistoryPerformed(coinName)
+                .stream()
+                .map(response -> DerivationHistoryPerformed.builder()
+                        .tid(response.getTid())
+                        .amount(response.getAmount())
+                        .type(response.getType())
+                        .price(response.getPrice())
+                        .date(Instant.ofEpochMilli(response.getDate())
+                                .atZone(ZoneId.systemDefault())
+                                .toLocalDateTime())
+                        .build()).toList();
     }
 }

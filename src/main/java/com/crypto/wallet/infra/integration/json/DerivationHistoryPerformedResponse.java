@@ -4,7 +4,7 @@ import com.crypto.wallet.infra.controllers.jsons.responses.IDerivationHistoryPer
 
 import java.math.BigDecimal;
 
-public class DerivationHistoryPerformedRestDTO implements IDerivationHistoryPerformed {
+public class DerivationHistoryPerformedResponse implements IDerivationHistoryPerformed {
 
     private BigDecimal amount;
     private long date;

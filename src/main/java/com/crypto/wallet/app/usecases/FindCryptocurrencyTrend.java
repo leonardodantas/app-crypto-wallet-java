@@ -1,6 +1,7 @@
 package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.domain.CryptocurrencyTrend;
+import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
@@ -22,17 +23,17 @@ public class FindCryptocurrencyTrend {
     private final ISimpleRegression simpleRegression;
 
     public List<CryptocurrencyTrend> getByCryptocurrencyName(final String name) {
-        final List<DerivationHistoryPerformedResponse> derivationHistoryPerformed = this.getDerivationHistory.getByCryptocurrencyName(name);
+        final var derivationHistoryPerformed = this.getDerivationHistory.getByCryptocurrencyName(name);
 
-        final List<DataForCalculation> dataForCalculationsBuy = getDataForCalculations(derivationHistoryPerformed, BUY);
-        final List<DataForCalculation> dataForCalculationsSell = getDataForCalculations(derivationHistoryPerformed, SELL);
+        final var dataForCalculationsBuy = getDataForCalculations(derivationHistoryPerformed, BUY);
+        final var dataForCalculationsSell = getDataForCalculations(derivationHistoryPerformed, SELL);
 
-        final BigDecimal buy = simpleRegression.calculeSimpleRegression(dataForCalculationsBuy);
-        final BigDecimal sell = simpleRegression.calculeSimpleRegression(dataForCalculationsSell);
+        final var buy = simpleRegression.calculeSimpleRegression(dataForCalculationsBuy);
+        final var sell = simpleRegression.calculeSimpleRegression(dataForCalculationsSell);
         return List.of(CryptocurrencyTrend.of(buy, BUY, name), CryptocurrencyTrend.of(sell, SELL, name));
     }
 
-    private List<DataForCalculation> getDataForCalculations(final List<DerivationHistoryPerformedResponse> derivationHistoryPerformed, String type) {
+    private List<DataForCalculation> getDataForCalculations(final List<DerivationHistoryPerformed> derivationHistoryPerformed, final String type) {
         return derivationHistoryPerformed.stream()
                 .filter(derivationHistoryPerformedDTO -> derivationHistoryPerformedDTO.getType().equals(type))
                 .map(DataForCalculation::from)

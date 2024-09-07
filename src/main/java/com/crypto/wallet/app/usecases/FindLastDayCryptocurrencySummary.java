@@ -14,7 +14,7 @@ public class FindLastDayCryptocurrencySummary {
     private final ITickerRepository tickerRepository;
 
     public List<Ticker> getAllTicker() {
-        return tickerRepository.findAll().stream().map(Ticker::from).toList();
+        return tickerRepository.findAll();
     }
 
 }

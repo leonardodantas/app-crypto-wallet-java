@@ -2,6 +2,8 @@ package com.crypto.wallet.domain;
 
 import com.crypto.wallet.infra.controllers.jsons.responses.ITickerDTO;
 import com.crypto.wallet.infra.database.mongodb.documents.CryptocurrencySummaryDocument;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +13,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class CryptocurrencySummary {
 
     private BigDecimal high;

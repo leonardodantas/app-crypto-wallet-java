@@ -1,9 +1,9 @@
 package com.crypto.wallet.app.repositories;
 
-import com.crypto.wallet.infra.database.mongodb.documents.TickerDocument;
+import com.crypto.wallet.domain.Ticker;
 
 import java.util.List;
 
 public interface ITickerRepository {
-    List<TickerDocument> findAll();
+    List<Ticker> findAll();
 }

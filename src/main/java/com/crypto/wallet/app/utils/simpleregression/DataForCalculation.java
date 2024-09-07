@@ -1,5 +1,6 @@
 package com.crypto.wallet.app.utils.simpleregression;
 
+import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
 
 import java.time.LocalDateTime;
@@ -11,13 +12,13 @@ public class DataForCalculation implements Comparable<DataForCalculation>{
     private final LocalDateTime x;
     private final double y;
 
-    private DataForCalculation(DerivationHistoryPerformedResponse derivationHistoryPerformedResponse) {
-        this.x = derivationHistoryPerformedResponse.getDate();
-        this.y = derivationHistoryPerformedResponse.getPrice().doubleValue();
+    private DataForCalculation(final DerivationHistoryPerformed derivationHistoryPerformed) {
+        this.x = derivationHistoryPerformed.getDate();
+        this.y = derivationHistoryPerformed.getPrice().doubleValue();
     }
 
-    public static DataForCalculation from(DerivationHistoryPerformedResponse derivationHistoryPerformedResponse) {
-        return new DataForCalculation(derivationHistoryPerformedResponse);
+    public static DataForCalculation from(DerivationHistoryPerformed derivationHistoryPerformed) {
+        return new DataForCalculation(derivationHistoryPerformed);
     }
 
     @Override
