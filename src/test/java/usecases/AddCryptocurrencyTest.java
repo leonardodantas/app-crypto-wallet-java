@@ -2,17 +2,21 @@ package usecases;
 
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
-import com.crypto.wallet.domain.Cryptocurrency;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
+import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
+import com.crypto.wallet.app.repositories.IWalletRepository;
 import com.crypto.wallet.app.usecases.AddCryptocurrencyWallet;
-import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
+import com.crypto.wallet.domain.Cryptocurrency;
+import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import com.crypto.wallet.domain.Wallet;
+import mocks.GetMockJson;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import mocks.GetMockJson;
 
 import java.util.Optional;
 
@@ -29,7 +33,11 @@ class AddCryptocurrencyTest {
     @Mock
     private IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
     @Mock
-    private SaveWallet saveWallet;
+    private ISalesHistoryRepository salesHistoryRepository;
+    @Mock
+    private IWalletRepository walletRepository;
+    @Captor
+    private ArgumentCaptor<Wallet> argumentCaptorWallet;
 
     @Test
     void shouldThrownCryptocurrencyNotFoundException() {
@@ -40,21 +48,29 @@ class AddCryptocurrencyTest {
 
         assertThrows(CryptocurrencyNotFoundException.class, () -> cryptocurrencyWallet.addCryptocurrency(request));
 
-        verify(saveWallet, never()).save(any(), any());
+        verify(salesHistoryRepository, never()).save(any());
+        verify(walletRepository, never()).findByDigitalCurrencyAcronym(any());
+        verify(walletRepository, never()).save(any());
     }
 
     @Test
     void shouldSaveCryptocurrencyInWallet() {
         final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", Cryptocurrency.class);
 
-        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
-        final var wallet = GetMockJson.execute("entities/wallet", WalletDocument.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronym.class);
+        final var wallet = GetMockJson.execute("entities/wallet", Wallet.class);
+
+        final var walletToSave = GetMockJson.execute("entities/wallet-1", Wallet.class);
+        final var walletSave = GetMockJson.execute("entities/wallet", Wallet.class);
 
         when(digitalCurrencyAcronymRepository.findByName(anyString()))
                 .thenReturn(Optional.of(digitalCurrencyAcronym));
 
-        when(saveWallet.save(any(), any()))
-                .thenReturn(wallet);
+        when(walletRepository
+                .findByDigitalCurrencyAcronym(any())).thenReturn(Optional.of(walletSave));
+
+        when(walletRepository
+                .save(any())).thenReturn(walletToSave);
 
         final var result = cryptocurrencyWallet.addCryptocurrency(cryptocurrencyWalletRequest);
 
@@ -62,7 +78,13 @@ class AddCryptocurrencyTest {
         assertEquals(wallet.getId(), result.getId());
         assertEquals(wallet.getQuantity(), result.getQuantity());
 
-        verify(saveWallet).save(any(), any());
+        verify(salesHistoryRepository, times(1)).save(any());
+        verify(walletRepository, times(1)).findByDigitalCurrencyAcronym(any());
+
+        verify(walletRepository).save(argumentCaptorWallet.capture());
+
+        final var walletSaveExpected = argumentCaptorWallet.getValue();
+        assertEquals(10, walletSaveExpected.getQuantity());
     }
 
 }
