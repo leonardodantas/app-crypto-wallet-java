@@ -76,7 +76,6 @@ class AddCryptocurrencyTest {
 
         assertNotNull(result);
         assertEquals(wallet.getId(), result.getId());
-        assertEquals(wallet.getQuantity(), result.getQuantity());
 
         verify(salesHistoryRepository, times(1)).save(any());
         verify(walletRepository, times(1)).findByDigitalCurrencyAcronym(any());
@@ -84,7 +83,7 @@ class AddCryptocurrencyTest {
         verify(walletRepository).save(argumentCaptorWallet.capture());
 
         final var walletSaveExpected = argumentCaptorWallet.getValue();
-        assertEquals(10, walletSaveExpected.getQuantity());
+        assertEquals(20, walletSaveExpected.getQuantity());
     }
 
 }

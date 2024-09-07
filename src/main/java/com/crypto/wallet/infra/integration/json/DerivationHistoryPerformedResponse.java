@@ -1,10 +1,11 @@
 package com.crypto.wallet.infra.integration.json;
 
-import com.crypto.wallet.infra.controllers.jsons.responses.IDerivationHistoryPerformed;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 
-public class DerivationHistoryPerformedResponse implements IDerivationHistoryPerformed {
+@Getter
+public class DerivationHistoryPerformedResponse {
 
     private BigDecimal amount;
     private long date;
@@ -12,28 +13,4 @@ public class DerivationHistoryPerformedResponse implements IDerivationHistoryPer
     private long tid;
     private String type;
 
-    @Override
-    public BigDecimal getAmount() {
-        return this.amount;
-    }
-
-    @Override
-    public long getDate() {
-        return this.date;
-    }
-
-    @Override
-    public BigDecimal getPrice() {
-        return this.price;
-    }
-
-    @Override
-    public long getTid() {
-        return this.tid;
-    }
-
-    @Override
-    public String getType() {
-        return this.type;
-    }
 }

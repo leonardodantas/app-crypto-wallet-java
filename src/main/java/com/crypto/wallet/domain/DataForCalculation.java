@@ -1,7 +1,4 @@
-package com.crypto.wallet.app.utils.simpleregression;
-
-import com.crypto.wallet.domain.DerivationHistoryPerformed;
-import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
+package com.crypto.wallet.domain;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

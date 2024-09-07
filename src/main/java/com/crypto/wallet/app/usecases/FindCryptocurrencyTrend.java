@@ -2,13 +2,11 @@ package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.domain.CryptocurrencyTrend;
 import com.crypto.wallet.domain.DerivationHistoryPerformed;
-import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
-import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
+import com.crypto.wallet.domain.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 

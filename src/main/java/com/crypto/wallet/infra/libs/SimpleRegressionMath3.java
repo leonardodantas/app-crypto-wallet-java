@@ -1,6 +1,6 @@
 package com.crypto.wallet.infra.libs;
 
-import com.crypto.wallet.app.utils.simpleregression.DataForCalculation;
+import com.crypto.wallet.domain.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.springframework.stereotype.Component;
