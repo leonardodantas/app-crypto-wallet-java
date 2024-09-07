@@ -1,17 +1,17 @@
 package usecases;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
-import com.crypto.wallet.infra.controllers.jsons.responses.DerivationHistoryPerformedResponse;
-import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedRest;
+import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.usecases.FindDerivationHistory;
-import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
+import com.crypto.wallet.domain.DerivationHistoryPerformed;
+import com.crypto.wallet.domain.DigitalCurrencyAcronym;
+import mocks.GetMockJson;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import mocks.GetMockJson;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,8 +45,8 @@ class FindDerivationHistoryTest {
     @Test
     void shouldGetDerivationHistoryPerformed() {
         final var name = "BITCOIN";
-        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronymDocument.class);
-        final var derivationHistoryPerformed = GetMockJson.execute("responses/derivation-history-performed", DerivationHistoryPerformedResponse.class);
+        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronym.class);
+        final var derivationHistoryPerformed = GetMockJson.execute("responses/derivation-history-performed", DerivationHistoryPerformed.class);
 
         when(digitalCurrencyAcronymRepository.findByName(name))
                 .thenReturn(Optional.of(digitalCurrencyAcronym));

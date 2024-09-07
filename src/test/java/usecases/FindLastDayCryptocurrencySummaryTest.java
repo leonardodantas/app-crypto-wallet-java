@@ -2,7 +2,7 @@ package usecases;
 
 import com.crypto.wallet.app.repositories.ITickerRepository;
 import com.crypto.wallet.app.usecases.FindLastDayCryptocurrencySummary;
-import com.crypto.wallet.infra.database.mongodb.documents.TickerDocument;
+import com.crypto.wallet.domain.Ticker;
 import mocks.GetMockJson;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ class FindLastDayCryptocurrencySummaryTest {
 
     @Test
     void shouldGetAllTicker() {
-        final var ticker = GetMockJson.execute("responses/ticket", TickerDocument.class);
+        final var ticker = GetMockJson.execute("responses/ticket", Ticker.class);
 
         when(tickerRepository.findAll())
                 .thenReturn(List.of(ticker));

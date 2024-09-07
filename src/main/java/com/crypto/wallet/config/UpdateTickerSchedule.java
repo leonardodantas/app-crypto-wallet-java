@@ -1,7 +1,6 @@
 package com.crypto.wallet.config;
 
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.infra.database.mongodb.documents.ScheduleLogDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.TickerDocument;
 import com.crypto.wallet.infra.database.mongodb.jpa.IScheduleLogMongoRepository;
@@ -69,7 +68,6 @@ public class UpdateTickerSchedule {
 
         final var tickersResponseMono = digitalCurrencyAcronymRepository.findAll()
                 .stream()
-                .map(DigitalCurrencyAcronym::from)
                 .map(findLastDayCryptocurrencySummaryWebClient::getSummary)
                 .toList();
 
