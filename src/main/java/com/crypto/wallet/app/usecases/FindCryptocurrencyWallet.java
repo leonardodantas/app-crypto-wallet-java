@@ -23,6 +23,7 @@ public class FindCryptocurrencyWallet {
     public List<CryptocurrencyWallet> getAll() {
         return walletRepository.findAll()
                 .stream()
-                .map(CryptocurrencyWallet::from).toList();
+                .map(CryptocurrencyWallet::from)
+                .toList();
     }
 }
