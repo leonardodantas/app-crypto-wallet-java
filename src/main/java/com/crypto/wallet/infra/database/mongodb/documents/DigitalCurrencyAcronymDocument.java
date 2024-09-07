@@ -16,7 +16,7 @@ public class DigitalCurrencyAcronymDocument {
     private String name;
     private String description;
 
-    public DigitalCurrencyAcronymDocument(final String name, final String description) {
+    private DigitalCurrencyAcronymDocument(final String name, final String description) {
         this.name = name;
         this.description = description;
     }

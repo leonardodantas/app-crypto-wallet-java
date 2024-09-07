@@ -1,11 +1,12 @@
 package com.crypto.wallet.domain;
 
 import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class DigitalCurrencyAcronym {
 
     private String name;
@@ -18,5 +19,9 @@ public class DigitalCurrencyAcronym {
 
     public static DigitalCurrencyAcronym from(DigitalCurrencyAcronymDocument digitalCurrencyAcronym) {
         return new DigitalCurrencyAcronym(digitalCurrencyAcronym);
+    }
+
+    public static DigitalCurrencyAcronym of(final String name, final String description) {
+        return new DigitalCurrencyAcronym(name, description);
     }
 }

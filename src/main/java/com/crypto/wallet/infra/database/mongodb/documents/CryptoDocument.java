@@ -1,5 +1,6 @@
 package com.crypto.wallet.infra.database.mongodb.documents;
 
+import com.crypto.wallet.domain.Crypto;
 import com.crypto.wallet.domain.TypeOperation;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -20,7 +21,16 @@ public class CryptoDocument {
         this.typeOperation = operation;
     }
 
+    private CryptoDocument(final Crypto crypto) {
+        this.id = crypto.getId();
+        this.typeOperation = crypto.getTypeOperation();
+    }
+
     public static CryptoDocument from(TypeOperation operation) {
         return new CryptoDocument(operation);
+    }
+
+    public static CryptoDocument from(final Crypto crypto) {
+        return new CryptoDocument(crypto);
     }
 }

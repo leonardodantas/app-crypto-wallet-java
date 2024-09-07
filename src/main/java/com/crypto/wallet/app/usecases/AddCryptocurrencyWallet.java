@@ -2,10 +2,9 @@ package com.crypto.wallet.app.usecases;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
-import com.crypto.wallet.domain.CryptocurrencyWallet;
-import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
-import com.crypto.wallet.domain.Cryptocurrency;
-import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
+import com.crypto.wallet.app.repositories.ISalesHistoryRepository;
+import com.crypto.wallet.app.repositories.IWalletRepository;
+import com.crypto.wallet.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +13,28 @@ import org.springframework.stereotype.Service;
 public class AddCryptocurrencyWallet {
 
     private final IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
-    private final SaveWallet saveWallet;
+    private final ISalesHistoryRepository salesHistoryRepository;
+    private final IWalletRepository walletRepository;
 
     public CryptocurrencyWallet addCryptocurrency(final Cryptocurrency cryptocurrency) {
-        final DigitalCurrencyAcronymDocument digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
+        final var digitalCurrencyAcronym = this.digitalCurrencyAcronymRepository
                 .findByName(cryptocurrency.name()).orElseThrow(() -> new CryptocurrencyNotFoundException(cryptocurrency.name()));
 
-        final WalletDocument wallet = saveWallet.save(cryptocurrency, digitalCurrencyAcronym);
+        final var wallet = saveWallet(cryptocurrency, digitalCurrencyAcronym);
 
         return CryptocurrencyWallet.of(wallet, digitalCurrencyAcronym);
+    }
+
+    private Wallet saveWallet(final Cryptocurrency cryptocurrency, final DigitalCurrencyAcronym digitalCurrencyAcronym) {
+        final var salesHistory = SalesHistory.of(cryptocurrency, digitalCurrencyAcronym, TypeOperation.BUY);
+        salesHistoryRepository.save(salesHistory);
+
+        final var wallet = Wallet.of(cryptocurrency, digitalCurrencyAcronym);
+
+        walletRepository
+                .findByDigitalCurrencyAcronym(digitalCurrencyAcronym)
+                .ifPresent(wallet::overrideWallet);
+
+        return walletRepository.save(wallet);
     }
 }
