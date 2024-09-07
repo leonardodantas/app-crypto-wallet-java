@@ -1,14 +1,14 @@
 package com.crypto.wallet.app.usecases;
 
-import com.crypto.wallet.domain.CryptocurrencyTrend;
-import com.crypto.wallet.domain.DerivationHistoryPerformed;
-import com.crypto.wallet.domain.DataForCalculation;
 import com.crypto.wallet.app.utils.simpleregression.ISimpleRegression;
+import com.crypto.wallet.domain.CryptocurrencyTrend;
+import com.crypto.wallet.domain.DataForCalculation;
+import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,19 +23,22 @@ public class FindCryptocurrencyTrend {
     public List<CryptocurrencyTrend> getByCryptocurrencyName(final String name) {
         final var derivationHistoryPerformed = this.getDerivationHistory.getByCryptocurrencyName(name);
 
-        final var dataForCalculationsBuy = getDataForCalculations(derivationHistoryPerformed, BUY);
-        final var dataForCalculationsSell = getDataForCalculations(derivationHistoryPerformed, SELL);
+        final var purchasePrice = getPriceByType(derivationHistoryPerformed, BUY);
+        final var salePrice = getPriceByType(derivationHistoryPerformed, SELL);
 
-        final var buy = simpleRegression.calculeSimpleRegression(dataForCalculationsBuy);
-        final var sell = simpleRegression.calculeSimpleRegression(dataForCalculationsSell);
-        return List.of(CryptocurrencyTrend.of(buy, BUY, name), CryptocurrencyTrend.of(sell, SELL, name));
+        return List.of(
+                CryptocurrencyTrend.of(purchasePrice, BUY, name),
+                CryptocurrencyTrend.of(salePrice, SELL, name)
+        );
     }
 
-    private List<DataForCalculation> getDataForCalculations(final List<DerivationHistoryPerformed> derivationHistoryPerformed, final String type) {
-        return derivationHistoryPerformed.stream()
+    private BigDecimal getPriceByType(final List<DerivationHistoryPerformed> derivationHistoryPerformed, final String type) {
+        final var dataForCalculations = derivationHistoryPerformed.stream()
                 .filter(derivationHistoryPerformedDTO -> derivationHistoryPerformedDTO.getType().equals(type))
                 .map(DataForCalculation::from)
-                .collect(Collectors.toList());
+                .toList();
+
+        return simpleRegression.calculeSimpleRegression(dataForCalculations);
     }
 
 
