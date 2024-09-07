@@ -1,6 +1,6 @@
 package com.crypto.wallet.infra.integration.feign;
 
-import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedRest;
+import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedIntegration;
 import com.crypto.wallet.domain.DerivationHistoryPerformed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class FindDerivationHistoryPerformedRestImpl implements IFindDerivationHistoryPerformedRest {
+public class FindDerivationHistoryPerformedIntegrationImpl implements IFindDerivationHistoryPerformedIntegration {
 
     private final DerivationHistoryPerformedFeign derivationHistoryPerformedFeign;
 

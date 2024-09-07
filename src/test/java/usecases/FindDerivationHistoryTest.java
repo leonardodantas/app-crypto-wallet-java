@@ -1,7 +1,7 @@
 package usecases;
 
 import com.crypto.wallet.app.exceptions.CryptocurrencyNotFoundException;
-import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedRest;
+import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedIntegration;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.app.usecases.FindDerivationHistory;
 import com.crypto.wallet.domain.DerivationHistoryPerformed;
@@ -28,7 +28,7 @@ class FindDerivationHistoryTest {
     @Mock
     private IDigitalCurrencyAcronymRepository digitalCurrencyAcronymRepository;
     @Mock
-    private IFindDerivationHistoryPerformedRest findDerivationHistoryPerformedRest;
+    private IFindDerivationHistoryPerformedIntegration findDerivationHistoryPerformedRest;
 
     @Test
     void shouldThrowCryptocurrencyNotFoundException() {

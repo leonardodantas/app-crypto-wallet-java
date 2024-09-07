@@ -20,6 +20,12 @@ public class Wallet {
         this.quantity = cryptocurrency.quantity();
     }
 
+    private Wallet(final Wallet wallet, final double quantity) {
+        this.id = wallet.getId();
+        this.digitalCurrencyAcronym = wallet.getDigitalCurrencyAcronym();
+        this.quantity = wallet.getQuantity() + quantity;
+    }
+
     public static Wallet of(final Cryptocurrency cryptocurrency, final DigitalCurrencyAcronym digitalCurrencyAcronym) {
         return new Wallet(digitalCurrencyAcronym, cryptocurrency);
     }
@@ -27,5 +33,9 @@ public class Wallet {
     public void overrideWallet(final Wallet wallet) {
         this.id = wallet.getId();
         this.quantity += wallet.getQuantity();
+    }
+
+    public static Wallet of(final Wallet wallet, final double quantity) {
+        return new Wallet(wallet, quantity);
     }
 }
