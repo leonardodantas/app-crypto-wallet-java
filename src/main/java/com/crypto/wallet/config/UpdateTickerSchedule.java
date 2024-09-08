@@ -16,6 +16,8 @@ import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -73,14 +75,18 @@ public class UpdateTickerSchedule {
 
         final var tickerResponseFlux = Flux.merge(tickersResponseMono);
 
-        final var tickerResponses = tickerResponseFlux.collectList().block();
+        final var tickers = new ArrayList<TickerDocument>();
+        tickerResponseFlux.collectList().subscribe(tickerResponses -> {
 
-        final var tickerDocuments = CollectionUtils.emptyIfNull(tickerResponses)
-                .stream()
-                .map(TickerDocument::from)
-                .toList();
+            final var tickerDocuments = CollectionUtils.emptyIfNull(tickerResponses)
+                    .stream()
+                    .map(TickerDocument::from)
+                    .toList();
 
-        tickerDocumentMongoRepository.saveAll(tickerDocuments);
+            tickers.addAll(tickerDocuments);
+        });
+
+        tickerDocumentMongoRepository.saveAll(tickers);
     }
 
 }
