@@ -58,7 +58,6 @@ class AddCryptocurrencyTest {
         final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", Cryptocurrency.class);
 
         final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronym.class);
-        final var wallet = GetMockJson.execute("entities/wallet", Wallet.class);
 
         final var walletToSave = GetMockJson.execute("entities/wallet-1", Wallet.class);
         final var walletSave = GetMockJson.execute("entities/wallet", Wallet.class);
@@ -83,6 +82,36 @@ class AddCryptocurrencyTest {
 
         final var walletSaveExpected = argumentCaptorWallet.getValue();
         assertEquals(20, walletSaveExpected.getQuantity());
+    }
+
+    @Test
+    void shouldSaveCryptocurrencyInWalletWhenDigitalCurrencyAcronymNotFound() {
+        final var cryptocurrencyWalletRequest = GetMockJson.execute("requests/cryptocurrency-wallet-valid", Cryptocurrency.class);
+
+        final var digitalCurrencyAcronym = GetMockJson.execute("entities/digital-currency-acronym", DigitalCurrencyAcronym.class);
+
+        final var walletToSave = GetMockJson.execute("entities/wallet-1", Wallet.class);
+
+        when(digitalCurrencyAcronymRepository.findByName(anyString()))
+                .thenReturn(Optional.of(digitalCurrencyAcronym));
+
+        when(walletRepository
+                .findByDigitalCurrencyAcronym(any())).thenReturn(Optional.empty());
+
+        when(walletRepository
+                .save(any())).thenReturn(walletToSave);
+
+        final var result = cryptocurrencyWallet.addCryptocurrency(cryptocurrencyWalletRequest);
+
+        assertNotNull(result);
+
+        verify(salesHistoryRepository, times(1)).save(any());
+        verify(walletRepository, times(1)).findByDigitalCurrencyAcronym(any());
+
+        verify(walletRepository).save(argumentCaptorWallet.capture());
+
+        final var walletSaveExpected = argumentCaptorWallet.getValue();
+        assertEquals(10, walletSaveExpected.getQuantity());
     }
 
 }
