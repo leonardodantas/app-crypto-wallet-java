@@ -30,11 +30,6 @@ public class Wallet {
         return new Wallet(digitalCurrencyAcronym, cryptocurrency);
     }
 
-    public void overrideWallet(final Wallet wallet) {
-        this.id = wallet.getId();
-        this.quantity += wallet.getQuantity();
-    }
-
     public static Wallet of(final Wallet wallet, final double quantity) {
         return new Wallet(wallet, quantity);
     }

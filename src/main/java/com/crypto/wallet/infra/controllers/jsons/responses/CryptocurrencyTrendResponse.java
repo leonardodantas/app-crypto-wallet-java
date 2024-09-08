@@ -11,6 +11,6 @@ public record CryptocurrencyTrendResponse(
 ) {
 
     public static CryptocurrencyTrendResponse from(final CryptocurrencyTrend cryptocurrencyTrend) {
-        return new CryptocurrencyTrendResponse(cryptocurrencyTrend.getType(), cryptocurrencyTrend.getCryptocurrency(), cryptocurrencyTrend.getTrend());
+        return new CryptocurrencyTrendResponse(cryptocurrencyTrend.type(), cryptocurrencyTrend.cryptocurrency(), cryptocurrencyTrend.trend());
     }
 }

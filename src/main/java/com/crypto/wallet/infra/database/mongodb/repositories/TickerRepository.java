@@ -20,10 +20,9 @@ public class TickerRepository implements ITickerRepository {
     public List<Ticker> findAll() {
         return tickerSpringData.findAll()
                 .stream().map(document -> {
-                    final var digitalCurrencyAcronym = DigitalCurrencyAcronym.builder()
-                            .name(document.getDigitalCurrencyAcronym().getName())
-                            .description(document.getDigitalCurrencyAcronym().getDescription())
-                            .build();
+                    final var digitalCurrencyAcronym = new DigitalCurrencyAcronym(
+                            document.getDigitalCurrencyAcronym().getName(),
+                            document.getDigitalCurrencyAcronym().getDescription());
 
                     final var cryptocurrencySummary = CryptocurrencySummary.builder()
                             .sell(document.getCryptocurrencySummary().getSell())
@@ -36,10 +35,7 @@ public class TickerRepository implements ITickerRepository {
                             .date(document.getCryptocurrencySummary().getDate())
                             .build();
 
-                    return Ticker.builder()
-                            .ticker(cryptocurrencySummary)
-                            .digitalCurrencyAcronym(digitalCurrencyAcronym)
-                            .build();
+                    return new Ticker(digitalCurrencyAcronym, cryptocurrencySummary);
                 }).toList();
     }
 }

@@ -1,6 +1,5 @@
 package com.crypto.wallet.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -9,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
-@AllArgsConstructor
 public class CryptocurrencySummary {
 
     private BigDecimal high;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class FindCryptocurrencyTrend {
         final var dataForCalculations = derivationHistoryPerformed.stream()
                 .filter(derivationHistoryPerformedDTO -> derivationHistoryPerformedDTO.getType().equals(type))
                 .map(DataForCalculation::from)
-                .toList();
+                .collect(Collectors.toList());
 
         return simpleRegression.calculeSimpleRegression(dataForCalculations);
     }

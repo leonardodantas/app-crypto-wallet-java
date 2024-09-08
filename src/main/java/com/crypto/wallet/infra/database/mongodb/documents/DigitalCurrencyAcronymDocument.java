@@ -22,6 +22,6 @@ public class DigitalCurrencyAcronymDocument {
     }
 
     public static DigitalCurrencyAcronymDocument from(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return new DigitalCurrencyAcronymDocument(digitalCurrencyAcronym.getName(), digitalCurrencyAcronym.getDescription());
+        return new DigitalCurrencyAcronymDocument(digitalCurrencyAcronym.name(), digitalCurrencyAcronym.description());
     }
 }

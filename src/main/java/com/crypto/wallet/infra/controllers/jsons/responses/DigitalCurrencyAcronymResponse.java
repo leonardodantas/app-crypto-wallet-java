@@ -8,6 +8,6 @@ public record DigitalCurrencyAcronymResponse(
 ) {
 
     public static DigitalCurrencyAcronymResponse from(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return new DigitalCurrencyAcronymResponse(digitalCurrencyAcronym.getName(), digitalCurrencyAcronym.getDescription());
+        return new DigitalCurrencyAcronymResponse(digitalCurrencyAcronym.name(), digitalCurrencyAcronym.description());
     }
 }

@@ -1,23 +1,14 @@
 package com.crypto.wallet.domain;
 
-import lombok.Getter;
-
 import java.math.BigDecimal;
 
-@Getter
-public class CryptocurrencyTrend {
+public record CryptocurrencyTrend(
+        String type,
+        String cryptocurrency,
+        BigDecimal trend
 
-    private final String type;
-    private final String cryptocurrency;
-    private final BigDecimal trend;
-
-    private CryptocurrencyTrend(BigDecimal trend, String type, String cryptocurrency) {
-        this.type = type;
-        this.trend = trend;
-        this.cryptocurrency = cryptocurrency;
-    }
-
-    public static CryptocurrencyTrend of(BigDecimal buy, String type, String crypto) {
-        return new CryptocurrencyTrend(buy, type, crypto);
+) {
+    public static CryptocurrencyTrend of(final BigDecimal trend, final String type, final String cryptocurrency) {
+        return new CryptocurrencyTrend(type, cryptocurrency, trend);
     }
 }

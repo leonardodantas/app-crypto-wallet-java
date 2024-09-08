@@ -22,7 +22,7 @@ public class FindLastDayCryptocurrencySummaryWebClient {
 
     public Mono<Ticker> getSummary(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
         final var params = new HashMap<String, String>();
-        params.put("name", digitalCurrencyAcronym.getName());
+        params.put("name", digitalCurrencyAcronym.name());
 
         return this.webClient.get()
                 .uri("/{name}/ticker", params)
@@ -32,17 +32,11 @@ public class FindLastDayCryptocurrencySummaryWebClient {
     }
 
     private Ticker getTicker(final TickerResponse tickerResponse, final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return Ticker.builder()
-                .ticker(getCryptocurrencySummary(tickerResponse))
-                .digitalCurrencyAcronym(getDigitalCurrencyAcronym(digitalCurrencyAcronym))
-                .build();
+        return new Ticker(getDigitalCurrencyAcronym(digitalCurrencyAcronym), getCryptocurrencySummary(tickerResponse));
     }
 
     private DigitalCurrencyAcronym getDigitalCurrencyAcronym(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return DigitalCurrencyAcronym.builder()
-                .name(digitalCurrencyAcronym.getName())
-                .description(digitalCurrencyAcronym.getDescription())
-                .build();
+        return new DigitalCurrencyAcronym(digitalCurrencyAcronym.name(), digitalCurrencyAcronym.description());
     }
 
     private CryptocurrencySummary getCryptocurrencySummary(final TickerResponse tickerResponse) {

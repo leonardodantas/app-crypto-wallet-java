@@ -7,6 +7,6 @@ public record TickerResponse(
         CryptocurrencySummaryResponse ticker
 ) {
     public static TickerResponse from(final Ticker ticker) {
-        return new TickerResponse(DigitalCurrencyAcronymResponse.from(ticker.getDigitalCurrencyAcronym()), CryptocurrencySummaryResponse.from(ticker.getTicker()));
+        return new TickerResponse(DigitalCurrencyAcronymResponse.from(ticker.digitalCurrencyAcronym()), CryptocurrencySummaryResponse.from(ticker.ticker()));
     }
 }

@@ -9,13 +9,13 @@ public class SalesHistory {
     private String id;
     private DigitalCurrencyAcronym digitalCurrencyAcronym;
     private double quantity;
-    private Crypto crypto;
+    private TypeOperation typeOperation;
     private LocalDateTime date;
 
     private SalesHistory(final Cryptocurrency cryptocurrency, final DigitalCurrencyAcronym digitalCurrencyAcronym, final TypeOperation typeOperation) {
         this.digitalCurrencyAcronym = digitalCurrencyAcronym;
         this.quantity = cryptocurrency.quantity();
-        this.crypto = Crypto.from(typeOperation);
+        this.typeOperation = typeOperation;
         this.date = LocalDateTime.now();
     }
 

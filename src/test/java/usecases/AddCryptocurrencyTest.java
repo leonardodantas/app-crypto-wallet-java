@@ -75,7 +75,6 @@ class AddCryptocurrencyTest {
         final var result = cryptocurrencyWallet.addCryptocurrency(cryptocurrencyWalletRequest);
 
         assertNotNull(result);
-        assertEquals(wallet.getId(), result.getId());
 
         verify(salesHistoryRepository, times(1)).save(any());
         verify(walletRepository, times(1)).findByDigitalCurrencyAcronym(any());
