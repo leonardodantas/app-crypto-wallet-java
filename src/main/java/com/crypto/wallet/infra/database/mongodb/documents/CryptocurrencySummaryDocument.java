@@ -22,14 +22,14 @@ public class CryptocurrencySummaryDocument {
     private LocalDateTime date;
 
     public CryptocurrencySummaryDocument(final CryptocurrencySummary ticker) {
-        this.high = ticker.getHigh().setScale(2, RoundingMode.HALF_DOWN);
-        this.low = ticker.getLow().setScale(2, RoundingMode.HALF_DOWN);
-        this.vol = ticker.getVol().setScale(2, RoundingMode.HALF_DOWN);
-        this.last = ticker.getLast().setScale(2, RoundingMode.HALF_DOWN);
-        this.buy = ticker.getBuy().setScale(2, RoundingMode.HALF_DOWN);
-        this.sell = ticker.getSell().setScale(2, RoundingMode.HALF_DOWN);
-        this.open = ticker.getOpen().setScale(2, RoundingMode.HALF_DOWN);
-        this.date = ticker.getDate();
+        this.high = ticker.high().setScale(2, RoundingMode.HALF_DOWN);
+        this.low = ticker.low().setScale(2, RoundingMode.HALF_DOWN);
+        this.vol = ticker.vol().setScale(2, RoundingMode.HALF_DOWN);
+        this.last = ticker.last().setScale(2, RoundingMode.HALF_DOWN);
+        this.buy = ticker.buy().setScale(2, RoundingMode.HALF_DOWN);
+        this.sell = ticker.sell().setScale(2, RoundingMode.HALF_DOWN);
+        this.open = ticker.open().setScale(2, RoundingMode.HALF_DOWN);
+        this.date = ticker.date();
     }
 
     public static CryptocurrencySummaryDocument from(final CryptocurrencySummary ticker) {

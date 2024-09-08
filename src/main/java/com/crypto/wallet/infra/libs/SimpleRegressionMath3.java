@@ -14,7 +14,7 @@ import java.util.List;
 public class SimpleRegressionMath3 implements ISimpleRegression {
 
     @Override
-    public BigDecimal calculeSimpleRegression(List<DataForCalculation> dataForCalculationsBuy) {
+    public BigDecimal calculateSimpleRegression(List<DataForCalculation> dataForCalculationsBuy) {
         Collections.sort(dataForCalculationsBuy);
 
         SimpleRegression simpleRegression = new SimpleRegression(true);

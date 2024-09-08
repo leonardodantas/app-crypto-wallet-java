@@ -20,22 +20,23 @@ public class TickerRepository implements ITickerRepository {
     public List<Ticker> findAll() {
         return tickerSpringData.findAll()
                 .stream().map(document -> {
-                    final var digitalCurrencyAcronym = new DigitalCurrencyAcronym(
+                    final var digitalCurrencyAcronym = DigitalCurrencyAcronym.of(
                             document.getDigitalCurrencyAcronym().getName(),
                             document.getDigitalCurrencyAcronym().getDescription());
 
-                    final var cryptocurrencySummary = CryptocurrencySummary.builder()
-                            .sell(document.getCryptocurrencySummary().getSell())
-                            .high(document.getCryptocurrencySummary().getHigh())
-                            .buy(document.getCryptocurrencySummary().getBuy())
-                            .low(document.getCryptocurrencySummary().getLow())
-                            .vol(document.getCryptocurrencySummary().getVol())
-                            .last(document.getCryptocurrencySummary().getLast())
-                            .open(document.getCryptocurrencySummary().getOpen())
-                            .date(document.getCryptocurrencySummary().getDate())
-                            .build();
 
-                    return new Ticker(digitalCurrencyAcronym, cryptocurrencySummary);
+                    final var cryptocurrencySummary = CryptocurrencySummary.of(
+                            document.getCryptocurrencySummary().getHigh(),
+                            document.getCryptocurrencySummary().getLow(),
+                            document.getCryptocurrencySummary().getVol(),
+                            document.getCryptocurrencySummary().getLast(),
+                            document.getCryptocurrencySummary().getBuy(),
+                            document.getCryptocurrencySummary().getSell(),
+                            document.getCryptocurrencySummary().getOpen(),
+                            document.getCryptocurrencySummary().getDate()
+                    );
+
+                    return Ticker.of(digitalCurrencyAcronym, cryptocurrencySummary);
                 }).toList();
     }
 }

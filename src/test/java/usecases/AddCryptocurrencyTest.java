@@ -81,7 +81,7 @@ class AddCryptocurrencyTest {
         verify(walletRepository).save(argumentCaptorWallet.capture());
 
         final var walletSaveExpected = argumentCaptorWallet.getValue();
-        assertEquals(20, walletSaveExpected.getQuantity());
+        assertEquals(20, walletSaveExpected.quantity());
     }
 
     @Test
@@ -111,7 +111,7 @@ class AddCryptocurrencyTest {
         verify(walletRepository).save(argumentCaptorWallet.capture());
 
         final var walletSaveExpected = argumentCaptorWallet.getValue();
-        assertEquals(10, walletSaveExpected.getQuantity());
+        assertEquals(10, walletSaveExpected.quantity());
     }
 
 }

@@ -13,8 +13,8 @@ public class DataForCalculation implements Comparable<DataForCalculation> {
     private final double y;
 
     private DataForCalculation(final DerivationHistoryPerformed derivationHistoryPerformed) {
-        this.x = derivationHistoryPerformed.getDate();
-        this.y = derivationHistoryPerformed.getPrice().doubleValue();
+        this.x = derivationHistoryPerformed.date();
+        this.y = derivationHistoryPerformed.price().doubleValue();
     }
 
     public static DataForCalculation from(final DerivationHistoryPerformed derivationHistoryPerformed) {

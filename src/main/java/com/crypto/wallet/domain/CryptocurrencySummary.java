@@ -1,22 +1,20 @@
 package com.crypto.wallet.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter
-@Builder
-public class CryptocurrencySummary {
+public record CryptocurrencySummary(
+        BigDecimal high,
+        BigDecimal low,
+        BigDecimal vol,
+        BigDecimal last,
+        BigDecimal buy,
+        BigDecimal sell,
+        BigDecimal open,
+        LocalDateTime date
+) {
 
-    private BigDecimal high;
-    private BigDecimal low;
-    private BigDecimal vol;
-    private BigDecimal last;
-    private BigDecimal buy;
-    private BigDecimal sell;
-    private BigDecimal open;
-    private LocalDateTime date;
-
+    public static CryptocurrencySummary of(final BigDecimal high, final BigDecimal low, final BigDecimal vol, final BigDecimal last, final BigDecimal buy, final BigDecimal sell, final BigDecimal open, final LocalDateTime date) {
+        return new CryptocurrencySummary(high, low, vol, last, buy, sell, open, date);
+    }
 }

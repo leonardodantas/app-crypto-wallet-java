@@ -1,8 +1,8 @@
 package com.crypto.wallet.infra.database.mongodb.documents;
 
+import com.crypto.wallet.domain.Cryptocurrency;
 import com.crypto.wallet.domain.SalesHistory;
 import com.crypto.wallet.domain.TypeOperation;
-import com.crypto.wallet.domain.Cryptocurrency;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,9 +30,9 @@ public class SalesHistoryDocument {
     }
 
     private SalesHistoryDocument(final SalesHistory salesHistory) {
-        this.digitalCurrencyAcronym = DigitalCurrencyAcronymDocument.from(salesHistory.getDigitalCurrencyAcronym());
-        this.quantity = salesHistory.getQuantity();
-        this.typeOperation = salesHistory.getTypeOperation();
+        this.digitalCurrencyAcronym = DigitalCurrencyAcronymDocument.from(salesHistory.digitalCurrencyAcronym());
+        this.quantity = salesHistory.quantity();
+        this.typeOperation = salesHistory.typeOperation();
         this.date = LocalDateTime.now();
     }
 

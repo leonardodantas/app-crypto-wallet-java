@@ -26,7 +26,6 @@ public class FindCryptocurrencyWalletController {
 
     private final FindCryptocurrencyWallet findCryptocurrencyWallet;
 
-
     @Operation(summary = "Buscar criptomoeda na carteira")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Criptomoeda encontrada com sucesso",
@@ -44,7 +43,6 @@ public class FindCryptocurrencyWalletController {
         final var domain = findCryptocurrencyWallet.getByName(cryptocurrency);
         return CryptocurrencyWalletResponse.from(domain);
     }
-
 
     @Operation(summary = "Buscar criptomoeda")
     @ApiResponses(value = {

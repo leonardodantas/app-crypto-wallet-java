@@ -1,19 +1,17 @@
 package com.crypto.wallet.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Getter
-@Builder
-public class DerivationHistoryPerformed {
+public record DerivationHistoryPerformed(
+        BigDecimal amount,
+        LocalDateTime date,
+        BigDecimal price,
+        long tid,
+        String type
+) {
 
-    private BigDecimal amount;
-    private LocalDateTime date;
-    private BigDecimal price;
-    private long tid;
-    private String type;
-
+    public static DerivationHistoryPerformed of(final long tid, final BigDecimal amount, final String type, final BigDecimal price, final LocalDateTime date) {
+        return new DerivationHistoryPerformed(amount, date, price, tid, type);
+    }
 }

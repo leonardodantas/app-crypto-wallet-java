@@ -35,11 +35,11 @@ public class FindCryptocurrencyTrend {
 
     private BigDecimal getPriceByType(final List<DerivationHistoryPerformed> derivationHistoryPerformed, final String type) {
         final var dataForCalculations = derivationHistoryPerformed.stream()
-                .filter(derivationHistoryPerformedDTO -> derivationHistoryPerformedDTO.getType().equals(type))
+                .filter(historyPerformed -> historyPerformed.type().equals(type))
                 .map(DataForCalculation::from)
                 .collect(Collectors.toList());
 
-        return simpleRegression.calculeSimpleRegression(dataForCalculations);
+        return simpleRegression.calculateSimpleRegression(dataForCalculations);
     }
 
 

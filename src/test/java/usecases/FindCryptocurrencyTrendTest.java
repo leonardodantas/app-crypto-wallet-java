@@ -43,7 +43,7 @@ class FindCryptocurrencyTrendTest {
         final var result = findCryptocurrencyTrend.getByCryptocurrencyName(name);
         assertNotNull(result);
 
-        verify(simpleRegression, times(2)).calculeSimpleRegression(any());
+        verify(simpleRegression, times(2)).calculateSimpleRegression(any());
     }
 
 }

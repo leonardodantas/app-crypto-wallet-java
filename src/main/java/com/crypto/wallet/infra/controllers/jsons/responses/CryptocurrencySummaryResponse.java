@@ -17,14 +17,14 @@ public record CryptocurrencySummaryResponse(
 ) {
     public static CryptocurrencySummaryResponse from(final CryptocurrencySummary cryptocurrencySummary) {
         return new CryptocurrencySummaryResponse(
-                cryptocurrencySummary.getHigh(),
-                cryptocurrencySummary.getLow(),
-                cryptocurrencySummary.getVol(),
-                cryptocurrencySummary.getLast(),
-                cryptocurrencySummary.getBuy(),
-                cryptocurrencySummary.getSell(),
-                cryptocurrencySummary.getOpen(),
-                cryptocurrencySummary.getDate()
+                cryptocurrencySummary.high(),
+                cryptocurrencySummary.low(),
+                cryptocurrencySummary.vol(),
+                cryptocurrencySummary.last(),
+                cryptocurrencySummary.buy(),
+                cryptocurrencySummary.sell(),
+                cryptocurrencySummary.open(),
+                cryptocurrencySummary.date()
         );
     }
 }

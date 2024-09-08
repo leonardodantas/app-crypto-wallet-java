@@ -50,12 +50,8 @@ public class WalletRepository implements IWalletRepository {
     }
 
     private static Wallet getWalletConvert(final WalletDocument walletDocument) {
-        final var digitalCurrencyAcronym = new DigitalCurrencyAcronym(walletDocument.getDigitalCurrencyAcronym().getName(), walletDocument.getDigitalCurrencyAcronym().getDescription());
+        final var digitalCurrencyAcronym = DigitalCurrencyAcronym.of(walletDocument.getDigitalCurrencyAcronym().getName(), walletDocument.getDigitalCurrencyAcronym().getDescription());
 
-        return Wallet.builder()
-                .id(walletDocument.getId())
-                .digitalCurrencyAcronym(digitalCurrencyAcronym)
-                .quantity(walletDocument.getQuantity())
-                .build();
+        return Wallet.of(walletDocument.getId(), digitalCurrencyAcronym, walletDocument.getQuantity());
     }
 }

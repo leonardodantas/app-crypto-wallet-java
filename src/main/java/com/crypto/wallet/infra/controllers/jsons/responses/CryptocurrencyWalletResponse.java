@@ -8,6 +8,6 @@ public record CryptocurrencyWalletResponse(
 ) {
 
     public static CryptocurrencyWalletResponse from(final CryptocurrencyWallet cryptocurrencyWallet) {
-        return new CryptocurrencyWalletResponse(DigitalCurrencyAcronymResponse.from(cryptocurrencyWallet.getDigitalCurrencyAcronym()), cryptocurrencyWallet.getQuantity());
+        return new CryptocurrencyWalletResponse(DigitalCurrencyAcronymResponse.from(cryptocurrencyWallet.digitalCurrencyAcronym()), cryptocurrencyWallet.quantity());
     }
 }

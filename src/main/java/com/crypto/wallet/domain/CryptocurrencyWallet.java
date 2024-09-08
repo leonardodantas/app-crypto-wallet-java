@@ -1,28 +1,15 @@
 package com.crypto.wallet.domain;
 
-import lombok.Getter;
-
-@Getter
-public class CryptocurrencyWallet {
-
-    private final DigitalCurrencyAcronym digitalCurrencyAcronym;
-    private final double quantity;
-
-    private CryptocurrencyWallet(final Wallet wallet, final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        this.digitalCurrencyAcronym = digitalCurrencyAcronym;
-        this.quantity = wallet.getQuantity();
-    }
-
-    private CryptocurrencyWallet(final Wallet wallet) {
-        this.digitalCurrencyAcronym = wallet.getDigitalCurrencyAcronym();
-        this.quantity = wallet.getQuantity();
-    }
+public record CryptocurrencyWallet(
+        DigitalCurrencyAcronym digitalCurrencyAcronym,
+        double quantity
+) {
 
     public static CryptocurrencyWallet of(final Wallet wallet, final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return new CryptocurrencyWallet(wallet, digitalCurrencyAcronym);
+        return new CryptocurrencyWallet(digitalCurrencyAcronym, wallet.quantity());
     }
 
-    public static CryptocurrencyWallet from(Wallet wallet) {
-        return new CryptocurrencyWallet(wallet);
+    public static CryptocurrencyWallet from(final Wallet wallet) {
+        return new CryptocurrencyWallet(wallet.digitalCurrencyAcronym(), wallet.quantity());
     }
 }

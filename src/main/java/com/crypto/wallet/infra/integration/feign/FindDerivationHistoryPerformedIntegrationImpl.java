@@ -19,14 +19,14 @@ public class FindDerivationHistoryPerformedIntegrationImpl implements IFindDeriv
     public List<DerivationHistoryPerformed> getDerivationHistoryPerformed(final String coinName) {
         return derivationHistoryPerformedFeign.getDerivationHistoryPerformed(coinName)
                 .stream()
-                .map(response -> DerivationHistoryPerformed.builder()
-                        .tid(response.getTid())
-                        .amount(response.getAmount())
-                        .type(response.getType())
-                        .price(response.getPrice())
-                        .date(Instant.ofEpochMilli(response.getDate())
+                .map(response -> DerivationHistoryPerformed.of(
+                        response.getTid(),
+                        response.getAmount(),
+                        response.getType(),
+                        response.getPrice(),
+                        Instant.ofEpochMilli(response.getDate())
                                 .atZone(ZoneId.systemDefault())
-                                .toLocalDateTime())
-                        .build()).toList();
+                                .toLocalDateTime()))
+                .toList();
     }
 }

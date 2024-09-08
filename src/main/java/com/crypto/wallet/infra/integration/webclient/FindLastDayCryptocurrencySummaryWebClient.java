@@ -40,15 +40,15 @@ public class FindLastDayCryptocurrencySummaryWebClient {
     }
 
     private CryptocurrencySummary getCryptocurrencySummary(final TickerResponse tickerResponse) {
-        return CryptocurrencySummary.builder()
-                .sell(tickerResponse.getSell())
-                .high(tickerResponse.getHigh())
-                .buy(tickerResponse.getBuy())
-                .low(tickerResponse.getLow())
-                .vol(tickerResponse.getVol())
-                .last(tickerResponse.getLast())
-                .open(tickerResponse.getOpen())
-                .date(LocalDateTime.ofInstant(Instant.ofEpochSecond(tickerResponse.getDate()), ZoneId.of("America/Sao_Paulo")))
-                .build();
+        return CryptocurrencySummary.of(
+                tickerResponse.getHigh(),
+                tickerResponse.getLow(),
+                tickerResponse.getVol(),
+                tickerResponse.getLast(),
+                tickerResponse.getBuy(),
+                tickerResponse.getSell(),
+                tickerResponse.getOpen(),
+                LocalDateTime.ofInstant(Instant.ofEpochSecond(tickerResponse.getDate()), ZoneId.of("America/Sao_Paulo"))
+        );
     }
 }
