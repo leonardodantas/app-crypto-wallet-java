@@ -1,7 +1,8 @@
-package com.crypto.wallet.infra.integration.feign;
+package com.crypto.wallet.infra.integration.service;
 
 import com.crypto.wallet.app.integration.IFindDerivationHistoryPerformedIntegration;
 import com.crypto.wallet.domain.DerivationHistoryPerformed;
+import com.crypto.wallet.infra.integration.feign.DerivationHistoryPerformedFeign;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
