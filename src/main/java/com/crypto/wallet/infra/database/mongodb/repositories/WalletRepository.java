@@ -6,7 +6,7 @@ import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Wallet;
 import com.crypto.wallet.infra.database.mongodb.documents.DigitalCurrencyAcronymDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.WalletDocument;
-import com.crypto.wallet.infra.database.mongodb.jpa.WalletRepositorySpringData;
+import com.crypto.wallet.infra.database.mongodb.mongorepositories.IWalletRepositoryMongoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,12 +17,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class WalletRepository implements IWalletRepository {
 
-    private final WalletRepositorySpringData walletRepositorySpringData;
+    private final IWalletRepositoryMongoRepository IWalletRepositoryMongoRepository;
 
     @Override
     public Wallet save(final Wallet wallet) {
         try {
-            final var document = walletRepositorySpringData.save(WalletDocument.from(wallet));
+            final var document = IWalletRepositoryMongoRepository.save(WalletDocument.from(wallet));
             return getWalletConvert(document);
         } catch (final Exception e) {
             throw new EntitySaveException(e.getMessage());
@@ -31,13 +31,13 @@ public class WalletRepository implements IWalletRepository {
 
     @Override
     public Optional<Wallet> findByDigitalCurrencyAcronym(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return walletRepositorySpringData.findByDigitalCurrencyAcronym(DigitalCurrencyAcronymDocument.from(digitalCurrencyAcronym))
+        return IWalletRepositoryMongoRepository.findByDigitalCurrencyAcronym(DigitalCurrencyAcronymDocument.from(digitalCurrencyAcronym))
                 .map(WalletRepository::getWalletConvert);
     }
 
     @Override
     public List<Wallet> findAll() {
-        return walletRepositorySpringData.findAll()
+        return IWalletRepositoryMongoRepository.findAll()
                 .stream()
                 .map(WalletRepository::getWalletConvert)
                 .toList();
@@ -45,12 +45,12 @@ public class WalletRepository implements IWalletRepository {
 
     @Override
     public Optional<Wallet> findByCryptocurrencyName(final String cryptocurrency) {
-        return walletRepositorySpringData.findByDigitalCurrencyAcronymName(cryptocurrency)
+        return IWalletRepositoryMongoRepository.findByDigitalCurrencyAcronymName(cryptocurrency)
                 .map(WalletRepository::getWalletConvert);
     }
 
     private static Wallet getWalletConvert(final WalletDocument walletDocument) {
-        final var digitalCurrencyAcronym = DigitalCurrencyAcronym.of(walletDocument.getDigitalCurrencyAcronym().getName(), walletDocument.getDigitalCurrencyAcronym().getDescription());
+        final var digitalCurrencyAcronym = DigitalCurrencyAcronym.of(walletDocument.getDigitalCurrencyAcronym().getId(), walletDocument.getDigitalCurrencyAcronym().getName(), walletDocument.getDigitalCurrencyAcronym().getDescription());
 
         return Wallet.of(walletDocument.getId(), digitalCurrencyAcronym, walletDocument.getQuantity());
     }

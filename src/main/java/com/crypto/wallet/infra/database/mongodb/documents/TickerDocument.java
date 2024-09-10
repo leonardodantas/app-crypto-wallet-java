@@ -20,7 +20,7 @@ public class TickerDocument {
     }
 
     public static TickerDocument from(final Ticker ticker) {
-        return new TickerDocument(DigitalCurrencyAcronymDocument.from(ticker.digitalCurrencyAcronym()), CryptocurrencySummaryDocument.from(ticker.ticker()));
+        return new TickerDocument(DigitalCurrencyAcronymDocument.from(ticker), CryptocurrencySummaryDocument.from(ticker.ticker()));
     }
 
     public String getName() {

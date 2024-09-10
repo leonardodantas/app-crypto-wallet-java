@@ -3,8 +3,8 @@ package com.crypto.wallet.config;
 import com.crypto.wallet.app.repositories.IDigitalCurrencyAcronymRepository;
 import com.crypto.wallet.infra.database.mongodb.documents.ScheduleLogDocument;
 import com.crypto.wallet.infra.database.mongodb.documents.TickerDocument;
-import com.crypto.wallet.infra.database.mongodb.jpa.IScheduleLogMongoRepository;
-import com.crypto.wallet.infra.database.mongodb.jpa.ITickerDocumentMongoRepository;
+import com.crypto.wallet.infra.database.mongodb.mongorepositories.IScheduleLogMongoRepository;
+import com.crypto.wallet.infra.database.mongodb.mongorepositories.ITickerDocumentMongoRepository;
 import com.crypto.wallet.infra.integration.webclient.FindLastDayCryptocurrencySummaryWebClient;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +16,6 @@ import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Component
@@ -56,7 +54,6 @@ public class UpdateTickerSchedule {
                         scheduleLogMongoRepository.save(scheduleLogDocumentUpdate);
                         updateTicker();
                     }
-                    log.info("TICKERS SEM ATUALIZAÇÃO");
                 }, () -> {
                     final var scheduleLogDocument = ScheduleLogDocument.from(SCHEDULE_NAME);
                     scheduleLogMongoRepository.save(scheduleLogDocument);
@@ -75,18 +72,14 @@ public class UpdateTickerSchedule {
 
         final var tickerResponseFlux = Flux.merge(tickersResponseMono);
 
-        final var tickers = new ArrayList<TickerDocument>();
         tickerResponseFlux.collectList().subscribe(tickerResponses -> {
-
             final var tickerDocuments = CollectionUtils.emptyIfNull(tickerResponses)
                     .stream()
                     .map(TickerDocument::from)
                     .toList();
 
-            tickers.addAll(tickerDocuments);
+            tickerDocumentMongoRepository.saveAll(tickerDocuments);
+            log.info("Finalizando processo assincrono");
         });
-
-        tickerDocumentMongoRepository.saveAll(tickers);
     }
-
 }

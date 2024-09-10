@@ -16,21 +16,24 @@ public class SalesHistoryDocument {
 
     @Id
     private String id;
-    private DigitalCurrencyAcronymDocument digitalCurrencyAcronym;
+    private String name;
+    private String description;
     private double quantity;
     private TypeOperation typeOperation;
     private LocalDateTime date;
 
     private SalesHistoryDocument(final Cryptocurrency cryptocurrency, final DigitalCurrencyAcronymDocument digitalCurrencyAcronym, final TypeOperation typeOperation) {
         this.id = UUID.randomUUID().toString();
-        this.digitalCurrencyAcronym = digitalCurrencyAcronym;
+        this.name = digitalCurrencyAcronym.getName();
+        this.description = digitalCurrencyAcronym.getDescription();
         this.quantity = cryptocurrency.quantity();
         this.typeOperation = typeOperation;
         this.date = LocalDateTime.now();
     }
 
     private SalesHistoryDocument(final SalesHistory salesHistory) {
-        this.digitalCurrencyAcronym = DigitalCurrencyAcronymDocument.from(salesHistory.digitalCurrencyAcronym());
+        this.name = salesHistory.digitalCurrencyAcronym().name();
+        this.description = salesHistory.digitalCurrencyAcronym().description();
         this.quantity = salesHistory.quantity();
         this.typeOperation = salesHistory.typeOperation();
         this.date = LocalDateTime.now();

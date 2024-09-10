@@ -15,7 +15,7 @@ public class FindCryptocurrencyWallet {
     private final IWalletRepository walletRepository;
 
     public CryptocurrencyWallet getByName(final String name) {
-        return walletRepository.findByCryptocurrencyName(name)
+        return walletRepository.findByCryptocurrencyName(name.toUpperCase())
                 .map(CryptocurrencyWallet::from)
                 .orElseThrow(() -> new CryptocurrencyNotFoundException(name));
     }

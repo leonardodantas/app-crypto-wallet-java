@@ -18,7 +18,7 @@ public class FindDerivationHistory {
 
     public List<DerivationHistoryPerformed> getByCryptocurrencyName(final String name) {
         this.digitalCurrencyAcronymRepository
-                .findByName(name).orElseThrow(() -> new CryptocurrencyNotFoundException(name));
+                .findByName(name.toUpperCase()).orElseThrow(() -> new CryptocurrencyNotFoundException(name));
 
         return findDerivationHistoryPerformedRest.getDerivationHistoryPerformed(name);
     }

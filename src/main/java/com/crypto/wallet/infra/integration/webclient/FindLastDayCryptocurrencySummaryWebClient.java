@@ -36,7 +36,7 @@ public class FindLastDayCryptocurrencySummaryWebClient {
     }
 
     private DigitalCurrencyAcronym getDigitalCurrencyAcronym(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
-        return new DigitalCurrencyAcronym(digitalCurrencyAcronym.name(), digitalCurrencyAcronym.description());
+        return DigitalCurrencyAcronym.of(digitalCurrencyAcronym.id(), digitalCurrencyAcronym.name(), digitalCurrencyAcronym.description());
     }
 
     private CryptocurrencySummary getCryptocurrencySummary(final TickerResponse tickerResponse) {

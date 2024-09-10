@@ -26,7 +26,7 @@ public class AddCryptocurrencyWallet {
 
     private DigitalCurrencyAcronym getDigitalCurrencyAcronym(final Cryptocurrency cryptocurrency) {
         return this.digitalCurrencyAcronymRepository
-                .findByName(cryptocurrency.name())
+                .findByName(cryptocurrency.name().toUpperCase())
                 .orElseThrow(() -> new CryptocurrencyNotFoundException(cryptocurrency.name()));
     }
 

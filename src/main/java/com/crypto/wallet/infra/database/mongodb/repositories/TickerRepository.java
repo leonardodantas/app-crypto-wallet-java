@@ -4,7 +4,7 @@ import com.crypto.wallet.app.repositories.ITickerRepository;
 import com.crypto.wallet.domain.CryptocurrencySummary;
 import com.crypto.wallet.domain.DigitalCurrencyAcronym;
 import com.crypto.wallet.domain.Ticker;
-import com.crypto.wallet.infra.database.mongodb.jpa.TickerSpringData;
+import com.crypto.wallet.infra.database.mongodb.mongorepositories.ITickerDocumentMongoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,13 +14,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TickerRepository implements ITickerRepository {
 
-    private final TickerSpringData tickerSpringData;
+    private final ITickerDocumentMongoRepository tickerDocumentMongoRepository;
 
     @Override
     public List<Ticker> findAll() {
-        return tickerSpringData.findAll()
+        return tickerDocumentMongoRepository.findAll()
                 .stream().map(document -> {
                     final var digitalCurrencyAcronym = DigitalCurrencyAcronym.of(
+                            document.getDigitalCurrencyAcronym().getId(),
                             document.getDigitalCurrencyAcronym().getName(),
                             document.getDigitalCurrencyAcronym().getDescription());
 
