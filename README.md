@@ -20,12 +20,6 @@ Refatoração feita com o objetivo de entender e aplicar as evoluções tecnicas
 - Inserção de dados de forma automatica
 - WebFlux
 - Spring Cloud
-<div style="display: inline_block">
-
-  <img align="center" alt="java" src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
-  <img align="center" alt="spring" src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" />
-
-</div>
 
 ## Documentação da API
 
@@ -39,6 +33,14 @@ Refatoração feita com o objetivo de entender e aplicar as evoluções tecnicas
 | :---------- | :--------- | :---------------------------------- |
 | `cryptocurrency` | `string` | **Obrigatório**. Nome da criptomoeda |
 
+CURL de exemplo:
+
+```
+curl -X 'GET' \
+  'http://localhost:8080/cryptocurrency/btc/trend' \
+  -H 'accept: application/json'
+```
+
 ### Adiciona a criptomoeda em sua carteira
 
 ```
@@ -51,11 +53,19 @@ A requisição precisa de um body com os seguintes parâmetros:
 | `name` | `string` | **Obrigatório**. Nome da criptomoeda |
 | `quantity` | `double` | **Obrigatório**. Quantidade a ser comprada |
 
-### Retorna todas criptomoedas em sua carteira
+CURL de exemplo:
 
 ```
-  GET /cryptocurrency/wallet
+curl -X 'POST' \
+  'http://localhost:8080/crypto' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "BTDC",
+  "quantity": 90
+}'
 ```
+
 ### Retorna a criptomoeda caso ela exista em sua carteira
 
 ```
@@ -66,10 +76,26 @@ A requisição precisa de um body com os seguintes parâmetros:
 | :---------- | :--------- | :---------------------------------- |
 | `cryptocurrency` | `string` | **Obrigatório**. Nome da criptomoeda |
 
+CURL de exemplo:
+
+```
+curl -X 'GET' \
+  'http://localhost:8080/cryptocurrency/btcd/wallet' \
+  -H 'accept: application/json'
+```
+
 ### Resumo de operação de todas as criptomoedas disponíveis na aplicação
 
 ```
   GET /lastday/cryptocurrency/summary
+```
+
+CURL de exemplo:
+
+```
+curl -X 'GET' \
+  'http://localhost:8080/lastday/cryptocurrency/summary' \
+  -H 'accept: application/json'
 ```
 
 ## Apêndice
