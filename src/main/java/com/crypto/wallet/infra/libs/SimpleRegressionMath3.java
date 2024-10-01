@@ -14,12 +14,12 @@ import java.util.List;
 public class SimpleRegressionMath3 implements ISimpleRegression {
 
     @Override
-    public BigDecimal calculateSimpleRegression(final List<DataForCalculation> dataForCalculationsBuy) {
-        Collections.sort(dataForCalculationsBuy);
+    public BigDecimal calculateSimpleRegression(final List<DataForCalculation> dataForCalculations) {
+        Collections.sort(dataForCalculations);
 
         final var simpleRegression = new SimpleRegression(true);
 
-        dataForCalculationsBuy
+        dataForCalculations
                 .forEach(data -> simpleRegression.addData(data.getX(), data.getY()));
 
         return BigDecimal.valueOf(simpleRegression.predict(Instant.now().getEpochSecond()));
