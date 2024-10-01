@@ -1,8 +1,25 @@
 # APP-CRYPTO-WALLET-JAVA
 
-Aplicação SpringBoot Java para compra e armazenamento de criptomoedas, seguindo os princípios de boas praticas do livro Clean Architecture. 
+<p>
+Refatoração feita com o objetivo de entender e aplicar as evoluções tecnicas que tive nos ultimos 2 anos.
+</p>
 
+### :hammer: Pré-requisitos
 
+- IDE de sua preferência.
+- JDK 21.
+- Docker e Docker Compose
+
+### 🛠 Detalhes Tecnicos
+
+- Java 21
+- Arquitetura baseada em Clean Arch
+- Swagger
+- MongoDB
+- Docker e Docker Compose
+- Inserção de dados de forma automatica
+- WebFlux
+- Spring Cloud
 <div style="display: inline_block">
 
   <img align="center" alt="java" src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" />
