@@ -23,6 +23,20 @@ Refatoração feita com o objetivo de entender e aplicar as evoluções tecnicas
 
 ## Documentação da API
 
+### Retorna todas as criptomoedas
+
+```
+  GET /cryptocurrency/{cryptocurrency}/trend
+```
+
+CURL de exemplo:
+
+```
+curl -X 'GET' \
+  'http://localhost:8080/cryptocurrency' \
+  -H 'accept: application/json'
+```
+
 ### Retorna a tendência de venda e compra da criptomoeda
 
 ```
