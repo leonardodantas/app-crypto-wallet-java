@@ -21,6 +21,28 @@ Refatoração feita com o objetivo de entender e aplicar as evoluções tecnicas
 - WebFlux
 - Spring Cloud
 
+###  Iniciando projeto pela primeira vez
+
+```bash
+# Clone este repositório
+git clone https://github.com/leonardodantas/app-crypto-wallet-java.git
+
+# Tenha o docker compose instalando, acesse a pasta raiz do projeto e execute o seguinte comando
+docker-compose up
+
+# O comando acima ira criar instâncias das seguintes aplicações
+- Mongo
+- Mongo Express
+ 
+# Na primeira execução do projeto, executar o seguinte comando após subir os containers via docker compose
+docker exec -it mongodb mongo /scripts/insert_script.js
+
+# Inicie a aplicação com uma IDE de sua preferência
+
+#Acesse o seguinte endereço no navegador
+http://localhost:8080/swagger-ui/index.html
+```
+
 ## Documentação da API
 
 ### Retorna todas as criptomoedas
