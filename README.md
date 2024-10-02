@@ -260,7 +260,35 @@ public record DigitalCurrencyAcronym(
 }
 ```
 ### Criação de schedule para otimizar performance
+Na release anterior do projeto, em um determinado endpoint, durante o processamento era necessario a realização de uma serie de requisições de forma sincrona para uma api externa, da seguinte forma:
+```
+    @Override
+    public List<TickerResponse> getAllTicker() {
+        List<DigitalCurrencyAcronymResponse> digitalCurrencyAcronymResponses = getDigitalCurrencyAcronym();
 
+        return digitalCurrencyAcronymResponses.stream()
+                .map(lastDayCoinSummary::getSummary)
+                .collect(Collectors.toUnmodifiableList());
+    }
+```
+Devido a esse processamento, o tempo de resposta era consideravelmente alto. Por se tratar de um chamada onde a resposta tende a variar apenas apos algumas horas, desenvolvi
+uma schedule na nova release, responsavel por buscar estas informações e armazenar em uma base de dados em periodos especificos durante o dia. Para uma melhor performance as requisições são feitas de forma assincrona com WebFlux.
+
+```
+    @Scheduled(cron = "0 0 0/3 * * ?")
+    public void updateTickerSchedule() {
+        log.info("EXECUÇÃO SCHEDULE TICKERS");
+        validateUpdateTickers();
+    }
+```
+Para garantir que a base de dados sempre estará populada, o metodo de inserção na base de dados tambem será executado sempre que a aplicação iniciar.
+```
+    @PostConstruct
+    public void initialize() {
+        log.info("EXECUÇÃO DE POSTSCONSTRUCT");
+        validateUpdateTickers();
+    }
+```
 ### Imutabilidade
 
 ### Atualização do swagger
