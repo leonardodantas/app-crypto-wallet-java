@@ -310,7 +310,35 @@ Com imutabilidade o codigo foi refatorado da seguinte forma:
 ```
 
 ### Atualização do swagger
+Na nova release busquei aproveitar o maximo possivel os recursos do swagger para melhor documentar cada endpoint do projeto, como no exempplo a seguir:
+```
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/crypto")
+@Tag(name = "APP-CRYPTO-WALLET-JAVA", description = "Gerenciamento de criptomoedas")
+public class AddCryptocurrencyWalletController {
 
+    private final AddCryptocurrencyWallet addCryptocurrencyWallet;
+
+    @Operation(summary = "Adicionar criptomoedas na carteira")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Criptomoeda adicionada com sucesso",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = com.crypto.wallet.domain.CryptocurrencyWallet.class))}),
+            @ApiResponse(responseCode = "404", description = "Not found",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class))}),
+            @ApiResponse(responseCode = "400", description = "Bad request",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorResponse.class))})})
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CryptocurrencyWalletResponse addCryptocurrency(@Valid @RequestBody final CryptocurrencyWalletRequest request) {
+        final var domain = addCryptocurrencyWallet.addCryptocurrency(Cryptocurrency.of(request.name(), request.quantity()));
+        return CryptocurrencyWalletResponse.from(domain);
+    }
+}
+```
 ### Migração de H2 para MongoDB
 
 ### Utilização de docker compose para subir a aplicação
