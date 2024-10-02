@@ -290,6 +290,24 @@ Para garantir que a base de dados sempre estará populada, o metodo de inserçã
     }
 ```
 ### Imutabilidade
+O principio de imutabilidade de codigo foi aplicado de forma rigorosa a nova release, em nenhum momento é possivel alterar um atributo de um objeto sem gerar um novo. Na release anterior existiam trechos de codigo da seguinte forma:
+```
+    public void overrideWallet(Wallet wallet) {
+        this.id = wallet.getId();
+        this.quantity += wallet.getQuantity();
+    }
+```
+Com imutabilidade o codigo foi refatorado da seguinte forma:
+```
+    public static Wallet of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronym digitalCurrencyAcronym) {
+        return new Wallet(digitalCurrencyAcronym, cryptoWallet);
+    }
+
+    public void overrideWallet(Wallet wallet) {
+        this.id = wallet.getId();
+        this.quantity += wallet.getQuantity();
+    }
+```
 
 ### Atualização do swagger
 
