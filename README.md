@@ -134,6 +134,70 @@ curl -X 'GET' \
   -H 'accept: application/json'
 ```
 
+## Principais refatorações aplicadas 
+<p>
+  Substituição de classes por records para representar objetos que possuem apenas getters, fazendo assim uso de recursos mais novos do Java.
+</p>
+
+CryptocurrencySummaryResponse antiga:
+```
+
+@Getter
+public class CryptocurrencySummaryResponse {
+
+    private final BigDecimal high;
+    private final BigDecimal low;
+    private final BigDecimal vol;
+    private final BigDecimal last;
+    private final BigDecimal buy;
+    private final BigDecimal sell;
+    private final BigDecimal open;
+    private final LocalDateTime date;
+
+    private CryptocurrencySummaryResponse(ITickerDTO ticker) {
+        this.high = ticker.getHigh();
+        this.low = ticker.getLow();
+        this.vol = ticker.getVol();
+        this.last = ticker.getLast();
+        this.buy = ticker.getBuy();
+        this.sell = ticker.getSell();
+        this.open = ticker.getOpen();
+        this.date = LocalDateTime.ofInstant(Instant.ofEpochSecond(ticker.getDate()), ZoneId.of("America/Sao_Paulo"));
+    }
+
+    public static CryptocurrencySummaryResponse from(ITickerDTO ticker) {
+        return new CryptocurrencySummaryResponse(ticker);
+    }
+}
+```
+
+CryptocurrencySummaryResponse nova:
+
+```
+public record CryptocurrencySummaryResponse(
+        BigDecimal high,
+        BigDecimal low,
+        BigDecimal vol,
+        BigDecimal last,
+        BigDecimal buy,
+        BigDecimal sell,
+        BigDecimal open,
+        LocalDateTime date
+) {
+    public static CryptocurrencySummaryResponse from(final CryptocurrencySummary cryptocurrencySummary) {
+        return new CryptocurrencySummaryResponse(
+                cryptocurrencySummary.high(),
+                cryptocurrencySummary.low(),
+                cryptocurrencySummary.vol(),
+                cryptocurrencySummary.last(),
+                cryptocurrencySummary.buy(),
+                cryptocurrencySummary.sell(),
+                cryptocurrencySummary.open(),
+                cryptocurrencySummary.date()
+        );
+    }
+}
+```
 ## Apêndice
 
 Para calcular a tendência da moeda foi utilizada uma função de regressão linear. Em uma aplicação complexa vários outros fatores deveriam ser considerados para esse cálculo, porém utilizei uma lib simples e que considera apenas dois fatores em seu cálculo (tempo e valor) para fins de estudo.
