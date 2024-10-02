@@ -339,10 +339,8 @@ public class AddCryptocurrencyWalletController {
     }
 }
 ```
-### Migração de H2 para MongoDB
-
 ### Utilização de docker compose para subir a aplicação
-
+Criação de um arquivo docker compose responsavel por subir um instancia do mongo e por inicializar o mongo express. Tambem foi criado um script js para inserir dados necessarios para que aplicação execute com sucesso. 
 ### Mongo Express para acessar dados no MongoDB
 
 
