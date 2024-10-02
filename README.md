@@ -135,13 +135,15 @@ curl -X 'GET' \
 ```
 
 ## Principais refatorações aplicadas 
+### Classes para records
+
 <p>
   Substituição de classes por records para representar objetos que possuem apenas getters, fazendo assim uso de recursos mais novos do Java.
 </p>
 
 CryptocurrencySummaryResponse antiga:
-```
 
+```
 @Getter
 public class CryptocurrencySummaryResponse {
 
@@ -198,6 +200,22 @@ public record CryptocurrencySummaryResponse(
     }
 }
 ```
+### Separação de responsabilidades
+
+### Criação de schedule para otimizar performance
+
+### Atualização do swagger
+
+### Migração de H2 para MongoDB
+
+### Utilização de docker compose para subir a aplicação
+
+### Mongo Express para acessar dados no MongoDB
+
+
+
+
+
 ## Apêndice
 
 Para calcular a tendência da moeda foi utilizada uma função de regressão linear. Em uma aplicação complexa vários outros fatores deveriam ser considerados para esse cálculo, porém utilizei uma lib simples e que considera apenas dois fatores em seu cálculo (tempo e valor) para fins de estudo.
