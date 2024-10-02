@@ -201,7 +201,64 @@ public record CryptocurrencySummaryResponse(
 }
 ```
 ### Separação de responsabilidades
+Na versão anterior, um unica classe era utilizada tanto para representar o dominio quanto para representar um entidade do banco de dados, como no exemplo a seguir:
+```
+@Entity
+@Getter
+@Table(name = "digital_currency_acronym")
+public class DigitalCurrencyAcronym {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(unique = true, length = 60)
+    private String name;
+    private String description;
+
+}
+```
+Com a refatoração da nova release, agora temos uma classe para representar o documento do banco de dados, e outra para representar o dominio da aplicação.
+
+Classe para representar o documento do banco de dados:
+```
+@Getter
+@Document("digital_currency_acronym")
+public class DigitalCurrencyAcronymDocument {
+
+    @Id
+    private String id;
+    @Indexed(unique = true)
+    private String name;
+    private String description;
+
+    private DigitalCurrencyAcronymDocument(final String id, final String name, final String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    public static DigitalCurrencyAcronymDocument from(final DigitalCurrencyAcronym digitalCurrencyAcronym) {
+        return new DigitalCurrencyAcronymDocument(digitalCurrencyAcronym.id(), digitalCurrencyAcronym.name(), digitalCurrencyAcronym.description());
+    }
+
+    public static DigitalCurrencyAcronymDocument from(final Ticker ticker) {
+        return new DigitalCurrencyAcronymDocument(UUID.randomUUID().toString(), ticker.digitalCurrencyAcronym().name(), ticker.digitalCurrencyAcronym().description());
+    }
+}
+```
+Record para representar o dominio:
+```
+public record DigitalCurrencyAcronym(
+        String id,
+        String name,
+        String description
+) {
+
+    public static DigitalCurrencyAcronym of(final String id, final String name, final String description) {
+        return new DigitalCurrencyAcronym(id, name, description);
+    }
+}
+```
 ### Criação de schedule para otimizar performance
 
 ### Imutabilidade
