@@ -204,6 +204,8 @@ public record CryptocurrencySummaryResponse(
 
 ### Criação de schedule para otimizar performance
 
+### Imutabilidade
+
 ### Atualização do swagger
 
 ### Migração de H2 para MongoDB
