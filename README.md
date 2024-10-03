@@ -1,7 +1,8 @@
 # APP-CRYPTO-WALLET-JAVA
 
 <p>
-Refatoração realizada em um projeto após 2 anos, com o objetivo de entender minhas principais evoluções nesse período. A release anterior pode ser encontrada aqui, e a release refatorada está disponível neste link.
+Refatoração realizada em um projeto após 2 anos, com o objetivo de entender minhas principais evoluções nesse período. A release anterior pode ser encontrada [Acesse a release anterior](https://github.com/leonardodantas/app-crypto-wallet-java/tree/release-v1.0.0)
+, e a release refatorada está disponível neste link.
 </p>
 
 ### :hammer: Pré-requisitos
