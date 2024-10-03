@@ -1,8 +1,7 @@
 # APP-CRYPTO-WALLET-JAVA
 
 <p>
-Refatoração realizada em um projeto após 2 anos, com o objetivo de entender minhas principais evoluções nesse período. A release anterior pode ser encontrada [Acesse a release anterior](https://github.com/leonardodantas/app-crypto-wallet-java/tree/release-v1.0.0)
-, e a release refatorada está disponível neste link.
+Refatoração realizada em um projeto após 2 anos, com o objetivo de entender minhas principais evoluções nesse período. A release anterior pode ser encontrada no seguinte endereço: https://github.com/leonardodantas/app-crypto-wallet-java/tree/release-v1.0.0, e a release refatorada está disponível em: https://github.com/leonardodantas/app-crypto-wallet-java/tree/release-v1.0.0.
 </p>
 
 ### :hammer: Pré-requisitos
@@ -139,7 +138,7 @@ curl -X 'GET' \
 ### Classes para records
 
 <p>
-  Substituição de classes por records para representar objetos que possuem apenas getters, fazendo assim uso de recursos mais novos do Java.
+  Substituição de classes por records para representar objetos que possuem apenas getters, aproveitando os recursos modernos do Java para simplificar o código e melhorar a legibilidade.
 </p>
 
 CryptocurrencySummaryResponse antiga:
@@ -202,7 +201,8 @@ public record CryptocurrencySummaryResponse(
 }
 ```
 ### Separação de responsabilidades
-Na versão anterior, um unica classe era utilizada tanto para representar o dominio quanto para representar um entidade do banco de dados, como no exemplo a seguir:
+Na versão anterior, uma única classe era usada tanto para representar o domínio quanto para servir como entidade do banco de dados, como no exemplo a seguir:
+
 ```
 @Entity
 @Getter
@@ -218,7 +218,7 @@ public class DigitalCurrencyAcronym {
 
 }
 ```
-Com a refatoração da nova release, agora temos uma classe para representar o documento do banco de dados, e outra para representar o dominio da aplicação.
+Com a refatoração na nova release, agora temos uma classe dedicada para representar o documento do banco de dados e outra para representar o domínio da aplicação. Essa abordagem se refere ao conceito de separação de responsabilidades (Separation of Concerns), que sugere que diferentes partes de uma aplicação devem ser responsáveis por diferentes aspectos ou funcionalidades.
 
 Classe para representar o documento do banco de dados:
 ```
@@ -261,7 +261,8 @@ public record DigitalCurrencyAcronym(
 }
 ```
 ### Criação de schedule para otimizar performance
-Na release anterior do projeto, em um determinado endpoint, durante o processamento era necessario a realização de uma serie de requisições de forma sincrona para uma api externa, da seguinte forma:
+Na release anterior do projeto, um determinado endpoint exigia a realização de uma série de requisições de forma síncrona para uma API externa durante o processamento, conforme exemplo a seguir:
+
 ```
     @Override
     public List<TickerResponse> getAllTicker() {
@@ -272,8 +273,7 @@ Na release anterior do projeto, em um determinado endpoint, durante o processame
                 .collect(Collectors.toUnmodifiableList());
     }
 ```
-Devido a esse processamento, o tempo de resposta era consideravelmente alto. Por se tratar de um chamada onde a resposta tende a variar apenas apos algumas horas, desenvolvi
-uma schedule na nova release, responsavel por buscar estas informações e armazenar em uma base de dados em periodos especificos durante o dia. Para uma melhor performance as requisições são feitas de forma assincrona com WebFlux.
+Devido a esse processamento, o tempo de resposta era consideravelmente alto. Como a resposta a essa chamada tende a variar apenas após algumas horas, desenvolvi uma funcionalidade na nova release responsável por buscar essas informações e armazená-las em uma base de dados em intervalos específicos durante o dia. Para otimizar a performance, as requisições agora são realizadas de forma assíncrona utilizando WebFlux.
 
 ```
     @Scheduled(cron = "0 0 0/3 * * ?")
@@ -291,14 +291,16 @@ Para garantir que a base de dados sempre estará populada, o metodo de inserçã
     }
 ```
 ### Imutabilidade
-O principio de imutabilidade de codigo foi aplicado de forma rigorosa a nova release, em nenhum momento é possivel alterar um atributo de um objeto sem gerar um novo. Na release anterior existiam trechos de codigo da seguinte forma:
+
+O princípio da imutabilidade de código foi aplicado na nova release, garantindo que nenhum atributo de um objeto possa ser alterado sem que um novo objeto seja criado. Na release anterior, trechos de código eram estruturados da seguinte maneira:
+
 ```
     public void overrideWallet(Wallet wallet) {
         this.id = wallet.getId();
         this.quantity += wallet.getQuantity();
     }
 ```
-Com imutabilidade o codigo foi refatorado da seguinte forma:
+Com imutabilidade o codigo foi refatorado para o codigo a seguir:
 ```
     public static Wallet of(ICryptocurrencyWallet cryptoWallet, DigitalCurrencyAcronym digitalCurrencyAcronym) {
         return new Wallet(digitalCurrencyAcronym, cryptoWallet);
@@ -311,7 +313,9 @@ Com imutabilidade o codigo foi refatorado da seguinte forma:
 ```
 
 ### Atualização do swagger
-Na nova release busquei aproveitar o maximo possivel os recursos do swagger para melhor documentar cada endpoint do projeto, como no exempplo a seguir:
+
+Na nova release, busquei aproveitar ao máximo os recursos do Swagger para aprimorar a documentação de cada endpoint do projeto, conforme exemplo a seguir:
+
 ```
 @RestController
 @RequiredArgsConstructor
@@ -341,7 +345,7 @@ public class AddCryptocurrencyWalletController {
 }
 ```
 ### Utilização de docker compose para subir a aplicação
-Criação de um arquivo docker compose responsavel por subir um instancia do mongo e por inicializar o mongo express. Tambem foi criado um script js para inserir dados necessarios para que aplicação execute com sucesso. 
+Foi criado um arquivo Docker Compose responsável por iniciar uma instância do MongoDB e configurar o Mongo Express. Além disso, um script JavaScript foi desenvolvido para inserir os dados necessários para que a aplicação funcione corretamente.
 
 ### Mongo Express para acessar dados no MongoDB
 Após a execução do docker compose é possivel acessar os dados armazenados no MongoDB via interface, basta acessar a url http://localhost:8081/ com o usuario **admin** e a senha **pass**
