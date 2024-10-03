@@ -341,16 +341,9 @@ public class AddCryptocurrencyWalletController {
 ```
 ### Utilização de docker compose para subir a aplicação
 Criação de um arquivo docker compose responsavel por subir um instancia do mongo e por inicializar o mongo express. Tambem foi criado um script js para inserir dados necessarios para que aplicação execute com sucesso. 
+
 ### Mongo Express para acessar dados no MongoDB
-
-
-
-
-
-## Apêndice
-
-Para calcular a tendência da moeda foi utilizada uma função de regressão linear. Em uma aplicação complexa vários outros fatores deveriam ser considerados para esse cálculo, porém utilizei uma lib simples e que considera apenas dois fatores em seu cálculo (tempo e valor) para fins de estudo.
-
+Após a execução do docker compose é possivel acessar os dados armazenados no MongoDB via interface, basta acessar a url http://localhost:8081/ com o usuario **admin** e a senha **pass**
 
 ## Tecnologias
 
