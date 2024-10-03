@@ -1,7 +1,9 @@
 # APP-CRYPTO-WALLET-JAVA
 
 <p>
-Refatoração feita com o objetivo de entender e aplicar as evoluções tecnicas que tive nos ultimos 2 anos.
+Refatoração realizada em um projeto após 2 anos, tendo como objetivo entender as minhas principais evoluções nesse periodo, a release anterior pode ser encontrada no seguinte endereço
+ [(release-v1.0.0)](https://github.com/leonardodantas/app-crypto-wallet-java/tree/release-v1.0.0), já a release refatorada pode ser encontrada no endereço [release-v2.0.0](https://github.com/leonardodantas/app-crypto-wallet-java/tree/release-v1.0.0).
+ [Flex Grid](http://exemplo.com/)
 </p>
 
 ### :hammer: Pré-requisitos
